@@ -1,5 +1,22 @@
 import { motion } from 'framer-motion';
 
+const statement =
+  'Together, we are eagerly cultivating a legacy of Jesus followers. Freeway is a community that feels like home — driven with purpose, life-change, and Godly intimacy.';
+
+const words = statement.split(' ');
+
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.03, delayChildren: 0.1 },
+  },
+};
+
+const word = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.2, 0.8, 0.2, 1] } },
+};
+
 export default function Vision() {
   return (
     <section id="vision" className="relative py-28 md:py-40 bg-fc-black">
@@ -20,24 +37,32 @@ export default function Vision() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-120px' }}
           className="md:col-span-8 md:col-start-5"
         >
-          <p className="text-2xl md:text-3xl leading-snug font-display font-medium text-fc-cream">
-            Together, we are eagerly cultivating a legacy of Jesus followers.
-            Freeway is a community that feels like home — driven with purpose,
-            life-change, and Godly intimacy.
+          <p className="text-2xl md:text-3xl leading-snug font-display font-medium text-fc-cream flex flex-wrap">
+            {words.map((w, i) => (
+              <motion.span key={i} variants={word} className="mr-[0.35rem] inline-block">
+                {w}
+              </motion.span>
+            ))}
           </p>
-          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-sm text-fc-cream/60 uppercase tracking-widest2 font-display">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-sm text-fc-cream/60 uppercase tracking-widest2 font-display"
+          >
             <span>Est. Albion, MI</span>
             <span className="text-fc-teal">·</span>
             <span>One service. Real people.</span>
             <span className="text-fc-teal">·</span>
             <span>No show, no script</span>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

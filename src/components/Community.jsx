@@ -1,5 +1,15 @@
 import { motion } from 'framer-motion';
 
+const reveal = {
+  hidden: { clipPath: 'inset(100% 0 0 0)' },
+  show: { clipPath: 'inset(0% 0 0 0)' },
+};
+
+const gridContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12 } },
+};
+
 export default function Community() {
   return (
     <section id="community" className="relative py-28 md:py-40 bg-fc-black overflow-hidden">
@@ -31,44 +41,60 @@ export default function Community() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={gridContainer}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.7, delay: 0.15 }}
             className="md:col-span-6 grid grid-cols-6 gap-4"
           >
-            <div className="col-span-4 row-span-2">
+            <motion.div
+              variants={reveal}
+              transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+              className="col-span-4 row-span-2 overflow-hidden"
+            >
               <img
                 src="/images/community-group.jpg"
                 alt="Freeway community gathered together"
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
-            </div>
-            <div className="col-span-2 aspect-square">
+            </motion.div>
+            <motion.div
+              variants={reveal}
+              transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+              className="col-span-2 aspect-square overflow-hidden"
+            >
               <img
                 src="/images/community-worship.jpg"
                 alt="Drummer leading worship"
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
-            </div>
-            <div className="col-span-2 aspect-square">
+            </motion.div>
+            <motion.div
+              variants={reveal}
+              transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+              className="col-span-2 aspect-square overflow-hidden"
+            >
               <img
                 src="/images/community-prayer.jpg"
                 alt="Hands raised in worship"
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
-            </div>
-            <div className="col-span-6 aspect-[21/9]">
+            </motion.div>
+            <motion.div
+              variants={reveal}
+              transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+              className="col-span-6 aspect-[21/9] overflow-hidden"
+            >
               <img
                 src="/images/community-kids.jpg"
                 alt="Kids playing on a tire swing"
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

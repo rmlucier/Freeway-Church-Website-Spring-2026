@@ -1,15 +1,34 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Hero() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+  // Image drifts down 20% of its height as you scroll past
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0.7, 1]);
+
   return (
-    <section id="top" className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-20">
+    <section
+      ref={ref}
+      id="top"
+      className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-20"
+    >
       <div className="absolute inset-0 z-0">
-        <img
+        <motion.img
           src="/images/hero.jpg"
           alt=""
+          style={{ y, scale }}
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-fc-black/70 via-fc-black/60 to-fc-black" />
+        <motion.div
+          style={{ opacity: overlayOpacity }}
+          className="absolute inset-0 bg-gradient-to-b from-fc-black/70 via-fc-black/60 to-fc-black"
+        />
       </div>
 
       <div className="container-fc relative z-10 grid md:grid-cols-12 gap-10 items-center">

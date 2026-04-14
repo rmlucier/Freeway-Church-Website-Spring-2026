@@ -25,14 +25,36 @@ export default function Footer() {
           className="grid md:grid-cols-12 gap-10 mb-20"
         >
           <div className="md:col-span-5">
-            <h2 className="display-xl text-5xl md:text-7xl leading-[0.85]">
-              Come<br />
-              <span className="text-fc-teal">home.</span>
+            <h2 className="display-xl text-5xl md:text-7xl leading-[0.85] overflow-hidden">
+              <motion.span
+                initial={{ y: '110%' }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+                className="block"
+              >
+                Come
+              </motion.span>
+              <motion.span
+                initial={{ y: '110%' }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.8, delay: 0.15, ease: [0.76, 0, 0.24, 1] }}
+                className="block text-fc-teal"
+              >
+                home.
+              </motion.span>
             </h2>
-            <p className="mt-6 text-fc-cream/70 max-w-md leading-relaxed">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-6 text-fc-cream/70 max-w-md leading-relaxed"
+            >
               Sundays at 10am. Albion, Michigan. Bring yourself, bring your questions,
               bring a friend — we'll save you a seat.
-            </p>
+            </motion.p>
           </div>
 
           <div className="md:col-span-3 md:col-start-7">

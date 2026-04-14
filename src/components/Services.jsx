@@ -61,11 +61,18 @@ export default function Services() {
             <div className="bg-fc-black p-8 md:p-10 border border-fc-cream/10">
               <p className="eyebrow mb-6">The Rhythm</p>
               <ul className="divide-y divide-fc-cream/10">
-                {schedule.map((s) => (
-                  <li key={s.time} className="py-4 flex items-baseline justify-between gap-4">
+                {schedule.map((s, i) => (
+                  <motion.li
+                    key={s.time}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                    className="py-4 flex items-baseline justify-between gap-4"
+                  >
                     <span className="font-display font-bold text-fc-teal text-lg tracking-wider">{s.time}</span>
                     <span className="font-display uppercase tracking-wide text-fc-cream/90">{s.name}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
