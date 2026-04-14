@@ -19,15 +19,24 @@ export default function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-20"
     >
       <div className="absolute inset-0 z-0">
-        <motion.img
-          src="/images/hero.jpg"
-          alt=""
+        <motion.video
+          src="/images/hero.mp4"
+          poster="/images/hero.jpg"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
           style={{ y, scale }}
           className="h-full w-full object-cover"
         />
+        {/* Solid base dimmer for text legibility */}
+        <div className="absolute inset-0 bg-fc-black/40" />
+        {/* Vertical gradient — lighter at top, fully dark at bottom */}
         <motion.div
           style={{ opacity: overlayOpacity }}
-          className="absolute inset-0 bg-gradient-to-b from-fc-black/70 via-fc-black/60 to-fc-black"
+          className="absolute inset-0 bg-gradient-to-b from-fc-black/60 via-fc-black/50 to-fc-black"
         />
       </div>
 
