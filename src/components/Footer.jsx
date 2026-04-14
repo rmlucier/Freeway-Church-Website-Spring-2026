@@ -73,9 +73,11 @@ export default function Footer() {
         </motion.div>
 
         <div className="pt-10 border-t border-fc-cream/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="font-display font-black text-3xl tracking-tight uppercase">
-            Freeway<span className="text-fc-teal">.</span>
-          </div>
+          <img
+            src="/images/logo-stack-white.png"
+            alt="Freeway Church"
+            className="h-20 md:h-24 w-auto"
+          />
           <div className="text-fc-cream/50 text-sm font-display uppercase tracking-widest2">
             © {new Date().getFullYear()} Freeway Church · Albion, MI
           </div>

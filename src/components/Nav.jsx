@@ -27,8 +27,12 @@ export default function Nav() {
       }`}
     >
       <div className="container-fc flex items-center justify-between h-20">
-        <a href="#top" className="font-display font-black text-2xl tracking-tight uppercase">
-          Freeway<span className="text-fc-teal">.</span>
+        <a href="#top" aria-label="Freeway Church — home" className="block">
+          <img
+            src="/images/logo-horizontal-white.png"
+            alt="Freeway Church"
+            className="h-8 md:h-9 w-auto"
+          />
         </a>
 
         <nav className="hidden md:flex items-center gap-10">
