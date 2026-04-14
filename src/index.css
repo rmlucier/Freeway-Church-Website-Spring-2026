@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-fc-black text-fc-cream;
+  }
+  ::selection {
+    @apply bg-fc-teal text-fc-black;
+  }
+  h1, h2, h3, h4, h5 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-display uppercase tracking-widest2 text-fc-teal text-sm font-semibold;
+  }
+  .display-xl {
+    @apply font-display font-black uppercase leading-[0.9] tracking-tight;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center px-8 py-3 font-display font-bold uppercase tracking-widest2 text-sm transition-all duration-300;
+  }
+  .btn-primary {
+    @apply btn bg-fc-teal text-fc-black hover:bg-fc-gold;
+  }
+  .btn-outline {
+    @apply btn border-2 border-fc-cream/70 text-fc-cream hover:border-fc-teal hover:text-fc-teal;
+  }
+  .container-fc {
+    @apply mx-auto max-w-8xl px-6 md:px-12;
+  }
+}
+
+/* Thin scrollbar in dark theme */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #1C1C1C; }
+::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #009B8D; }
