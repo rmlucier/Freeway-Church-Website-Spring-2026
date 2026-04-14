@@ -4,7 +4,6 @@ const socials = [
   { label: 'Instagram', href: 'https://instagram.com/freeway.church' },
   { label: 'Facebook', href: 'https://www.facebook.com/www.freeway.church/' },
   { label: 'YouTube', href: 'https://www.youtube.com/@freewaymedia' },
-  { label: 'Podcast', href: 'https://open.spotify.com/show/1ClBK7hZzOSyfFhQYjpjMo' },
 ];
 
 const quickLinks = [

@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
-import Placeholder from './Placeholder.jsx';
 
 export default function Hero() {
   return (
     <section id="top" className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-20">
-      {/* Background placeholder — will be replaced with hero photo/video */}
       <div className="absolute inset-0 z-0">
-        <Placeholder label="Hero Image — wide worship / congregation shot" aspect="16/9" className="h-full w-full" />
+        <img
+          src="/images/hero.jpg"
+          alt=""
+          className="h-full w-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-fc-black/70 via-fc-black/60 to-fc-black" />
       </div>
 

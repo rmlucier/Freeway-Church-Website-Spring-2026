@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import Placeholder from './Placeholder.jsx';
 
 export default function Community() {
   return (
@@ -39,16 +38,36 @@ export default function Community() {
             className="md:col-span-6 grid grid-cols-6 gap-4"
           >
             <div className="col-span-4 row-span-2">
-              <Placeholder label="Community — wide group shot after service" aspect="4/5" className="h-full" />
+              <img
+                src="/images/community-group.jpg"
+                alt="Freeway community gathered together"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
             </div>
-            <div className="col-span-2">
-              <Placeholder label="Worship detail shot" aspect="1/1" />
+            <div className="col-span-2 aspect-square">
+              <img
+                src="/images/community-worship.jpg"
+                alt="Drummer leading worship"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
             </div>
-            <div className="col-span-2">
-              <Placeholder label="Hands / prayer close-up" aspect="1/1" />
+            <div className="col-span-2 aspect-square">
+              <img
+                src="/images/community-prayer.jpg"
+                alt="Hands raised in worship"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
             </div>
-            <div className="col-span-6">
-              <Placeholder label="Kids or youth moment" aspect="21/9" />
+            <div className="col-span-6 aspect-[21/9]">
+              <img
+                src="/images/community-kids.jpg"
+                alt="Kids playing on a tire swing"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
             </div>
           </motion.div>
         </div>

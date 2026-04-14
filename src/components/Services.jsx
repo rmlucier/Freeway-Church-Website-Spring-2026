@@ -103,22 +103,32 @@ export default function Services() {
           </motion.div>
         </div>
 
-        {/* Map */}
+        {/* Building + Map */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-16 border border-fc-cream/10 overflow-hidden aspect-[16/7]"
+          className="mt-16 grid md:grid-cols-2 gap-4"
         >
-          <iframe
-            src={mapsEmbed}
-            title="Freeway Church location"
-            className="w-full h-full grayscale contrast-125"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
+          <div className="border border-fc-cream/10 overflow-hidden aspect-[16/10]">
+            <img
+              src="/images/building.jpg"
+              alt="Freeway Church building exterior"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div className="border border-fc-cream/10 overflow-hidden aspect-[16/10]">
+            <iframe
+              src={mapsEmbed}
+              title="Freeway Church location"
+              className="w-full h-full grayscale contrast-125"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
         </motion.div>
       </div>
     </section>

@@ -16,8 +16,8 @@ npm run preview
 
 ## Structure
 - `src/App.jsx` — top-level composition, renders all sections in order
-- `src/components/Placeholder.jsx` — labeled image stubs used everywhere real images will eventually live
 - `src/components/{Nav,Hero,Vision,Pillars,Community,Services,Sermons,JoinCTA,Footer}.jsx` — section components
+- `public/images/` — real photos (hero, community, building, youtube-stage)
 - `tailwind.config.js` — brand tokens (`fc-black`, `fc-teal`, `fc-gold`, `fc-cream`) and Barlow Condensed
 - `vercel.json` — SPA rewrite
 
@@ -29,9 +29,5 @@ npm run preview
 - Display: Barlow Condensed. Body: Inter.
 
 ## TODO
-- Swap Placeholder components for real photos/video (each has a descriptive label)
-- Add `public/og-image.jpg` for social sharing
-- Add `public/favicon.png`
 - Point `freeway.church` DNS at Vercel after GoDaddy migration
 - Consider `/sermons` archive route if a full message archive is wanted
-- Lazy-load images once real assets are in
