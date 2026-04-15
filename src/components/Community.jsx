@@ -142,9 +142,9 @@ export default function Community() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6 }}
-            className="grid md:grid-cols-5 gap-4 mb-16"
+            className="grid md:grid-cols-2 gap-4 mb-16"
           >
-            <div className="md:col-span-3 border border-fc-cream/10 overflow-hidden aspect-[16/10]">
+            <div className="border border-fc-cream/10 overflow-hidden aspect-[3/2]">
               <img
                 src="/images/wednesday-dinner.jpg"
                 alt="People sharing dinner on Wednesday night"
@@ -152,7 +152,7 @@ export default function Community() {
                 loading="lazy"
               />
             </div>
-            <div className="md:col-span-2 border border-fc-cream/10 overflow-hidden aspect-[16/10]">
+            <div className="border border-fc-cream/10 overflow-hidden aspect-[3/2]">
               <img
                 src="/images/wednesday-smallgroup.jpg"
                 alt="Men gathered around a small group table"

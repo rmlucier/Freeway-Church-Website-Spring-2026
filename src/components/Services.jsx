@@ -116,22 +116,22 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="mt-16 relative border border-fc-cream/10 overflow-hidden aspect-[21/9] md:aspect-[21/7]"
+          className="mt-16 relative border border-fc-cream/10 overflow-hidden aspect-[16/9] md:aspect-[21/9]"
         >
           <img
             src="/images/services-youth.jpg"
-            alt="Freeway Youth leading worship"
-            className="absolute inset-0 h-full w-full object-cover"
+            alt="Freeway Youth leaders"
+            className="absolute inset-0 h-full w-full object-cover object-center"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-fc-black via-fc-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-fc-black via-fc-black/55 to-fc-black/10" />
           <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end max-w-xl">
-            <p className="eyebrow mb-3">Freeway Youth · FWY</p>
-            <h3 className="font-display font-black uppercase text-3xl md:text-5xl leading-none mb-4 text-fc-cream">
+            <p className="eyebrow mb-3 drop-shadow-lg">Freeway Youth · FWY</p>
+            <h3 className="font-display font-black uppercase text-3xl md:text-5xl leading-none mb-4 text-fc-cream drop-shadow-lg">
               6th–12th.<br />
               <span className="text-fc-teal">Sundays at 6.</span>
             </h3>
-            <p className="text-fc-cream/80 leading-relaxed max-w-sm">
+            <p className="text-fc-cream/90 leading-relaxed max-w-sm drop-shadow">
               Real questions, real conversations, real worship. Small-group style plus
               quarterly events.
             </p>

@@ -271,11 +271,11 @@ export default function Visit() {
               </p>
             </div>
             <div className="md:col-span-5 order-1 md:order-2">
-              <div className="relative border border-fc-cream/10 overflow-hidden aspect-[4/5]">
+              <div className="relative border border-fc-cream/10 overflow-hidden aspect-[3/2]">
                 <img
                   src="/images/roy-elissa.jpg"
                   alt="Pastors Roy and Elissa Lucier co-teaching"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-center"
                   loading="lazy"
                 />
               </div>
