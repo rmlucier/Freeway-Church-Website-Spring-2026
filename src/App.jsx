@@ -1,13 +1,9 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Nav from './components/Nav.jsx';
-import Hero from './components/Hero.jsx';
-import Vision from './components/Vision.jsx';
-import Pillars from './components/Pillars.jsx';
-import Community from './components/Community.jsx';
-import Services from './components/Services.jsx';
-import Sermons from './components/Sermons.jsx';
-import JoinCTA from './components/JoinCTA.jsx';
 import Footer from './components/Footer.jsx';
+import Home from './pages/Home.jsx';
+import Giving from './pages/Giving.jsx';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -18,22 +14,17 @@ export default function App() {
   });
 
   return (
-    <>
+    <BrowserRouter>
       <motion.div
         style={{ scaleX }}
         className="fixed top-0 left-0 right-0 h-0.5 bg-fc-teal origin-left z-[60]"
       />
       <Nav />
-      <main>
-        <Hero />
-        <Vision />
-        <Pillars />
-        <Community />
-        <Services />
-        <Sermons />
-        <JoinCTA />
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/giving" element={<Giving />} />
+      </Routes>
       <Footer />
-    </>
+    </BrowserRouter>
   );
 }

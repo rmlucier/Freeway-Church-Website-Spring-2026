@@ -1,0 +1,394 @@
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+
+// 2025 Budget allocation — from Business Meeting 2025
+const budget = [
+  {
+    label: 'Staff',
+    percent: 48,
+    detail: 'Pastor Roy (full time) and Pastor Elissa (part time) on the ground in Albion.',
+    color: 'bg-fc-teal',
+  },
+  {
+    label: 'Building',
+    percent: 16,
+    detail: 'Utilities, groundskeeping, maintenance, custodial service, maintenance reserve fund.',
+    color: 'bg-fc-gold',
+  },
+  {
+    label: 'Ministry',
+    percent: 16,
+    detail: 'Sunday food, Kids + Youth, audio/visual equipment.',
+    color: 'bg-fc-teal-dark',
+  },
+  {
+    label: 'Outgoing Support',
+    percent: 10,
+    detail: 'Monthly giving to missionary partners — 10% of our budget goes back out.',
+    color: 'bg-fc-gold-soft',
+  },
+  {
+    label: 'Operating',
+    percent: 10,
+    detail: 'Building insurance, office supplies, the everyday things that keep the lights on.',
+    color: 'bg-fc-cream/40',
+  },
+];
+
+// Kingdom Builders growth — from Business Meeting 2025
+const kbHistory = [
+  { year: '2021', amount: 3446 },
+  { year: '2022', amount: 8405 },
+  { year: '2023', amount: 9336 },
+  { year: '2024', amount: 10783 },
+];
+const kbGoal2025 = 23100;
+const kbMaxForChart = 25000; // y-axis scale
+
+export default function Giving() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <main className="pt-28">
+      {/* Hero */}
+      <section className="relative py-24 md:py-40 bg-fc-black overflow-hidden">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+            className="max-w-4xl"
+          >
+            <p className="eyebrow mb-6">Giving at Freeway</p>
+            <h1 className="display-xl text-5xl md:text-8xl leading-[0.9] text-fc-cream">
+              A free way.<br />
+              <span className="text-fc-teal">A full life.</span>
+            </h1>
+            <p className="mt-10 text-xl md:text-2xl text-fc-cream/80 leading-snug max-w-2xl font-display font-medium">
+              We don't give to cover the bills.<br />We give to leave a legacy.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* How it works — Tithing vs Kingdom Builders */}
+      <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mb-16"
+          >
+            <p className="eyebrow mb-4">How It Works</p>
+            <h2 className="display-xl text-4xl md:text-6xl">
+              Two buckets.<br />
+              <span className="text-fc-gold">One direction.</span>
+            </h2>
+            <p className="mt-6 text-lg text-fc-cream/70 leading-relaxed max-w-2xl">
+              Freeway is a tithing church. Our congregation gives 10% of their income — and we
+              give 10% of our general budget back out to missionary partners, locally and
+              around the world. Everything beyond the tithe becomes something we call
+              Kingdom Builders.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6 }}
+              className="relative border-l-2 border-fc-teal pl-8 py-2"
+            >
+              <p className="eyebrow mb-3">The Tithe</p>
+              <h3 className="font-display font-black uppercase text-3xl md:text-4xl leading-none mb-5">
+                10% of income.
+              </h3>
+              <p className="text-fc-cream/80 leading-relaxed mb-4">
+                For fully devoted followers of Christ, we expect a baseline of 10% of your
+                income given to Freeway Church. This isn't a cover charge. It's not a hedge
+                against God. It's practice — a rhythm of trust.
+              </p>
+              <p className="text-fc-cream/60 leading-relaxed italic">
+                You can never out-give God.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, delay: 0.12 }}
+              className="relative border-l-2 border-fc-gold pl-8 py-2"
+            >
+              <p className="eyebrow mb-3 text-fc-gold">Over and Above</p>
+              <h3 className="font-display font-black uppercase text-3xl md:text-4xl leading-none mb-5">
+                Kingdom Builders.
+              </h3>
+              <p className="text-fc-cream/80 leading-relaxed mb-4">
+                Anyone who gives over and above their tithe is a Kingdom Builder. The money
+                goes directly to missionaries and projects we have real relationships with —
+                Gospel-centered, Kingdom-focused.
+              </p>
+              <p className="text-fc-cream/60 leading-relaxed italic">
+                We don't give to cover bills. We give to leave a legacy.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Where it goes — 2025 Budget */}
+      <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mb-14"
+          >
+            <p className="eyebrow mb-4">Where It Goes · 2025 Budget</p>
+            <h2 className="display-xl text-4xl md:text-6xl">
+              Every dollar, <br />
+              <span className="text-fc-teal">on purpose.</span>
+            </h2>
+          </motion.div>
+
+          {/* Stacked horizontal bar */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1.1, ease: [0.2, 0.8, 0.2, 1] }}
+            className="origin-left flex h-10 md:h-12 rounded-sm overflow-hidden mb-12 border border-fc-cream/10"
+          >
+            {budget.map((b) => (
+              <div
+                key={b.label}
+                className={`${b.color} relative group`}
+                style={{ width: `${b.percent}%` }}
+                title={`${b.label} — ${b.percent}%`}
+              />
+            ))}
+          </motion.div>
+
+          {/* Detail list */}
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+            {budget.map((b, i) => (
+              <motion.div
+                key={b.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="flex items-start gap-5"
+              >
+                <div className={`${b.color} w-1 self-stretch flex-shrink-0 mt-1`} />
+                <div>
+                  <div className="flex items-baseline justify-between gap-4 mb-1">
+                    <h3 className="font-display font-bold uppercase tracking-wide text-xl">
+                      {b.label}
+                    </h3>
+                    <span className="font-display font-black text-fc-teal text-xl md:text-2xl">
+                      {b.percent}%
+                    </span>
+                  </div>
+                  <p className="text-fc-cream/70 text-sm leading-relaxed">{b.detail}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Kingdom Builders deep dive */}
+      <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mb-16"
+          >
+            <p className="eyebrow mb-4 text-fc-gold">Kingdom Builders</p>
+            <h2 className="display-xl text-4xl md:text-6xl">
+              We get to <span className="text-fc-gold">change the world.</span>
+            </h2>
+            <p className="mt-6 text-lg text-fc-cream/70 leading-relaxed max-w-2xl">
+              Kingdom Builders narrows the focus: we know exactly why and what we're giving
+              to. As a family, we can accomplish more than we ever could by ourselves. The
+              money raised goes directly to missionaries and projects we have relationships
+              with — all Gospel-centered, geared to advance the Kingdom of God.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-12 gap-10 md:gap-16">
+            {/* Principles */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6 }}
+              className="md:col-span-6 space-y-8"
+            >
+              <div>
+                <div className="font-display text-fc-gold text-sm tracking-widest2 mb-2">01</div>
+                <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none mb-3">
+                  You are a Kingdom Builder
+                </h3>
+                <p className="text-fc-cream/70 leading-relaxed">
+                  Anyone who gives over and above their tithe is a Kingdom Builder. There's no
+                  form, no intake meeting, no minimum commitment. If you give beyond the
+                  tithe, you're in.
+                </p>
+              </div>
+              <div>
+                <div className="font-display text-fc-gold text-sm tracking-widest2 mb-2">02</div>
+                <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none mb-3">
+                  First Fruits, every January
+                </h3>
+                <p className="text-fc-cream/70 leading-relaxed">
+                  Each year we kick off with a First Fruits offering — a moment to plan, vision,
+                  and dream together about what God wants to do through us in the coming year.
+                  January 2025 First Fruits: <span className="text-fc-teal font-display font-bold">$9,026.09.</span>
+                </p>
+              </div>
+              <div>
+                <div className="font-display text-fc-gold text-sm tracking-widest2 mb-2">03</div>
+                <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none mb-3">
+                  2025 goal
+                </h3>
+                <p className="text-fc-cream/70 leading-relaxed">
+                  We're aiming for{' '}
+                  <span className="text-fc-teal font-display font-bold">$23,100</span> in Kingdom
+                  Builders giving this year. This year we plan to give raises to every
+                  missionary we support.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Growth chart */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="md:col-span-6"
+            >
+              <div className="bg-fc-black p-8 md:p-10 border border-fc-cream/10">
+                <p className="eyebrow mb-6">Five-Year Trajectory</p>
+                <div className="relative h-72 flex items-end justify-between gap-3 md:gap-5 border-b border-fc-cream/10 pb-2">
+                  {kbHistory.map((y, i) => {
+                    const heightPct = (y.amount / kbMaxForChart) * 100;
+                    return (
+                      <motion.div
+                        key={y.year}
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${heightPct}%` }}
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ duration: 0.9, delay: 0.2 + i * 0.1, ease: [0.2, 0.8, 0.2, 1] }}
+                        className="flex-1 bg-fc-gold relative flex items-end justify-center"
+                      >
+                        <span className="absolute -top-6 font-display text-xs text-fc-cream/80 whitespace-nowrap">
+                          ${(y.amount / 1000).toFixed(1)}k
+                        </span>
+                      </motion.div>
+                    );
+                  })}
+                  {/* 2025 goal — dashed outline */}
+                  <motion.div
+                    initial={{ height: 0 }}
+                    whileInView={{ height: `${(kbGoal2025 / kbMaxForChart) * 100}%` }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ duration: 0.9, delay: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+                    className="flex-1 border-2 border-dashed border-fc-teal relative flex items-end justify-center"
+                  >
+                    <span className="absolute -top-6 font-display text-xs text-fc-teal whitespace-nowrap">
+                      $23.1k goal
+                    </span>
+                  </motion.div>
+                </div>
+                <div className="flex justify-between gap-3 md:gap-5 mt-3 font-display text-xs text-fc-cream/60 tracking-widest2 uppercase">
+                  {kbHistory.map((y) => (
+                    <div key={y.year} className="flex-1 text-center">
+                      {y.year}
+                    </div>
+                  ))}
+                  <div className="flex-1 text-center text-fc-teal">2025</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pastoral note */}
+      <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <p className="eyebrow mb-6">A Note from Pastor Roy</p>
+            <p className="font-display font-medium text-2xl md:text-3xl leading-snug text-fc-cream mb-8">
+              "Praise God that he continues to gently move us into deeper Godly wisdom as we
+              walk our own path of surrender and transformation. May God's kingdom come to
+              Albion and the surrounding areas as it is in heaven."
+            </p>
+            <p className="font-display uppercase tracking-widest2 text-sm text-fc-cream/60">
+              — Pastors Roy and Elissa Lucier
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Final CTAs */}
+      <section className="py-24 md:py-32 bg-fc-black-soft border-y border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <h2 className="display-xl text-4xl md:text-6xl mb-10">
+              Ready to give?
+            </h2>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="https://freewaychurch.churchcenter.com/giving"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                Give Now
+              </a>
+              <a
+                href="https://freewaychurch.churchcenter.com/people/forms/274372"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+              >
+                Talk to a Pastor
+              </a>
+            </div>
+            <p className="mt-8 font-display uppercase tracking-widest2 text-xs text-fc-cream/50 max-w-md leading-relaxed">
+              Ephesians 2:10 — "For we are God's masterpiece. He has created us anew in
+              Christ Jesus, so we can do the good things he planned for us long ago."
+            </p>
+          </motion.div>
+        </div>
+      </section>
+    </main>
+  );
+}

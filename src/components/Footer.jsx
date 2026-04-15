@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const socials = [
   { label: 'Instagram', href: 'https://instagram.com/freeway.church' },
@@ -7,9 +8,9 @@ const socials = [
 ];
 
 const quickLinks = [
-  { label: 'About Us', href: '#vision' },
-  { label: 'Messages', href: '#sermons' },
-  { label: 'Give', href: 'https://freewaychurch.churchcenter.com/giving' },
+  { label: 'About Us', href: '/#vision' },
+  { label: 'Messages', href: '/#sermons' },
+  { label: 'Give', href: '/giving' },
   { label: 'Freeway Report', href: 'https://freewaychurch.churchcenter.com/people/forms/274372' },
 ];
 
@@ -87,18 +88,29 @@ export default function Footer() {
           <div className="md:col-span-3 md:col-start-7">
             <p className="eyebrow mb-5">Quick Links</p>
             <ul className="space-y-3">
-              {quickLinks.map((l) => (
-                <li key={l.label}>
-                  <a
-                    href={l.href}
-                    target={l.href.startsWith('http') ? '_blank' : undefined}
-                    rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="font-display uppercase tracking-wide text-fc-cream/80 hover:text-fc-teal transition-colors"
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              ))}
+              {quickLinks.map((l) => {
+                const isExternal = l.href.startsWith('http');
+                const className =
+                  'font-display uppercase tracking-wide text-fc-cream/80 hover:text-fc-teal transition-colors';
+                return (
+                  <li key={l.label}>
+                    {isExternal ? (
+                      <a
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={className}
+                      >
+                        {l.label}
+                      </a>
+                    ) : (
+                      <Link to={l.href} className={className}>
+                        {l.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
