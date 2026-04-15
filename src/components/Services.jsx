@@ -122,7 +122,7 @@ export default function Services() {
             <img
               src="/images/building.jpg"
               alt="Freeway Church building exterior"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover grayscale contrast-125"
               loading="lazy"
             />
           </div>

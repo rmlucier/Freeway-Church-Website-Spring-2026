@@ -38,13 +38,13 @@ const budget = [
 // Missionary partners — funded by the tithe-on-tithe (general fund outgoing support)
 // Some partners serve in sensitive regions and are intentionally unnamed.
 const partners = [
-  { name: 'Nicaragua' },
-  { name: 'Kazakhstan' },
-  { name: 'Indonesia' },
-  { name: 'China' },
-  { name: 'Project 42', href: 'https://www.project42partners.org/' },
-  { name: 'Refugees in Detroit' },
-  { name: 'Detroit Chi Alpha', href: 'https://linktr.ee/waynestatechialpha' },
+  { name: 'Nicaragua', image: '/images/partners/nicaragua.jpg' },
+  { name: 'Kazakhstan', image: '/images/partners/kazakhstan.jpg' },
+  { name: 'Indonesia', image: '/images/partners/indonesia.jpg' },
+  { name: 'China', image: '/images/partners/china.jpg' },
+  { name: 'Project 42', href: 'https://www.project42partners.org/', image: '/images/partners/project42.jpg' },
+  { name: 'Refugees in Detroit', href: 'https://www.hicdetroit.com/', image: '/images/partners/refugees-detroit.jpg' },
+  { name: 'Detroit Chi Alpha', href: 'https://linktr.ee/waynestatechialpha', image: '/images/partners/chi-alpha.jpg' },
 ];
 
 // What Kingdom Builders funds — responsive / project-based giving
@@ -274,22 +274,31 @@ export default function Giving() {
                 show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
               };
               const cardClass =
-                'group relative p-8 md:p-10 border-r border-b border-fc-cream/10 hover:bg-fc-black transition-colors';
+                'group relative overflow-hidden aspect-[4/3] md:aspect-[5/4] border-r border-b border-fc-cream/10';
 
               const inner = (
                 <>
+                  {p.image && (
+                    <div
+                      className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
+                      style={{ backgroundImage: `url(${p.image})` }}
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-fc-black via-fc-black/60 to-fc-black/30 group-hover:from-fc-black group-hover:via-fc-black/40 group-hover:to-transparent transition-all duration-500" />
                   <div className="absolute top-0 left-0 h-px bg-fc-teal w-0 group-hover:w-full transition-all duration-500" />
-                  <span className="font-display text-fc-cream/30 text-xs tracking-widest2 absolute top-3 right-4">
+                  <span className="font-display text-fc-cream/50 text-xs tracking-widest2 absolute top-4 right-5 z-10">
                     0{i + 1}
                   </span>
-                  <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none text-fc-cream">
-                    {p.name}
-                  </h3>
-                  {p.href && (
-                    <span className="absolute bottom-3 right-4 font-display uppercase tracking-widest2 text-[10px] text-fc-teal opacity-0 group-hover:opacity-100 transition-opacity">
-                      Visit →
-                    </span>
-                  )}
+                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 z-10">
+                    <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none text-fc-cream drop-shadow-lg">
+                      {p.name}
+                    </h3>
+                    {p.href && (
+                      <span className="block mt-3 font-display uppercase tracking-widest2 text-[10px] text-fc-teal opacity-80 group-hover:opacity-100 transition-opacity">
+                        Visit →
+                      </span>
+                    )}
+                  </div>
                 </>
               );
 
