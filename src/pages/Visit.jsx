@@ -20,14 +20,14 @@ const expectations = [
   {
     title: 'Your kids are safe.',
     body:
-      'Kidsway (K–5th) runs during service with a background-checked, trained team. Nursery for the littlest ones. Check-in takes about three minutes.',
+      'Kids (K–5th) sit with you through worship, then Kidsway dismisses during the greeting so they head down for their own lesson. Background-checked, trained team. Nursery for the littlest ones.',
   },
 ];
 
 const timeline = [
   { time: '9:45', label: 'Doors open', body: 'Come early, grab coffee, find a seat.' },
   { time: '10:00', label: 'Worship starts', body: 'Music, prayer, a few announcements.' },
-  { time: '10:25', label: 'The message', body: '30–35 minutes from Pastor Roy.' },
+  { time: '10:25', label: 'The message', body: '30–35 minutes from Pastor Roy. Kids head to Kidsway during the greeting right before the message.' },
   { time: '11:00', label: 'Response & close', body: 'Worship, response, sending.' },
   { time: '11:15', label: 'Prayer', body: 'Ten minutes together — for each other, for Albion, for whatever you carried in.' },
   { time: '11:30', label: 'Fellowship', body: 'Snacks, conversation, meet the pastors.' },
@@ -44,7 +44,7 @@ const faqs = [
   },
   {
     q: 'What about my kids?',
-    a: 'Kidsway runs K–5th during service. We\'ll walk you through check-in the first time — a quick form, a nametag, and a secure pickup code.',
+    a: 'Kids (K–5th) stay with you during the worship set, then Kidsway dismisses about 30 minutes in during the greeting time. You can sign them in when you first arrive and grab a nametag, or wait and sign them in right before they head down. Either works.',
   },
   {
     q: 'Is there anything I should bring?',
