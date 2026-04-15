@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 
 const links = [
+  { label: 'Visit', to: '/visit' },
   { label: 'Vision', hash: '#vision' },
-  { label: 'Pillars', hash: '#pillars' },
+  { label: 'Beliefs', to: '/beliefs' },
   { label: 'Community', hash: '#community' },
-  { label: 'Services', hash: '#services' },
   { label: 'Messages', hash: '#sermons' },
 ];
 
@@ -42,15 +42,25 @@ export default function Nav() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-10">
-          {links.map((l) => (
-            <a
-              key={l.hash}
-              href={sectionHref(l.hash)}
-              className="font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            l.to ? (
+              <Link
+                key={l.label}
+                to={l.to}
+                className="font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors"
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.label}
+                href={sectionHref(l.hash)}
+                className="font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors"
+              >
+                {l.label}
+              </a>
+            )
+          )}
           <Link to="/giving" className="btn-primary">
             Give
           </Link>
@@ -77,16 +87,27 @@ export default function Nav() {
             className="md:hidden overflow-hidden bg-fc-black border-t border-fc-cream/10"
           >
             <div className="container-fc py-6 flex flex-col gap-5">
-              {links.map((l) => (
-                <a
-                  key={l.hash}
-                  href={sectionHref(l.hash)}
-                  onClick={() => setOpen(false)}
-                  className="font-display uppercase tracking-widest2 text-lg"
-                >
-                  {l.label}
-                </a>
-              ))}
+              {links.map((l) =>
+                l.to ? (
+                  <Link
+                    key={l.label}
+                    to={l.to}
+                    onClick={() => setOpen(false)}
+                    className="font-display uppercase tracking-widest2 text-lg"
+                  >
+                    {l.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={l.label}
+                    href={sectionHref(l.hash)}
+                    onClick={() => setOpen(false)}
+                    className="font-display uppercase tracking-widest2 text-lg"
+                  >
+                    {l.label}
+                  </a>
+                )
+              )}
               <Link
                 to="/giving"
                 onClick={() => setOpen(false)}

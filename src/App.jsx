@@ -4,6 +4,8 @@ import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import Giving from './pages/Giving.jsx';
+import Beliefs from './pages/Beliefs.jsx';
+import Visit from './pages/Visit.jsx';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -22,6 +24,8 @@ export default function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/visit" element={<Visit />} />
+        <Route path="/beliefs" element={<Beliefs />} />
         <Route path="/giving" element={<Giving />} />
       </Routes>
       <Footer />

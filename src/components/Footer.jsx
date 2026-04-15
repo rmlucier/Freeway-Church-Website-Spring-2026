@@ -8,7 +8,8 @@ const socials = [
 ];
 
 const quickLinks = [
-  { label: 'About Us', href: '/#vision' },
+  { label: 'Plan a Visit', href: '/visit' },
+  { label: 'What We Believe', href: '/beliefs' },
   { label: 'Messages', href: '/#sermons' },
   { label: 'Give', href: '/giving' },
   { label: 'Freeway Report', href: 'https://freewaychurch.churchcenter.com/people/forms/274372' },
