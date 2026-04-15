@@ -190,45 +190,100 @@ export default function Giving() {
             </h2>
           </motion.div>
 
-          {/* Stacked horizontal bar */}
+          {/* Stacked horizontal bar — segments reveal in sequence */}
           <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 1.1, ease: [0.2, 0.8, 0.2, 1] }}
-            className="origin-left flex h-10 md:h-12 rounded-sm overflow-hidden mb-12 border border-fc-cream/10"
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+            }}
+            className="relative flex h-10 md:h-12 rounded-sm overflow-hidden mb-4 border border-fc-cream/10"
           >
             {budget.map((b) => (
-              <div
+              <motion.div
                 key={b.label}
-                className={`${b.color} relative group`}
-                style={{ width: `${b.percent}%` }}
-                title={b.label}
-              />
+                variants={{
+                  hidden: { width: 0 },
+                  show: {
+                    width: `${b.percent}%`,
+                    transition: { duration: 0.7, ease: [0.2, 0.8, 0.2, 1] },
+                  },
+                }}
+                className={`${b.color} relative group cursor-default`}
+                style={{ flex: `0 0 auto` }}
+                title={`${b.label} · ${b.percent}%`}
+              >
+                {/* top accent line on hover */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-fc-cream/0 group-hover:bg-fc-cream/80 transition-colors duration-300" />
+                {/* hover label */}
+                <div className="absolute left-1/2 -translate-x-1/2 -top-9 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                  <span className="font-display uppercase tracking-widest2 text-[10px] text-fc-cream/90">
+                    {b.label} · {b.percent}%
+                  </span>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
 
+          {/* Percent ticks */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="flex justify-between mb-14 font-display uppercase tracking-widest2 text-[10px] text-fc-cream/40"
+          >
+            <span>0%</span>
+            <span>50%</span>
+            <span>100%</span>
+          </motion.div>
+
           {/* Detail list */}
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-            {budget.map((b, i) => (
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
+            }}
+            className="grid md:grid-cols-2 gap-x-12 gap-y-8"
+          >
+            {budget.map((b) => (
               <motion.div
                 key={b.label}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="flex items-start gap-5"
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                }}
+                className="group flex items-start gap-5"
               >
-                <div className={`${b.color} w-1 self-stretch flex-shrink-0 mt-1`} />
-                <div>
-                  <h3 className="font-display font-bold uppercase tracking-wide text-xl mb-1">
-                    {b.label}
-                  </h3>
+                <div
+                  className={`${b.color} w-1 self-stretch flex-shrink-0 mt-1 transition-all duration-300 group-hover:w-1.5`}
+                />
+                <div className="flex-1">
+                  <div className="flex items-baseline justify-between gap-4 mb-1">
+                    <h3 className="font-display font-bold uppercase tracking-wide text-xl">
+                      {b.label}
+                    </h3>
+                    <motion.span
+                      variants={{
+                        hidden: { opacity: 0, y: 8 },
+                        show: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.15 } },
+                      }}
+                      className="font-display font-black text-2xl md:text-3xl text-fc-cream/90 leading-none"
+                    >
+                      {b.percent}
+                      <span className="text-fc-cream/40 text-lg">%</span>
+                    </motion.span>
+                  </div>
                   <p className="text-fc-cream/70 text-sm leading-relaxed">{b.detail}</p>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
