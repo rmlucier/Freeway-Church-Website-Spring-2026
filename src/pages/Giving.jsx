@@ -36,14 +36,15 @@ const budget = [
 ];
 
 // Missionary partners — funded by the tithe-on-tithe (general fund outgoing support)
+// Some partners serve in sensitive regions and are intentionally unnamed.
 const partners = [
-  'Nicaragua',
-  'Kazakhstan',
-  'Indonesia',
-  'China',
-  'Project 42',
-  'Refugees in Detroit',
-  'Detroit Chi Alpha',
+  { name: 'Nicaragua' },
+  { name: 'Kazakhstan' },
+  { name: 'Indonesia' },
+  { name: 'China' },
+  { name: 'Project 42', href: 'https://www.project42partners.org/' },
+  { name: 'Refugees in Detroit' },
+  { name: 'Detroit Chi Alpha', href: 'https://linktr.ee/waynestatechialpha' },
 ];
 
 // What Kingdom Builders funds — responsive / project-based giving
@@ -267,24 +268,48 @@ export default function Giving() {
             }}
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 border-t border-l border-fc-cream/10"
           >
-            {partners.map((p, i) => (
-              <motion.div
-                key={p}
-                variants={{
-                  hidden: { opacity: 0, y: 16 },
-                  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-                }}
-                className="group relative p-8 md:p-10 border-r border-b border-fc-cream/10 hover:bg-fc-black transition-colors"
-              >
-                <div className="absolute top-0 left-0 h-px bg-fc-teal w-0 group-hover:w-full transition-all duration-500" />
-                <span className="font-display text-fc-cream/30 text-xs tracking-widest2 absolute top-3 right-4">
-                  0{i + 1}
-                </span>
-                <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none text-fc-cream">
-                  {p}
-                </h3>
-              </motion.div>
-            ))}
+            {partners.map((p, i) => {
+              const variants = {
+                hidden: { opacity: 0, y: 16 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              };
+              const cardClass =
+                'group relative p-8 md:p-10 border-r border-b border-fc-cream/10 hover:bg-fc-black transition-colors';
+
+              const inner = (
+                <>
+                  <div className="absolute top-0 left-0 h-px bg-fc-teal w-0 group-hover:w-full transition-all duration-500" />
+                  <span className="font-display text-fc-cream/30 text-xs tracking-widest2 absolute top-3 right-4">
+                    0{i + 1}
+                  </span>
+                  <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none text-fc-cream">
+                    {p.name}
+                  </h3>
+                  {p.href && (
+                    <span className="absolute bottom-3 right-4 font-display uppercase tracking-widest2 text-[10px] text-fc-teal opacity-0 group-hover:opacity-100 transition-opacity">
+                      Visit →
+                    </span>
+                  )}
+                </>
+              );
+
+              return p.href ? (
+                <motion.a
+                  key={p.name}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variants={variants}
+                  className={cardClass}
+                >
+                  {inner}
+                </motion.a>
+              ) : (
+                <motion.div key={p.name} variants={variants} className={cardClass}>
+                  {inner}
+                </motion.div>
+              );
+            })}
           </motion.div>
 
           <motion.p
