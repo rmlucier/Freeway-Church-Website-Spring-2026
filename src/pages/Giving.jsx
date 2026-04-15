@@ -24,7 +24,7 @@ const budget = [
   {
     label: 'Outgoing Support',
     percent: 10,
-    detail: 'Monthly giving to missionary partners — 10% of our budget goes back out.',
+    detail: 'A tithe on our tithe. 10% of our budget flows straight to our missionary partners — specific people, specific places.',
     color: 'bg-fc-gold-soft',
   },
   {
@@ -32,6 +32,41 @@ const budget = [
     percent: 10,
     detail: 'Building insurance, office supplies, the everyday things that keep the lights on.',
     color: 'bg-fc-cream/40',
+  },
+];
+
+// Missionary partners — funded by the tithe-on-tithe (general fund outgoing support)
+const partners = [
+  'Nicaragua',
+  'Kazakhstan',
+  'Indonesia',
+  'China',
+  'Project 42',
+  'Refugees in Detroit',
+  'Detroit Chi Alpha',
+];
+
+// What Kingdom Builders funds — responsive / project-based giving
+const kbFunds = [
+  {
+    title: 'Disaster Relief',
+    body: 'When floods, fires, or crisis hit — here or around the world.',
+  },
+  {
+    title: 'Bibles',
+    body: 'For hands that want one and don\'t have one yet.',
+  },
+  {
+    title: 'Benevolence',
+    body: 'Immediate help for members of our church family in need.',
+  },
+  {
+    title: 'Camp Scholarships',
+    body: 'So no kid misses summer camp for money.',
+  },
+  {
+    title: 'Building Upgrades',
+    body: 'The space that lets us welcome more people, better.',
   },
 ];
 
@@ -130,9 +165,9 @@ export default function Giving() {
                 Kingdom Builders.
               </h3>
               <p className="text-fc-cream/80 leading-relaxed mb-4">
-                Anyone who gives over and above their tithe is a Kingdom Builder. The money
-                goes directly to missionaries and projects we have real relationships with —
-                Gospel-centered, Kingdom-focused.
+                Anyone who gives over and above their tithe is a Kingdom Builder. These
+                dollars respond to specific, on-the-ground needs — disaster relief, Bibles,
+                benevolence, camp scholarships, building upgrades. Never generic.
               </p>
               <p className="text-fc-cream/60 leading-relaxed italic">
                 We don't give to cover bills. We give to leave a legacy.
@@ -206,8 +241,71 @@ export default function Giving() {
         </div>
       </section>
 
-      {/* Kingdom Builders deep dive */}
+      {/* Missionary Partners — funded by the tithe-on-tithe */}
       <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mb-14"
+          >
+            <p className="eyebrow mb-4">Our Partners · Tithe on the Tithe</p>
+            <h2 className="display-xl text-4xl md:text-6xl">
+              Seven partners. <br />
+              <span className="text-fc-teal">Three continents.</span>
+            </h2>
+            <p className="mt-6 text-lg text-fc-cream/70 leading-relaxed max-w-2xl">
+              10% of our general budget goes straight back out — monthly support for
+              missionaries and ministries we have real relationships with.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+            }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 border-t border-l border-fc-cream/10"
+          >
+            {partners.map((p, i) => (
+              <motion.div
+                key={p}
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                }}
+                className="group relative p-8 md:p-10 border-r border-b border-fc-cream/10 hover:bg-fc-black transition-colors"
+              >
+                <div className="absolute top-0 left-0 h-px bg-fc-teal w-0 group-hover:w-full transition-all duration-500" />
+                <span className="font-display text-fc-cream/30 text-xs tracking-widest2 absolute top-3 right-4">
+                  0{i + 1}
+                </span>
+                <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none text-fc-cream">
+                  {p}
+                </h3>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="mt-10 font-display uppercase tracking-widest2 text-sm text-fc-cream/60 text-center md:text-left"
+          >
+            Seven partners. Seven places. <span className="text-fc-teal">One table.</span>
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Kingdom Builders deep dive */}
+      <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
         <div className="container-fc">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -221,10 +319,10 @@ export default function Giving() {
               We get to <span className="text-fc-gold">change the world.</span>
             </h2>
             <p className="mt-6 text-lg text-fc-cream/70 leading-relaxed max-w-2xl">
-              Kingdom Builders narrows the focus: we know exactly why and what we're giving
-              to. As a family, we can accomplish more than we ever could by ourselves. The
-              money raised goes directly to missionaries and projects we have relationships
-              with — all Gospel-centered, geared to advance the Kingdom of God.
+              Tithes carry the rhythm — Sundays, staff, missionary partners. Kingdom Builders
+              carries the moments: disaster relief, Bibles, benevolence, camp scholarships,
+              building upgrades. As a family we can accomplish more than we ever could by
+              ourselves. Never generic. Always specific.
             </p>
           </motion.div>
 
@@ -323,6 +421,54 @@ export default function Giving() {
                   <div className="flex-1 text-center text-fc-teal">2025</div>
                 </div>
               </div>
+            </motion.div>
+          </div>
+
+          {/* What Kingdom Builders funds */}
+          <div className="mt-20 md:mt-28">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl mb-10"
+            >
+              <p className="eyebrow mb-4 text-fc-gold">What It Funds</p>
+              <h3 className="font-display font-black uppercase text-3xl md:text-5xl leading-none">
+                Specific needs. <br />
+                <span className="text-fc-gold">Real moments.</span>
+              </h3>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+              }}
+              className="grid sm:grid-cols-2 lg:grid-cols-5 gap-0 border-t border-l border-fc-cream/10"
+            >
+              {kbFunds.map((f, i) => (
+                <motion.div
+                  key={f.title}
+                  variants={{
+                    hidden: { opacity: 0, y: 16 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                  }}
+                  className="group relative p-8 border-r border-b border-fc-cream/10 hover:bg-fc-black-soft transition-colors"
+                >
+                  <div className="absolute top-0 left-0 h-px bg-fc-gold w-0 group-hover:w-full transition-all duration-500" />
+                  <span className="font-display text-fc-cream/30 text-xs tracking-widest2 block mb-4">
+                    0{i + 1}
+                  </span>
+                  <h4 className="font-display font-black uppercase text-xl leading-tight mb-3 text-fc-cream">
+                    {f.title}
+                  </h4>
+                  <p className="text-fc-cream/70 text-sm leading-relaxed">{f.body}</p>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </div>
