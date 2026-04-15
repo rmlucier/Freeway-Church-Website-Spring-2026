@@ -77,7 +77,7 @@ const kbHistory = [
   { year: '2023', amount: 9336 },
   { year: '2024', amount: 10783 },
 ];
-const kbGoal2025 = 23100;
+const kbGoal = 23100;
 const kbMaxForChart = 25000; // y-axis scale
 
 export default function Giving() {
@@ -207,7 +207,7 @@ export default function Giving() {
                 key={b.label}
                 className={`${b.color} relative group`}
                 style={{ width: `${b.percent}%` }}
-                title={`${b.label} — ${b.percent}%`}
+                title={b.label}
               />
             ))}
           </motion.div>
@@ -225,14 +225,9 @@ export default function Giving() {
               >
                 <div className={`${b.color} w-1 self-stretch flex-shrink-0 mt-1`} />
                 <div>
-                  <div className="flex items-baseline justify-between gap-4 mb-1">
-                    <h3 className="font-display font-bold uppercase tracking-wide text-xl">
-                      {b.label}
-                    </h3>
-                    <span className="font-display font-black text-fc-teal text-xl md:text-2xl">
-                      {b.percent}%
-                    </span>
-                  </div>
+                  <h3 className="font-display font-bold uppercase tracking-wide text-xl mb-1">
+                    {b.label}
+                  </h3>
                   <p className="text-fc-cream/70 text-sm leading-relaxed">{b.detail}</p>
                 </div>
               </motion.div>
@@ -349,24 +344,23 @@ export default function Giving() {
               <div>
                 <div className="font-display text-fc-gold text-sm tracking-widest2 mb-2">02</div>
                 <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none mb-3">
-                  First Fruits, every January
+                  First Fruits
                 </h3>
                 <p className="text-fc-cream/70 leading-relaxed">
                   Each year we kick off with a First Fruits offering — a moment to plan, vision,
                   and dream together about what God wants to do through us in the coming year.
-                  January 2025 First Fruits: <span className="text-fc-teal font-display font-bold">$9,026.09.</span>
                 </p>
               </div>
               <div>
                 <div className="font-display text-fc-gold text-sm tracking-widest2 mb-2">03</div>
                 <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none mb-3">
-                  2025 goal
+                  2026 goal
                 </h3>
                 <p className="text-fc-cream/70 leading-relaxed">
                   We're aiming for{' '}
                   <span className="text-fc-teal font-display font-bold">$23,100</span> in Kingdom
-                  Builders giving this year. This year we plan to give raises to every
-                  missionary we support.
+                  Builders giving this year — enough to give raises to every missionary we
+                  support.
                 </p>
               </div>
             </motion.div>
@@ -380,7 +374,7 @@ export default function Giving() {
               className="md:col-span-6"
             >
               <div className="bg-fc-black p-8 md:p-10 border border-fc-cream/10">
-                <p className="eyebrow mb-6">Five-Year Trajectory</p>
+                <p className="eyebrow mb-6">The Trajectory</p>
                 <div className="relative h-72 flex items-end justify-between gap-3 md:gap-5 border-b border-fc-cream/10 pb-2">
                   {kbHistory.map((y, i) => {
                     const heightPct = (y.amount / kbMaxForChart) * 100;
@@ -391,24 +385,20 @@ export default function Giving() {
                         whileInView={{ height: `${heightPct}%` }}
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{ duration: 0.9, delay: 0.2 + i * 0.1, ease: [0.2, 0.8, 0.2, 1] }}
-                        className="flex-1 bg-fc-gold relative flex items-end justify-center"
-                      >
-                        <span className="absolute -top-6 font-display text-xs text-fc-cream/80 whitespace-nowrap">
-                          ${(y.amount / 1000).toFixed(1)}k
-                        </span>
-                      </motion.div>
+                        className="flex-1 bg-fc-gold"
+                      />
                     );
                   })}
-                  {/* 2025 goal — dashed outline */}
+                  {/* 2026 goal — dashed outline */}
                   <motion.div
                     initial={{ height: 0 }}
-                    whileInView={{ height: `${(kbGoal2025 / kbMaxForChart) * 100}%` }}
+                    whileInView={{ height: `${(kbGoal / kbMaxForChart) * 100}%` }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.9, delay: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
                     className="flex-1 border-2 border-dashed border-fc-teal relative flex items-end justify-center"
                   >
-                    <span className="absolute -top-6 font-display text-xs text-fc-teal whitespace-nowrap">
-                      $23.1k goal
+                    <span className="absolute -top-6 font-display uppercase tracking-widest2 text-[10px] text-fc-teal whitespace-nowrap">
+                      Goal
                     </span>
                   </motion.div>
                 </div>
@@ -418,7 +408,7 @@ export default function Giving() {
                       {y.year}
                     </div>
                   ))}
-                  <div className="flex-1 text-center text-fc-teal">2025</div>
+                  <div className="flex-1 text-center text-fc-teal">2026</div>
                 </div>
               </div>
             </motion.div>
