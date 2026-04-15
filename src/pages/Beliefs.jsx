@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // AG's four CORE doctrines (from the 16 Fundamental Truths)
@@ -42,10 +41,6 @@ const doctrines = [
 ];
 
 export default function Beliefs() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <main className="pt-28">
       {/* Hero */}

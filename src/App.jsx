@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
+import ScrollToHash from './components/ScrollToHash.jsx';
 import Home from './pages/Home.jsx';
 import Giving from './pages/Giving.jsx';
 import Beliefs from './pages/Beliefs.jsx';
@@ -17,6 +18,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToHash />
       <motion.div
         style={{ scaleX }}
         className="fixed top-0 left-0 right-0 h-0.5 bg-fc-teal origin-left z-[60]"

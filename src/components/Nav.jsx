@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 
+// Unified nav links.
+//   type: 'page'    → dedicated route (e.g. /visit)
+//   type: 'section' → homepage section anchor (e.g. /#community)
+// Both resolve through React Router + ScrollToHash so behavior is
+// consistent whether you're on the home page or somewhere else.
 const links = [
-  { label: 'Visit', to: '/visit' },
-  { label: 'Vision', hash: '#vision' },
-  { label: 'Beliefs', to: '/beliefs' },
-  { label: 'Community', hash: '#community' },
-  { label: 'Messages', hash: '#sermons' },
+  { label: 'Visit', to: '/visit', type: 'page' },
+  { label: 'Vision', to: '/#vision', type: 'section' },
+  { label: 'Beliefs', to: '/beliefs', type: 'page' },
+  { label: 'Community', to: '/#community', type: 'section' },
+  { label: 'Messages', to: '/#sermons', type: 'section' },
 ];
 
 export default function Nav() {
@@ -23,8 +28,14 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Build an anchor href that works from any page
-  const sectionHref = (hash) => (onHome ? hash : `/${hash}`);
+  // Close mobile menu whenever the route changes
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname, location.hash]);
+
+  const linkClass =
+    'font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors';
+  const mobileLinkClass = 'font-display uppercase tracking-widest2 text-lg';
 
   return (
     <header
@@ -42,25 +53,11 @@ export default function Nav() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-10">
-          {links.map((l) =>
-            l.to ? (
-              <Link
-                key={l.label}
-                to={l.to}
-                className="font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors"
-              >
-                {l.label}
-              </Link>
-            ) : (
-              <a
-                key={l.label}
-                href={sectionHref(l.hash)}
-                className="font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors"
-              >
-                {l.label}
-              </a>
-            )
-          )}
+          {links.map((l) => (
+            <Link key={l.label} to={l.to} className={linkClass}>
+              {l.label}
+            </Link>
+          ))}
           <Link to="/giving" className="btn-primary">
             Give
           </Link>
@@ -87,32 +84,12 @@ export default function Nav() {
             className="md:hidden overflow-hidden bg-fc-black border-t border-fc-cream/10"
           >
             <div className="container-fc py-6 flex flex-col gap-5">
-              {links.map((l) =>
-                l.to ? (
-                  <Link
-                    key={l.label}
-                    to={l.to}
-                    onClick={() => setOpen(false)}
-                    className="font-display uppercase tracking-widest2 text-lg"
-                  >
-                    {l.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={l.label}
-                    href={sectionHref(l.hash)}
-                    onClick={() => setOpen(false)}
-                    className="font-display uppercase tracking-widest2 text-lg"
-                  >
-                    {l.label}
-                  </a>
-                )
-              )}
-              <Link
-                to="/giving"
-                onClick={() => setOpen(false)}
-                className="btn-primary self-start"
-              >
+              {links.map((l) => (
+                <Link key={l.label} to={l.to} className={mobileLinkClass}>
+                  {l.label}
+                </Link>
+              ))}
+              <Link to="/giving" className="btn-primary self-start">
                 Give
               </Link>
             </div>

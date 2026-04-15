@@ -5,6 +5,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Keep section anchors clear of the fixed header */
+    scroll-padding-top: 80px;
   }
   body {
     @apply bg-fc-black text-fc-cream;

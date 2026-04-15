@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // 2025 Budget allocation — from Business Meeting 2025
@@ -82,10 +81,6 @@ const kbGoal = 23100;
 const kbMaxForChart = 25000; // y-axis scale
 
 export default function Giving() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <main className="pt-28">
       {/* Hero */}

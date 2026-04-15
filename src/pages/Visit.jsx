@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const expectations = [
@@ -65,10 +64,6 @@ const mapsEmbed = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2952.72
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
 export default function Visit() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <main className="pt-28">
       {/* Hero */}
