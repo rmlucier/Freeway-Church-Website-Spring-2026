@@ -330,6 +330,34 @@ export default function Giving() {
           >
             Seven partners. Seven places. <span className="text-fc-teal">One table.</span>
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-14 pt-10 border-t border-fc-cream/10 grid md:grid-cols-12 gap-8 md:gap-12 items-start"
+          >
+            <div className="md:col-span-7">
+              <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-tight text-fc-cream mb-3">
+                Want to get more involved — <span className="text-fc-teal">or pray for these partners by name?</span>
+              </h3>
+              <p className="text-fc-cream/70 leading-relaxed max-w-xl">
+                Reach out and we'll share specific prayer requests, upcoming trips, and ways
+                you can support our partners beyond the tithe.
+              </p>
+            </div>
+            <div className="md:col-span-5 md:justify-self-end">
+              <a
+                href="https://freewaychurch.churchcenter.com/people/forms/274372"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                Message Us
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
