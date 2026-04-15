@@ -15,11 +15,13 @@ const expectations = [
     title: 'Coffee is on us.',
     body:
       'Grab a cup in the commons before service and stick around for fellowship after. You are not walking into a room of strangers for longer than a cup of coffee.',
+    image: '/images/visit-commons.jpg',
   },
   {
     title: 'Your kids are safe.',
     body:
       'Kids (K–5th) sit with you through worship, then Kidsway dismisses during the greeting so they head down for their own lesson. Background-checked, trained team. Nursery for the littlest ones.',
+    image: '/images/visit-kids-play.jpg',
   },
 ];
 
@@ -67,8 +69,14 @@ export default function Visit() {
   return (
     <main className="pt-28">
       {/* Hero */}
-      <section className="relative py-24 md:py-40 bg-fc-black overflow-hidden">
-        <div className="container-fc">
+      <section className="relative min-h-[80vh] flex items-end bg-fc-black overflow-hidden">
+        <img
+          src="/images/visit-exterior.jpg"
+          alt="Freeway Church building, daytime"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-fc-black via-fc-black/70 to-fc-black/30" />
+        <div className="container-fc relative z-10 py-20 md:py-28">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -80,7 +88,7 @@ export default function Visit() {
               We saved<br />
               <span className="text-fc-teal">you a seat.</span>
             </h1>
-            <p className="mt-10 text-xl md:text-2xl text-fc-cream/80 leading-snug max-w-2xl font-display font-medium">
+            <p className="mt-10 text-xl md:text-2xl text-fc-cream/90 leading-snug max-w-2xl font-display font-medium drop-shadow">
               Sundays at 10am. 28900 B Dr N, Albion. Whether it&apos;s your first time in a
               church in years — or ever — you belong here.
             </p>
@@ -132,21 +140,60 @@ export default function Visit() {
                   hidden: { opacity: 0, y: 16 },
                   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
                 }}
-                className="group relative p-8 md:p-10 border-r border-b border-fc-cream/10"
+                className="group relative border-r border-b border-fc-cream/10 flex flex-col"
               >
-                <div className="absolute top-0 left-0 h-px bg-fc-teal w-0 group-hover:w-full transition-all duration-500" />
-                <span className="font-display text-fc-cream/30 text-xs tracking-widest2 absolute top-3 right-4">
-                  0{i + 1}
-                </span>
-                <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none mb-4 text-fc-cream">
-                  {e.title}
-                </h3>
-                <p className="text-fc-cream/70 leading-relaxed">{e.body}</p>
+                <div className="absolute top-0 left-0 h-px bg-fc-teal w-0 group-hover:w-full transition-all duration-500 z-10" />
+                {e.image && (
+                  <div className="aspect-[16/10] overflow-hidden">
+                    <img
+                      src={e.image}
+                      alt={e.title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div className="relative p-8 md:p-10 flex-1">
+                  <span className="font-display text-fc-cream/30 text-xs tracking-widest2 absolute top-3 right-4">
+                    0{i + 1}
+                  </span>
+                  <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none mb-4 text-fc-cream">
+                    {e.title}
+                  </h3>
+                  <p className="text-fc-cream/70 leading-relaxed">{e.body}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
+
+      {/* Sanctuary band */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.9 }}
+        className="relative aspect-[21/9] md:aspect-[21/7] overflow-hidden border-t border-fc-cream/10"
+      >
+        <img
+          src="/images/visit-sanctuary.jpg"
+          alt="Congregation gathered for Sunday service"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-fc-black/70 via-transparent to-fc-black/30" />
+        <div className="absolute inset-0 flex items-end">
+          <div className="container-fc pb-10 md:pb-16">
+            <p className="font-display uppercase tracking-widest2 text-xs md:text-sm text-fc-cream/70 mb-2">
+              Sunday · 10am
+            </p>
+            <p className="font-display font-black uppercase text-2xl md:text-4xl text-fc-cream leading-none max-w-2xl drop-shadow-lg">
+              This is what a Sunday <span className="text-fc-teal">looks like.</span>
+            </p>
+          </div>
+        </div>
+      </motion.section>
 
       {/* Timeline */}
       <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
@@ -194,6 +241,46 @@ export default function Visit() {
               </motion.li>
             ))}
           </motion.ol>
+        </div>
+      </section>
+
+      {/* Meet the Pastors */}
+      <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7 }}
+            className="grid md:grid-cols-12 gap-10 md:gap-16 items-center"
+          >
+            <div className="md:col-span-7 order-2 md:order-1">
+              <p className="eyebrow mb-6">Meet the Pastors</p>
+              <h2 className="display-xl text-4xl md:text-6xl mb-8">
+                Roy &amp; Elissa<br />
+                <span className="text-fc-teal">Lucier.</span>
+              </h2>
+              <p className="text-fc-cream/80 text-lg leading-relaxed mb-6">
+                Roy and Elissa lead Freeway together — Roy full-time, Elissa part-time, both
+                all in. They preach, pastor, pray, and live on mission in Albion with their
+                family. When you walk in Sunday, you&apos;ll meet them.
+              </p>
+              <p className="text-fc-cream/60 leading-relaxed">
+                Not performers. Not polished. Just two people who love Jesus, love Albion, and
+                want you to know both.
+              </p>
+            </div>
+            <div className="md:col-span-5 order-1 md:order-2">
+              <div className="relative border border-fc-cream/10 overflow-hidden aspect-[4/5]">
+                <img
+                  src="/images/roy-elissa.jpg"
+                  alt="Pastors Roy and Elissa Lucier co-teaching"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -271,29 +358,41 @@ export default function Visit() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+            className="grid md:grid-cols-12 gap-10 md:gap-16 items-center"
           >
-            <p className="eyebrow mb-6">See You Sunday</p>
-            <h2 className="display-xl text-4xl md:text-6xl mb-8">
-              We'll be watching<br />
-              <span className="text-fc-gold">for you.</span>
-            </h2>
-            <p className="text-fc-cream/70 text-lg leading-relaxed mb-10 max-w-2xl">
-              Let us know you're planning to come. We'll keep an eye out, say hi, and make sure
-              your first visit isn't your last.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="https://freewaychurch.churchcenter.com/people/forms/274372"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                Let Us Know You're Coming
-              </a>
-              <a href="/#services" className="btn-outline">
-                See Sunday Schedule
-              </a>
+            <div className="md:col-span-7">
+              <p className="eyebrow mb-6">See You Sunday</p>
+              <h2 className="display-xl text-4xl md:text-6xl mb-8">
+                We'll be watching<br />
+                <span className="text-fc-gold">for you.</span>
+              </h2>
+              <p className="text-fc-cream/70 text-lg leading-relaxed mb-10 max-w-2xl">
+                Let us know you're planning to come. We'll keep an eye out, say hi, and make
+                sure your first visit isn't your last.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="https://freewaychurch.churchcenter.com/people/forms/274372"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                >
+                  Let Us Know You're Coming
+                </a>
+                <a href="/#services" className="btn-outline">
+                  See Sunday Schedule
+                </a>
+              </div>
+            </div>
+            <div className="md:col-span-5">
+              <div className="relative border border-fc-cream/10 overflow-hidden aspect-[3/4] max-w-sm mx-auto md:mx-0 md:ml-auto">
+                <img
+                  src="/images/visit-fellowship.jpg"
+                  alt="Fellowship after service"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </motion.div>
         </div>

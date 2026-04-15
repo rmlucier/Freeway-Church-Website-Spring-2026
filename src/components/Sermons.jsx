@@ -44,8 +44,8 @@ export default function Sermons() {
             >
               <div className="overflow-hidden aspect-video">
                 <img
-                  src="/images/youtube-stage.jpg"
-                  alt="Pastor Roy preaching on stage"
+                  src="/images/roy-preaching.jpg"
+                  alt="Pastor Roy preaching"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   loading="lazy"
                 />

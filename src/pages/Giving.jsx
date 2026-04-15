@@ -529,17 +529,29 @@ export default function Giving() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.7 }}
-            className="max-w-3xl mx-auto text-center"
+            className="grid md:grid-cols-12 gap-10 md:gap-14 items-center"
           >
-            <p className="eyebrow mb-6">A Note from Pastor Roy</p>
-            <p className="font-display font-medium text-2xl md:text-3xl leading-snug text-fc-cream mb-8">
-              "Praise God that he continues to gently move us into deeper Godly wisdom as we
-              walk our own path of surrender and transformation. May God's kingdom come to
-              Albion and the surrounding areas as it is in heaven."
-            </p>
-            <p className="font-display uppercase tracking-widest2 text-sm text-fc-cream/60">
-              — Pastors Roy and Elissa Lucier
-            </p>
+            <div className="md:col-span-5">
+              <div className="relative border border-fc-cream/10 overflow-hidden aspect-[4/5] max-w-sm mx-auto md:mx-0">
+                <img
+                  src="/images/roy-portrait.jpg"
+                  alt="Pastor Roy Lucier"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="md:col-span-7">
+              <p className="eyebrow mb-6">A Note from Pastor Roy</p>
+              <p className="font-display font-medium text-2xl md:text-3xl leading-snug text-fc-cream mb-8">
+                "Praise God that he continues to gently move us into deeper Godly wisdom as we
+                walk our own path of surrender and transformation. May God's kingdom come to
+                Albion and the surrounding areas as it is in heaven."
+              </p>
+              <p className="font-display uppercase tracking-widest2 text-sm text-fc-cream/60">
+                — Pastors Roy and Elissa Lucier
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>

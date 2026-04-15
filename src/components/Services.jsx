@@ -110,13 +110,41 @@ export default function Services() {
           </motion.div>
         </div>
 
+        {/* Freeway Youth band */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="mt-16 relative border border-fc-cream/10 overflow-hidden aspect-[21/9] md:aspect-[21/7]"
+        >
+          <img
+            src="/images/services-youth.jpg"
+            alt="Freeway Youth leading worship"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-fc-black via-fc-black/60 to-transparent" />
+          <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end max-w-xl">
+            <p className="eyebrow mb-3">Freeway Youth · FWY</p>
+            <h3 className="font-display font-black uppercase text-3xl md:text-5xl leading-none mb-4 text-fc-cream">
+              6th–12th.<br />
+              <span className="text-fc-teal">Sundays at 6.</span>
+            </h3>
+            <p className="text-fc-cream/80 leading-relaxed max-w-sm">
+              Real questions, real conversations, real worship. Small-group style plus
+              quarterly events.
+            </p>
+          </div>
+        </motion.div>
+
         {/* Building + Map */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-16 grid md:grid-cols-2 gap-4"
+          className="mt-4 grid md:grid-cols-2 gap-4"
         >
           <div className="border border-fc-cream/10 overflow-hidden aspect-[16/10]">
             <img

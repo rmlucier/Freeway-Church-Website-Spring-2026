@@ -10,6 +10,8 @@ const doctrines = [
       'We believe every person is made for God and separated from him by sin — and that rescue is real. Salvation comes through repentance toward God and faith in Jesus Christ, whose death and resurrection cover what we could never fix. It is not earned. It is received.',
     scriptures: ['Romans 10:9–10', 'Ephesians 2:8–9', 'Titus 2:11'],
     accent: 'teal',
+    image: '/images/beliefs-salvation.jpg',
+    imageAlt: 'Woman raising her arms in joy after baptism',
   },
   {
     number: '02',
@@ -19,6 +21,8 @@ const doctrines = [
       'We believe the baptism in the Holy Spirit is a distinct experience following salvation, given to empower believers for witness and service. It is the same Spirit poured out at Pentecost, still at work today — filling, gifting, and sending the church into the world.',
     scriptures: ['Acts 1:8', 'Acts 2:4', 'Acts 2:38–39'],
     accent: 'gold',
+    image: '/images/beliefs-spirit.jpg',
+    imageAlt: 'Hands raised in worship with an open Bible',
   },
   {
     number: '03',
@@ -28,6 +32,8 @@ const doctrines = [
       'We believe divine healing is integral to the gospel. Jesus carried our sickness as well as our sin, and deliverance from both is made possible through his atonement. We pray for healing in confidence — and we trust God\'s heart even when the answer takes longer than we hoped.',
     scriptures: ['Isaiah 53:4–5', 'Matthew 8:16–17', 'James 5:14–16'],
     accent: 'teal',
+    image: '/images/beliefs-healing.jpg',
+    imageAlt: 'Two women kneeling in prayer at an altar',
   },
   {
     number: '04',
@@ -37,6 +43,8 @@ const doctrines = [
       'We believe Jesus is returning — personally, visibly, gloriously. The blessed hope of the church is that Christ will come again to gather his people, judge in righteousness, and reign in a kingdom that has no end. This hope shapes how we live right now.',
     scriptures: ['1 Thessalonians 4:16–17', 'Titus 2:13', 'Revelation 22:12'],
     accent: 'gold',
+    image: '/images/beliefs-horizon.jpg',
+    imageAlt: 'Mountain ridge emerging from clouds at sunrise',
   },
 ];
 
@@ -90,13 +98,24 @@ export default function Beliefs() {
                     isEven ? '' : 'md:[&>*:first-child]:order-2'
                   }`}
                 >
-                  {/* Left: number + title */}
+                  {/* Left: image + title */}
                   <div className="md:col-span-5">
-                    <div
-                      className={`font-display font-black text-[clamp(6rem,14vw,12rem)] leading-none ${accentText} opacity-20 -mb-4 md:-mb-8`}
-                    >
-                      {d.number}
-                    </div>
+                    {d.image && (
+                      <div className="relative border border-fc-cream/10 overflow-hidden aspect-[4/5] mb-8">
+                        <img
+                          src={d.image}
+                          alt={d.imageAlt}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-fc-black/40 via-transparent to-transparent" />
+                        <div
+                          className={`absolute top-4 left-5 font-display font-black text-5xl md:text-6xl leading-none ${accentText} drop-shadow-lg`}
+                        >
+                          {d.number}
+                        </div>
+                      </div>
+                    )}
                     <div className={`w-16 h-1 ${accentBg} mb-6`} />
                     <h2 className="display-xl text-4xl md:text-6xl leading-[0.95] text-fc-cream mb-4">
                       {d.title}

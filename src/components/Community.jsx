@@ -136,6 +136,32 @@ export default function Community() {
             </p>
           </motion.div>
 
+          {/* Photo band */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6 }}
+            className="grid md:grid-cols-5 gap-4 mb-16"
+          >
+            <div className="md:col-span-3 border border-fc-cream/10 overflow-hidden aspect-[16/10]">
+              <img
+                src="/images/wednesday-dinner.jpg"
+                alt="People sharing dinner on Wednesday night"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="md:col-span-2 border border-fc-cream/10 overflow-hidden aspect-[16/10]">
+              <img
+                src="/images/wednesday-smallgroup.jpg"
+                alt="Men gathered around a small group table"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+
           {/* Timeline */}
           <motion.div
             initial="hidden"
