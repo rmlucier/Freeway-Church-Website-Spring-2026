@@ -28,8 +28,9 @@ const timeline = [
   { time: '9:45', label: 'Doors open', body: 'Come early, grab coffee, find a seat.' },
   { time: '10:00', label: 'Worship starts', body: 'Music, prayer, a few announcements.' },
   { time: '10:25', label: 'The message', body: '30–35 minutes from Pastor Roy.' },
-  { time: '11:00', label: 'Response & close', body: 'Prayer, worship, sending.' },
-  { time: '11:15', label: 'Fellowship', body: 'Snacks, conversation, meet the pastors.' },
+  { time: '11:00', label: 'Response & close', body: 'Worship, response, sending.' },
+  { time: '11:15', label: 'Prayer', body: 'Ten minutes together — for each other, for Albion, for whatever you carried in.' },
+  { time: '11:30', label: 'Fellowship', body: 'Snacks, conversation, meet the pastors.' },
 ];
 
 const faqs = [
