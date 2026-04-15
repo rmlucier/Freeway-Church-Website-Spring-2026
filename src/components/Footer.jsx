@@ -24,37 +24,64 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
           className="grid md:grid-cols-12 gap-10 mb-20"
         >
-          <div className="md:col-span-5">
-            <h2 className="display-xl text-5xl md:text-7xl leading-[0.85] overflow-hidden">
-              <motion.span
-                initial={{ y: '110%' }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-                className="block"
-              >
-                Come
-              </motion.span>
-              <motion.span
-                initial={{ y: '110%' }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.8, delay: 0.15, ease: [0.76, 0, 0.24, 1] }}
-                className="block text-fc-teal"
-              >
-                home.
-              </motion.span>
-            </h2>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
+          <div className="md:col-span-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 text-fc-cream/70 max-w-md leading-relaxed"
+              transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+              className="display-xl text-7xl md:text-[10rem] leading-[0.85] text-fc-teal"
             >
-              Sundays at 10am. Albion, Michigan. Bring yourself, bring your questions,
-              bring a friend — we'll save you a seat.
-            </motion.p>
+              Free.
+            </motion.h2>
+
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
+              }}
+              className="mt-8 max-w-xl space-y-5 text-fc-cream/80 leading-relaxed text-lg"
+            >
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                }}
+              >
+                There's a free way to become friends with God. It's Jesus.
+                That's the whole thing — every Sunday, every word, every
+                life we've watched change flows from him.
+              </motion.p>
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                }}
+              >
+                He's not watching from a distance. He's waiting — for you to
+                turn around and come home to a truth you've always known.
+              </motion.p>
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                }}
+              >
+                That echo in your chest? It's real. It's all true.
+              </motion.p>
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+                }}
+                className="font-display font-black uppercase text-3xl md:text-4xl tracking-tight text-fc-cream pt-2"
+              >
+                Come home.
+              </motion.p>
+            </motion.div>
           </div>
 
           <div className="md:col-span-3 md:col-start-7">
