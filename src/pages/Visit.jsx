@@ -62,7 +62,9 @@ const faqs = [
 ];
 
 const mapsQuery = encodeURIComponent('Freeway Church, 28900 B Dr N, Albion, MI 49224');
-const mapsEmbed = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2952.7222710448855!2d-84.74432480493775!3d42.26310316697449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883d4576470f903b%3A0x468424fe76a1d8ff!2sFreeway%20Church!5e0!3m2!1sen!2sus!4v1725637081321!5m2!1sen!2sus`;
+// Map is centered roughly on Parma (between Albion and Jackson) with a ~25-mile
+// view so visitors see Albion in context — Albion west, Parma middle, Jackson east.
+const mapsEmbed = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000!2d-84.58!3d42.245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883d4576470f903b%3A0x468424fe76a1d8ff!2sFreeway%20Church!5e0!3m2!1sen!2sus!4v1725637081321!5m2!1sen!2sus`;
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
 export default function Visit() {
