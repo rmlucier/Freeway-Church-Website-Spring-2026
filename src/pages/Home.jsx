@@ -5,6 +5,7 @@ import Community from '../components/Community.jsx';
 import Services from '../components/Services.jsx';
 import Sermons from '../components/Sermons.jsx';
 import JoinCTA from '../components/JoinCTA.jsx';
+import Midweek from '../components/Midweek.jsx';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Services />
       <Sermons />
       <JoinCTA />
+      <Midweek />
     </>
   );
 }
