@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import MailLink from './MailLink.jsx';
 
 const reveal = {
   hidden: { clipPath: 'inset(100% 0 0 0)' },
@@ -142,20 +143,12 @@ export default function Community() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6 }}
-            className="grid md:grid-cols-2 gap-4 mb-16"
+            className="mb-16"
           >
-            <div className="border border-fc-cream/10 overflow-hidden aspect-[3/2]">
+            <div className="border border-fc-cream/10 overflow-hidden aspect-[21/9]">
               <img
                 src="/images/wednesday-dinner.jpg"
                 alt="People sharing dinner on Wednesday night"
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div className="border border-fc-cream/10 overflow-hidden aspect-[3/2]">
-              <img
-                src="/images/wednesday-smallgroup.jpg"
-                alt="Men gathered around a small group table"
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
@@ -216,14 +209,13 @@ export default function Community() {
               </p>
             </div>
             <div className="md:col-span-5 md:justify-self-end">
-              <a
-                href="https://freewaychurch.churchcenter.com/people/forms/274372"
-                target="_blank"
-                rel="noopener noreferrer"
+              <MailLink
+                subject="Community Events Calendar"
                 className="btn-primary"
+                ariaLabel="Email us about community events"
               >
                 Message Us
-              </a>
+              </MailLink>
             </div>
           </motion.div>
         </div>

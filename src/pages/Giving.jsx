@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import MailLink from '../components/MailLink.jsx';
 
 // 2025 Budget allocation — from Business Meeting 2025
 const budget = [
@@ -38,7 +39,7 @@ const budget = [
 // Some partners serve in sensitive regions and are intentionally unnamed.
 const partners = [
   { name: 'Nicaragua', image: '/images/partners/nicaragua.jpg' },
-  { name: 'Kazakhstan', image: '/images/partners/kazakhstan.jpg' },
+  { name: 'Central Asia', image: '/images/partners/kazakhstan.jpg' },
   { name: 'Indonesia', image: '/images/partners/indonesia.jpg' },
   { name: 'China', image: '/images/partners/china.jpg' },
   { name: 'Project 42', href: 'https://www.project42partners.org/', image: '/images/partners/project42.jpg' },
@@ -571,14 +572,13 @@ export default function Giving() {
               >
                 Give Now
               </a>
-              <a
-                href="https://freewaychurch.churchcenter.com/people/forms/274372"
-                target="_blank"
-                rel="noopener noreferrer"
+              <MailLink
+                subject="Talk to a Pastor"
                 className="btn-outline"
+                ariaLabel="Email a pastor"
               >
                 Talk to a Pastor
-              </a>
+              </MailLink>
             </div>
             <p className="mt-8 font-display uppercase tracking-widest2 text-xs text-fc-cream/50 max-w-md leading-relaxed">
               Ephesians 2:10 — "For we are God's masterpiece. He has created us anew in
