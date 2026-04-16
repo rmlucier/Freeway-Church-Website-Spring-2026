@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import MailLink from '../components/MailLink.jsx';
 
 // AG's four CORE doctrines (from the 16 Fundamental Truths)
 const doctrines = [
@@ -196,22 +197,23 @@ export default function Beliefs() {
           >
             <p className="eyebrow mb-6">Have Questions?</p>
             <h2 className="display-xl text-4xl md:text-6xl mb-8">
-              We'd rather have the conversation<br />
-              <span className="text-fc-gold">than win the argument.</span>
+              Unity over<br />
+              <span className="text-fc-gold">uniformity.</span>
             </h2>
             <p className="text-fc-cream/70 text-lg leading-relaxed mb-10 max-w-2xl">
-              If any of this is new, unclear, or stirring something — we'd love to talk it
-              through with you. No pressure, no performance.
+              Christians disagree about plenty of things. What holds us together is Jesus —
+              his life, his death, his resurrection, his return. If any of this is new,
+              unclear, or stirring something, we'd love to talk it through. No pressure, no
+              performance.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="https://freewaychurch.churchcenter.com/people/forms/274372"
-                target="_blank"
-                rel="noopener noreferrer"
+              <MailLink
+                subject="Talk to a Pastor"
                 className="btn-primary"
+                ariaLabel="Email a pastor"
               >
                 Talk to a Pastor
-              </a>
+              </MailLink>
               <a href="/#services" className="btn-outline">
                 Visit on Sunday
               </a>
