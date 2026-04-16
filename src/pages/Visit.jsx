@@ -76,6 +76,7 @@ export default function Visit() {
           src="/images/visit-exterior.jpg"
           alt="Freeway Church building, daytime"
           className="absolute inset-0 h-full w-full object-cover"
+          fetchpriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-fc-black via-fc-black/70 to-fc-black/30" />
         <div className="container-fc relative z-10 py-20 md:py-28">

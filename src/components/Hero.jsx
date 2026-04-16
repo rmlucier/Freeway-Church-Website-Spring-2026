@@ -1,8 +1,9 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 
 export default function Hero() {
   const ref = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
@@ -19,18 +20,32 @@ export default function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-20"
     >
       <div className="absolute inset-0 z-0">
-        <motion.video
-          src="/images/hero.mp4"
-          poster="/images/hero.jpg"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-          style={{ y, scale }}
-          className="h-full w-full object-cover"
-        />
+        {prefersReducedMotion ? (
+          // Users who asked for reduced motion get a still poster instead of
+          // an autoplaying video — saves ~4MB download too.
+          <img
+            src="/images/hero.jpg"
+            alt=""
+            aria-hidden="true"
+            fetchpriority="high"
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <motion.video
+            src="/images/hero.mp4"
+            poster="/images/hero.jpg"
+            autoPlay
+            loop
+            muted
+            playsInline
+            // "metadata" lets the poster paint immediately and the video
+            // stream in — far better LCP than "auto" on slow connections.
+            preload="metadata"
+            aria-hidden="true"
+            style={{ y, scale }}
+            className="h-full w-full object-cover"
+          />
+        )}
         {/* Solid base dimmer for text legibility */}
         <div className="absolute inset-0 bg-fc-black/40" />
         {/* Vertical gradient — lighter at top, fully dark at bottom */}

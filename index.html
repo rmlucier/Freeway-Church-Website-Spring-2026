@@ -22,6 +22,9 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Preload the hero poster so it's the LCP candidate even while the
+         video is still downloading. -->
+    <link rel="preload" as="image" href="/images/hero.jpg" fetchpriority="high" />
   </head>
   <body class="bg-fc-black text-fc-cream font-body antialiased">
     <div id="root"></div>
