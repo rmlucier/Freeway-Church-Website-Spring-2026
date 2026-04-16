@@ -14,7 +14,7 @@ const expectations = [
   {
     title: 'Coffee is on us.',
     body:
-      'Grab a cup in the commons before service and stick around for fellowship after. You are not walking into a room of strangers for longer than a cup of coffee.',
+      "Free coffee in the commons before service. Stick around after for fellowship — snacks, conversation, and time to meet some of us. No one stays a stranger long.",
     image: '/images/visit-commons.jpg',
   },
   {
@@ -41,7 +41,7 @@ const faqs = [
   },
   {
     q: 'Which door do I use?',
-    a: 'Main entrance on the front of the building — you can\'t miss it. A greeter will meet you inside.',
+    a: "The door right off the parking lot — that's the one we use. A greeter will meet you inside.",
   },
   {
     q: 'What about my kids?',
@@ -267,7 +267,7 @@ export default function Visit() {
               </p>
               <p className="text-fc-cream/60 leading-relaxed">
                 Not performers. Not polished. Just two people who love Jesus, love Albion, and
-                want you to know both.
+                want to introduce you to both.
               </p>
             </div>
             <div className="md:col-span-5 order-1 md:order-2">
@@ -363,12 +363,12 @@ export default function Visit() {
             <div className="md:col-span-7">
               <p className="eyebrow mb-6">See You Sunday</p>
               <h2 className="display-xl text-4xl md:text-6xl mb-8">
-                We'll be watching<br />
-                <span className="text-fc-gold">for you.</span>
+                We can't wait<br />
+                <span className="text-fc-gold">to see you.</span>
               </h2>
               <p className="text-fc-cream/70 text-lg leading-relaxed mb-10 max-w-2xl">
-                Let us know you're planning to come. We'll keep an eye out, say hi, and make
-                sure your first visit isn't your last.
+                Let us know you're planning to come. We'll say hi, introduce you around, and
+                make sure your first visit isn't your last.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a

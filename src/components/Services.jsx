@@ -21,7 +21,7 @@ const programs = [
     body: 'Extended time together (with snacks) in the commons after every Sunday service.',
   },
   {
-    title: 'Freeway Youth (FWY)',
+    title: 'Freeway Youth',
     body: '6th–12th grade. Sunday evenings in small-group style, plus quarterly events. Real questions, real conversations.',
   },
 ];
@@ -126,7 +126,7 @@ export default function Services() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-fc-black via-fc-black/55 to-fc-black/10" />
           <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end max-w-xl">
-            <p className="eyebrow mb-3 drop-shadow-lg">Freeway Youth · FWY</p>
+            <p className="eyebrow mb-3 drop-shadow-lg">Freeway Youth</p>
             <h3 className="font-display font-black uppercase text-3xl md:text-5xl leading-none mb-4 text-fc-cream drop-shadow-lg">
               6th–12th.<br />
               <span className="text-fc-teal">Sundays at 6.</span>

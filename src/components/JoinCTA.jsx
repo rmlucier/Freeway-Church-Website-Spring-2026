@@ -14,12 +14,12 @@ const steps = [
   },
   {
     title: 'Connect',
-    body: 'New around here? Fill out a Freeway Report and we\'ll reach out.',
+    body: "New around here? We'd love to reach out!",
     href: 'https://freewaychurch.churchcenter.com/people/forms/274372',
   },
   {
     title: 'Give',
-    body: 'See how giving works here and where it goes. Then give.',
+    body: 'Learn how we steward every dollar.',
     href: '/giving',
   },
   {
@@ -47,8 +47,8 @@ export default function JoinCTA() {
         >
           <p className="eyebrow mb-4">Next Steps</p>
           <h2 className="display-xl text-4xl md:text-6xl">
-            Wherever you are,<br />
-            <span className="text-fc-teal">there's a step.</span>
+            One step<br />
+            <span className="text-fc-teal">at a time.</span>
           </h2>
         </motion.div>
 

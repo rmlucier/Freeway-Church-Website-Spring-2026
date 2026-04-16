@@ -12,7 +12,7 @@ const quickLinks = [
   { label: 'What We Believe', href: '/beliefs' },
   { label: 'Messages', href: '/#sermons' },
   { label: 'Give', href: '/giving' },
-  { label: 'Freeway Report', href: 'https://freewaychurch.churchcenter.com/people/forms/274372' },
+  { label: 'Newsletter', href: 'https://freewaychurch.churchcenter.com/people/forms/274372' },
 ];
 
 export default function Footer() {
@@ -81,7 +81,7 @@ export default function Footer() {
                 }}
                 className="font-display font-black uppercase text-3xl md:text-4xl tracking-tight text-fc-cream pt-2"
               >
-                Come home.
+                You're home.
               </motion.p>
             </motion.div>
           </div>

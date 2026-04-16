@@ -62,7 +62,7 @@ const kbFunds = [
   },
   {
     title: 'Camp Scholarships',
-    body: 'So no kid misses summer camp for money.',
+    body: 'So no kid misses summer camp due to lack of funds.',
   },
   {
     title: 'Building Upgrades',
@@ -183,7 +183,7 @@ export default function Giving() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mb-14"
           >
-            <p className="eyebrow mb-4">Where It Goes · 2025 Budget</p>
+            <p className="eyebrow mb-4">Where It Goes</p>
             <h2 className="display-xl text-4xl md:text-6xl">
               Every dollar, <br />
               <span className="text-fc-teal">on purpose.</span>
@@ -527,7 +527,7 @@ export default function Giving() {
             <div className="md:col-span-5">
               <div className="relative border border-fc-cream/10 overflow-hidden aspect-[4/5] max-w-sm mx-auto md:mx-0">
                 <img
-                  src="/images/roy-portrait.jpg"
+                  src="/images/roy-preaching.jpg"
                   alt="Pastor Roy Lucier"
                   className="h-full w-full object-cover"
                   loading="lazy"
