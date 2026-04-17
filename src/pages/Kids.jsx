@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import MailLink from '../components/MailLink.jsx';
@@ -107,21 +107,76 @@ const nurseryLeaders = [
   { name: 'Emma', photo: 'emma.jpg' },
 ];
 
-function LeaderAvatar({ name, photo }) {
+// Size + color variation is deterministic per index so reorderings stay
+// stable, but visually the grid reads as an organic pile of bubbles.
+const BUBBLE_SIZES = [
+  'w-16 md:w-20', // sm — ~64px / 80px
+  'w-20 md:w-24', // md — ~80px / 96px
+  'w-24 md:w-32', // lg — ~96px / 128px
+];
+const INITIAL_TILE_STYLES = [
+  'bg-fc-teal text-fc-black',
+  'bg-fc-gold text-fc-black',
+  'bg-fc-black-soft text-fc-teal border-2 border-fc-teal',
+];
+
+function LeaderBubble({ name, photo, index }) {
+  const prefersReducedMotion = useReducedMotion();
+
+  // Cycle sizes: md, lg, sm, md, lg, sm… → varied without randomness
+  const sizeClass = BUBBLE_SIZES[(index + 1) % 3];
+  // Stable tilt per name: -5° to +5°
+  const tilt = ((name.charCodeAt(0) * 13) % 11) - 5;
+  // Colorful initial tiles cycle through teal / gold / outlined
+  const initialStyle = INITIAL_TILE_STYLES[name.length % 3];
+
+  // Float values — each bubble bobs on its own rhythm so they're not
+  // synchronized. Disabled when the user prefers reduced motion.
+  const floatAnimate = prefersReducedMotion
+    ? { rotate: tilt }
+    : { rotate: tilt, y: [0, -6, 0, 4, 0] };
+  const floatTransition = prefersReducedMotion
+    ? {}
+    : {
+        y: {
+          duration: 4 + (index % 3),
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: (index * 0.35) % 2,
+        },
+      };
+
   return (
-    <div className="flex flex-col items-center text-center">
-      <div className="aspect-square w-20 md:w-24 rounded-full overflow-hidden bg-fc-black-soft border border-fc-cream/15 flex items-center justify-center mb-3">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.6, rotate: tilt }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: '-40px' }}
+      animate={floatAnimate}
+      whileHover={{ scale: 1.1, rotate: 0, y: 0 }}
+      transition={{
+        ...floatTransition,
+        opacity: { duration: 0.4, delay: index * 0.05 },
+        scale: { type: 'spring', stiffness: 260, damping: 18 },
+        rotate: { duration: 0.4 },
+      }}
+      className="flex flex-col items-center text-center"
+    >
+      <div
+        className={`${sizeClass} aspect-square rounded-full overflow-hidden shadow-lg shadow-fc-black/40 flex items-center justify-center mb-3 ${
+          photo ? 'ring-2 ring-fc-cream/20 bg-fc-black-soft' : initialStyle
+        }`}
+      >
         {photo ? (
           <img
             src={`/images/leaders/${photo}`}
             alt={name}
             className="h-full w-full object-cover"
             loading="lazy"
-            width="96"
-            height="96"
+            width="128"
+            height="128"
           />
         ) : (
-          <span className="font-display font-black text-3xl text-fc-cream/40 select-none">
+          <span className="font-display font-black text-3xl md:text-4xl select-none">
             {name[0]}
           </span>
         )}
@@ -129,7 +184,7 @@ function LeaderAvatar({ name, photo }) {
       <p className="font-display uppercase tracking-widest2 text-xs text-fc-cream/80">
         {name}
       </p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -409,12 +464,12 @@ export default function Kids() {
               <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-2">
                 Kidsway · K–5th
               </p>
-              <h3 className="font-display font-black uppercase text-2xl mb-8 text-fc-teal">
+              <h3 className="font-display font-black uppercase text-2xl mb-10 text-fc-teal">
                 Leaders
               </h3>
-              <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
-                {kidswayLeaders.map((l) => (
-                  <LeaderAvatar key={l.name} name={l.name} photo={l.photo} />
+              <div className="flex flex-wrap items-center justify-center gap-6 md:gap-7">
+                {kidswayLeaders.map((l, i) => (
+                  <LeaderBubble key={l.name} name={l.name} photo={l.photo} index={i} />
                 ))}
               </div>
             </div>
@@ -422,12 +477,13 @@ export default function Kids() {
               <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-2">
                 Nursery · 0–5
               </p>
-              <h3 className="font-display font-black uppercase text-2xl mb-8 text-fc-teal">
+              <h3 className="font-display font-black uppercase text-2xl mb-10 text-fc-teal">
                 Leaders
               </h3>
-              <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
-                {nurseryLeaders.map((l) => (
-                  <LeaderAvatar key={l.name} name={l.name} photo={l.photo} />
+              <div className="flex flex-wrap items-center justify-center gap-6 md:gap-7">
+                {nurseryLeaders.map((l, i) => (
+                  // Offset index so sizes don't match Kidsway row exactly
+                  <LeaderBubble key={l.name} name={l.name} photo={l.photo} index={i + 2} />
                 ))}
               </div>
             </div>
