@@ -9,16 +9,16 @@ const rooms = [
     name: 'Nursery',
     body:
       'A warm, toy-filled room for infants through pre-K. Kids stay in nursery for the full service so you can actually be present for worship. The nursery team runs a simple rhythm — a short Bible lesson, a craft or activity, play time, and a memory verse to take home — all at a pace that works for little ones. Parents sign in at the door.',
-    image: '/images/visit-kids-play.jpg',
-    imageAlt: 'Kids playing in the Freeway nursery room',
+    image: '/images/kids-nursery.jpg',
+    imageAlt: 'Kids at play in the Freeway nursery room',
   },
   {
     age: 'K–5th',
     name: 'Kidsway',
     body:
       "Kids ages 5 through 11 start the service with their families in the main auditorium. During the greeting right before the message, they leave together for Kidsway — where it's worship, a Bible teaching at their level, a memory verse, and a game or craft. They're back with you by the end of service.",
-    image: '/images/community-kids.jpg',
-    imageAlt: 'Kidsway kids at Freeway Church',
+    image: '/images/kids-kidsway.jpg',
+    imageAlt: 'Kidsway kids in costume during a program at Freeway Church',
   },
   {
     age: '6th–12th',
@@ -34,12 +34,12 @@ const safetyPoints = [
   {
     title: 'Every volunteer is background-checked.',
     body:
-      'No exceptions. Every adult who serves in the kids wing or nursery goes through a background check before they step into a classroom.',
+      'Every adult who serves in the kids wing or nursery goes through a background check before they step into a classroom.',
   },
   {
     title: 'Two-leader policy.',
     body:
-      'No child is ever alone with one adult. Every classroom runs with at least two background-checked leaders present at all times.',
+      'No child is alone with one adult. Every classroom runs with at least two background-checked leaders present at all times.',
   },
   {
     title: 'Secured kids wing.',
@@ -49,7 +49,7 @@ const safetyPoints = [
   {
     title: 'Matching-tag pickup.',
     body:
-      "When you drop your kid off, you get a tag. The only person who can pick them up is the person who dropped them off — matched by tag. No tag, no pickup.",
+      "When you drop your kid off, you get a tag. The only person who can pick them up is the person who dropped them off — matched by tag.",
   },
 ];
 
@@ -57,7 +57,7 @@ const sundayFlow = [
   { time: '9:45', label: 'Check-in opens', body: 'Early drop-off for nursery and Kidsway. Skip the line by checking in online beforehand.' },
   { time: '10:00', label: 'Service starts', body: 'Nursery kids (0–5) head to their room. Kidsway kids (K–5) sit with you.' },
   { time: '10:25', label: 'Kidsway leaves for class', body: "During the greeting, K–5th kids leave the auditorium together for Kidsway — worship, teaching, game or craft." },
-  { time: '11:15', label: 'Pickup', body: 'Same door, same person who dropped them off. Tag match required.' },
+  { time: '11:25', label: 'Pickup', body: 'Same door, same person who dropped them off. Tag match required.' },
 ];
 
 const faqs = [
@@ -102,8 +102,8 @@ export default function Kids() {
       {/* Hero */}
       <section className="relative min-h-[70vh] flex items-end bg-fc-black overflow-hidden">
         <img
-          src="/images/community-kids.jpg"
-          alt="Kids at Freeway Church"
+          src="/images/kids-hero.jpg"
+          alt="Kids at Freeway Church laughing together"
           className="absolute inset-0 h-full w-full object-cover"
           fetchpriority="high"
         />
@@ -220,6 +220,22 @@ export default function Kids() {
         </div>
       </section>
 
+      {/* Photo band — reassurance after heavy safety content */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.9 }}
+        className="relative aspect-[21/9] overflow-hidden border-t border-fc-cream/10"
+      >
+        <img
+          src="/images/kids-outdoor-2.jpg"
+          alt="A Freeway Church kid playing outdoors"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+      </motion.div>
+
       {/* Check-in + typical Sunday */}
       <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
         <div className="container-fc">
@@ -307,6 +323,22 @@ export default function Kids() {
           </div>
         </div>
       </section>
+
+      {/* Photo band — breather before team section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.9 }}
+        className="relative aspect-[21/9] overflow-hidden border-t border-fc-cream/10"
+      >
+        <img
+          src="/images/kids-outdoor-1.jpg"
+          alt="A Freeway Church kid at an outdoor community gathering"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+      </motion.div>
 
       {/* Meet the leaders */}
       <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
