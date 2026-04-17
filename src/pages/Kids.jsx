@@ -95,13 +95,13 @@ const kidswayLeaders = [
   { name: 'Charlie', photo: 'charlie.jpg' },
   { name: 'Jamie' },
   { name: 'Kaylee', photo: 'kaylee.jpg' },
-  { name: 'Elanore', photo: 'elanore.jpg' },
+  { name: 'Eleanor', photo: 'eleanor.jpg' },
 ];
 const nurseryLeaders = [
   { name: 'Jen', photo: 'jen.jpg' },
   { name: 'Grace', photo: 'grace.jpg' },
   { name: 'Irene', photo: 'irene.jpg' },
-  { name: 'Atalyia', photo: 'atalyia.jpg' },
+  { name: 'Atalya', photo: 'atalya.jpg' },
   { name: 'Carissa', photo: 'carissa.jpg' },
   { name: 'Iris', photo: 'iris.jpg' },
   { name: 'Emma', photo: 'emma.jpg' },
