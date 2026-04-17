@@ -87,8 +87,51 @@ const faqs = [
   },
 ];
 
-const kidswayLeaders = ['Martha', 'Charlie', 'Jamie', 'Kaylee', 'Elanor'];
-const nurseryLeaders = ['Jen', 'Grace', 'Irene', 'Atalya', 'Carissa', 'Iris', 'Emma'];
+// Each leader is optionally paired with a headshot in /images/leaders/.
+// When there's no photo, the avatar renders as an initial tile so the
+// grid stays visually consistent.
+const kidswayLeaders = [
+  { name: 'Martha', photo: 'martha.jpg' },
+  { name: 'Charlie' },
+  { name: 'Jamie' },
+  { name: 'Kaylee', photo: 'kaylee.jpg' },
+  { name: 'Elanor' },
+];
+const nurseryLeaders = [
+  { name: 'Jen', photo: 'jen.jpg' },
+  { name: 'Grace', photo: 'grace.jpg' },
+  { name: 'Irene', photo: 'irene.jpg' },
+  { name: 'Atalya' },
+  { name: 'Carissa', photo: 'carissa.jpg' },
+  { name: 'Iris', photo: 'iris.jpg' },
+  { name: 'Emma' },
+];
+
+function LeaderAvatar({ name, photo }) {
+  return (
+    <div className="flex flex-col items-center text-center">
+      <div className="aspect-square w-20 md:w-24 rounded-full overflow-hidden bg-fc-black-soft border border-fc-cream/15 flex items-center justify-center mb-3">
+        {photo ? (
+          <img
+            src={`/images/leaders/${photo}`}
+            alt={name}
+            className="h-full w-full object-cover"
+            loading="lazy"
+            width="96"
+            height="96"
+          />
+        ) : (
+          <span className="font-display font-black text-3xl text-fc-cream/40 select-none">
+            {name[0]}
+          </span>
+        )}
+      </div>
+      <p className="font-display uppercase tracking-widest2 text-xs text-fc-cream/80">
+        {name}
+      </p>
+    </div>
+  );
+}
 
 export default function Kids() {
   return (
@@ -361,28 +404,32 @@ export default function Kids() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             <div className="border border-fc-cream/10 p-8 md:p-10">
-              <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-3">
+              <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-2">
                 Kidsway · K–5th
               </p>
-              <h3 className="font-display font-black uppercase text-2xl mb-6 text-fc-teal">
+              <h3 className="font-display font-black uppercase text-2xl mb-8 text-fc-teal">
                 Leaders
               </h3>
-              <p className="text-fc-cream/80 leading-relaxed">
-                {kidswayLeaders.join(' · ')}
-              </p>
+              <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
+                {kidswayLeaders.map((l) => (
+                  <LeaderAvatar key={l.name} name={l.name} photo={l.photo} />
+                ))}
+              </div>
             </div>
             <div className="border border-fc-cream/10 p-8 md:p-10">
-              <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-3">
+              <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-2">
                 Nursery · 0–5
               </p>
-              <h3 className="font-display font-black uppercase text-2xl mb-6 text-fc-teal">
+              <h3 className="font-display font-black uppercase text-2xl mb-8 text-fc-teal">
                 Leaders
               </h3>
-              <p className="text-fc-cream/80 leading-relaxed">
-                {nurseryLeaders.join(' · ')}
-              </p>
+              <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
+                {nurseryLeaders.map((l) => (
+                  <LeaderAvatar key={l.name} name={l.name} photo={l.photo} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
