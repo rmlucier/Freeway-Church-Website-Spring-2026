@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO.jsx';
 import MailLink from '../components/MailLink.jsx';
 
 // 2025 Budget allocation — from Business Meeting 2025
@@ -87,6 +88,11 @@ const kbMaxForChart = 25000; // y-axis scale
 export default function Giving() {
   return (
     <main className="pt-28">
+      <SEO
+        path="/giving"
+        title="Giving"
+        description="How Freeway Church stewards every dollar — the 2026 budget, the Kingdom Builders trajectory, and the global partners we stand with in seven regions."
+      />
       {/* Hero */}
       <section className="relative py-24 md:py-40 bg-fc-black overflow-hidden">
         <div className="container-fc">

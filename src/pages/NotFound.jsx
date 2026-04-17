@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO.jsx';
 
 export default function NotFound() {
   return (
     <main className="min-h-screen flex items-center pt-28 pb-20 bg-fc-black">
+      <SEO
+        path="/404"
+        title="Page not found"
+        description="The page you're looking for doesn't exist on freeway.church."
+        noindex
+      />
       <div className="container-fc">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

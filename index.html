@@ -6,15 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1C1C1C" />
 
-    <title>Freeway Church — Home Free</title>
-    <meta name="description" content="Freeway is a community that feels like home. Together, we are eagerly cultivating a legacy of Jesus followers in Albion, Michigan." />
+    <!-- Default title/description — each page overrides these with
+         react-helmet-async at runtime. These are the fallback values. -->
+    <title>Freeway Church — A church in Albion, Michigan. Sundays at 10am.</title>
+    <meta name="description" content="Freeway Church is a community in Albion, Michigan for anyone figuring out faith — including people who walked away from church and are thinking about coming back. Sundays at 10am. Everyone is welcome." />
 
-    <meta property="og:title" content="Freeway Church — Home Free" />
-    <meta property="og:description" content="A community that feels like home. Sundays at 10am in Albion, MI." />
+    <meta property="og:title" content="Freeway Church — A church in Albion, Michigan" />
+    <meta property="og:description" content="Sundays at 10am in Albion, MI. Everyone is welcome, even you." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://freeway.church" />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:image" content="https://freeway.church/og-image.jpg" />
+    <meta property="og:site_name" content="Freeway Church" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Schema.org structured data — this is what drives Google's local
+         knowledge panel ("right-rail" result) when people search for the
+         church. Includes historical names (Albion Assembly of God, Albion
+         World Outreach) so search references to the old names still point
+         to the current site. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Church",
+      "name": "Freeway Church",
+      "alternateName": [
+        "FreeWay Church",
+        "Albion Assembly of God",
+        "Albion World Outreach"
+      ],
+      "slogan": "Everyone is welcome at Freeway Church, even you.",
+      "description": "An independent, Assemblies of God-affiliated church in Albion, Michigan. Sundays at 10am.",
+      "url": "https://freeway.church",
+      "logo": "https://freeway.church/images/logo-stack-white.png",
+      "image": "https://freeway.church/og-image.jpg",
+      "telephone": "+1-517-798-0571",
+      "email": "info@freeway.church",
+      "foundingDate": "1942-04-14",
+      "founder": {
+        "@type": "Person",
+        "name": "Irene Holmes Smith"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "28900 B Dr N",
+        "addressLocality": "Albion",
+        "addressRegion": "MI",
+        "postalCode": "49224",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Albion, Michigan" },
+        { "@type": "City", "name": "Parma, Michigan" },
+        { "@type": "City", "name": "Jackson, Michigan" },
+        { "@type": "City", "name": "Marshall, Michigan" },
+        { "@type": "City", "name": "Homer, Michigan" }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "10:00",
+          "closes": "11:15"
+        }
+      ],
+      "event": {
+        "@type": "Event",
+        "name": "Sunday Worship Service",
+        "description": "Weekly Sunday worship service — music, message, prayer, community.",
+        "eventSchedule": {
+          "@type": "Schedule",
+          "byDay": "https://schema.org/Sunday",
+          "startTime": "10:00",
+          "endTime": "11:15",
+          "repeatFrequency": "P1W"
+        },
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Freeway Church",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "28900 B Dr N",
+            "addressLocality": "Albion",
+            "addressRegion": "MI",
+            "postalCode": "49224",
+            "addressCountry": "US"
+          }
+        }
+      }
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

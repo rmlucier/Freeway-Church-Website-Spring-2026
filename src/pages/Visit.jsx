@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO.jsx';
 import LiteYouTube from '../components/LiteYouTube.jsx';
 
 const expectations = [
@@ -71,6 +72,11 @@ const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 export default function Visit() {
   return (
     <main className="pt-28">
+      <SEO
+        path="/visit"
+        title="Plan a Visit"
+        description="Sundays at 10am · 28900 B Dr N, Albion, Michigan. Whether it's your first time in a church in years — or ever — you belong here. Free coffee, casual vibe, no pressure."
+      />
       {/* Hero */}
       <section className="relative min-h-[80vh] flex items-end bg-fc-black overflow-hidden">
         <img

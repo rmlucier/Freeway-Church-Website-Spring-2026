@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO.jsx';
 import MailLink from '../components/MailLink.jsx';
 
 // AG's four CORE doctrines (from the 16 Fundamental Truths)
@@ -52,6 +53,11 @@ const doctrines = [
 export default function Beliefs() {
   return (
     <main className="pt-28">
+      <SEO
+        path="/beliefs"
+        title="What We Believe"
+        description="Freeway Church is an independent, Assemblies of God-affiliated church in Albion, Michigan. Here's a plain-English look at what we teach: Jesus, Scripture, the Holy Spirit, and why unity matters more than uniformity."
+      />
       {/* Hero */}
       <section className="relative py-24 md:py-40 bg-fc-black overflow-hidden">
         <div className="container-fc">
