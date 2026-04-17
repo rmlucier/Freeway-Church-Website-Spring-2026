@@ -131,36 +131,52 @@ function LeaderBubble({ name, photo, index }) {
   // Colorful initial tiles cycle through teal / gold / outlined
   const initialStyle = INITIAL_TILE_STYLES[name.length % 3];
 
-  // Float values — each bubble bobs on its own rhythm so they're not
-  // synchronized. Disabled when the user prefers reduced motion.
+  // Every bubble animates on THREE axes, each with its own duration and
+  // delay so the wall of bubbles never lines up. Disabled for users who
+  // prefer reduced motion.
   const floatAnimate = prefersReducedMotion
     ? { rotate: tilt }
-    : { rotate: tilt, y: [0, -6, 0, 4, 0] };
+    : {
+        rotate: [tilt, tilt + 4, tilt, tilt - 4, tilt],
+        y: [0, -14, 0, 10, 0],
+        x: [0, 4, 0, -4, 0],
+      };
   const floatTransition = prefersReducedMotion
     ? {}
     : {
         y: {
-          duration: 4 + (index % 3),
+          duration: 4 + (index % 4),
           repeat: Infinity,
           ease: 'easeInOut',
           delay: (index * 0.35) % 2,
+        },
+        x: {
+          duration: 6 + (index % 3),
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: (index * 0.2) % 1.5,
+        },
+        rotate: {
+          duration: 5 + (index % 3),
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: (index * 0.45) % 2,
         },
       };
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.6, rotate: tilt }}
+      initial={{ opacity: 0, scale: 0.5, rotate: tilt }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: '-40px' }}
       animate={floatAnimate}
-      whileHover={{ scale: 1.1, rotate: 0, y: 0 }}
+      whileHover={{ scale: 1.15, rotate: 0, y: -4, x: 0 }}
       transition={{
         ...floatTransition,
-        opacity: { duration: 0.4, delay: index * 0.05 },
-        scale: { type: 'spring', stiffness: 260, damping: 18 },
-        rotate: { duration: 0.4 },
+        opacity: { duration: 0.5, delay: index * 0.05 },
+        scale: { type: 'spring', stiffness: 220, damping: 14 },
       }}
-      className="flex flex-col items-center text-center"
+      className="flex flex-col items-center text-center cursor-default"
     >
       <div
         className={`${sizeClass} aspect-square rounded-full overflow-hidden shadow-lg shadow-fc-black/40 flex items-center justify-center mb-3 ${
@@ -461,28 +477,26 @@ export default function Kids() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            <div className="border border-fc-cream/10 p-8 md:p-10">
-              <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-2">
-                Kidsway · K–5th
-              </p>
-              <h3 className="font-display font-black uppercase text-2xl mb-10 text-fc-teal">
-                Leaders
-              </h3>
-              <div className="flex flex-wrap items-center justify-center gap-6 md:gap-7">
+          <div className="space-y-20">
+            <div>
+              <div className="text-center mb-10">
+                <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-2">
+                  Kidsway · K–5th Leaders
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-8 md:gap-10">
                 {kidswayLeaders.map((l, i) => (
                   <LeaderBubble key={l.name} name={l.name} photo={l.photo} index={i} />
                 ))}
               </div>
             </div>
-            <div className="border border-fc-cream/10 p-8 md:p-10">
-              <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-2">
-                Nursery · 0–5
-              </p>
-              <h3 className="font-display font-black uppercase text-2xl mb-10 text-fc-teal">
-                Leaders
-              </h3>
-              <div className="flex flex-wrap items-center justify-center gap-6 md:gap-7">
+            <div>
+              <div className="text-center mb-10">
+                <p className="font-display uppercase tracking-widest2 text-xs text-fc-gold mb-2">
+                  Nursery · 0–5 Leaders
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-8 md:gap-10">
                 {nurseryLeaders.map((l, i) => (
                   // Offset index so sizes don't match Kidsway row exactly
                   <LeaderBubble key={l.name} name={l.name} photo={l.photo} index={i + 2} />
