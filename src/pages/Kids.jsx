@@ -92,19 +92,19 @@ const faqs = [
 // grid stays visually consistent.
 const kidswayLeaders = [
   { name: 'Martha', photo: 'martha.jpg' },
-  { name: 'Charlie' },
+  { name: 'Charlie', photo: 'charlie.jpg' },
   { name: 'Jamie' },
   { name: 'Kaylee', photo: 'kaylee.jpg' },
-  { name: 'Elanor' },
+  { name: 'Elanore', photo: 'elanore.jpg' },
 ];
 const nurseryLeaders = [
   { name: 'Jen', photo: 'jen.jpg' },
   { name: 'Grace', photo: 'grace.jpg' },
   { name: 'Irene', photo: 'irene.jpg' },
-  { name: 'Atalya' },
+  { name: 'Atalyia', photo: 'atalyia.jpg' },
   { name: 'Carissa', photo: 'carissa.jpg' },
   { name: 'Iris', photo: 'iris.jpg' },
-  { name: 'Emma' },
+  { name: 'Emma', photo: 'emma.jpg' },
 ];
 
 function LeaderAvatar({ name, photo }) {
