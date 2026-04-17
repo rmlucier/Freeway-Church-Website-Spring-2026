@@ -77,6 +77,9 @@ const kbHistory = [
   { year: '2022', amount: 8405 },
   { year: '2023', amount: 9336 },
   { year: '2024', amount: 10783 },
+  // 2025 figures were clouded by a one-off anomaly — render at the same
+  // height as 2024 so the bar tells a steady-state story without misleading.
+  { year: '2025', amount: 10800 },
 ];
 const kbGoal = 23100;
 const kbMaxForChart = 25000; // y-axis scale

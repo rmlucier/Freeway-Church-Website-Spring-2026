@@ -52,13 +52,23 @@ export default function Midweek() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="border border-fc-cream/10 overflow-hidden aspect-[21/9]">
-            <img
-              src="/images/wednesday-dinner.jpg"
-              alt="People sharing dinner on Wednesday night"
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="border border-fc-cream/10 overflow-hidden aspect-[3/2]">
+              <img
+                src="/images/wednesday-dinner.jpg"
+                alt="People sharing dinner on Wednesday night"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="border border-fc-cream/10 overflow-hidden aspect-[3/2]">
+              <img
+                src="/images/wednesday-community.jpg"
+                alt="Wednesday night community gathering"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
         </motion.div>
 
