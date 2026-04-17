@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
+import FAQSchema from '../components/FAQSchema.jsx';
 import LiteYouTube from '../components/LiteYouTube.jsx';
 
 const expectations = [
@@ -59,6 +60,9 @@ const faqs = [
         for safety policies, typical Sunday, and parent FAQs.
       </>
     ),
+    // Plain-text version for FAQPage structured data (schema wants strings).
+    plainA:
+      'Nursery (0–5) runs during the whole service, and Kidsway (K–5th) leaves the auditorium for class during the greeting before the message. Sign in at the door — or check in online beforehand. See the Kids page for safety policies, typical Sunday, and parent FAQs.',
   },
   {
     q: 'Is there anything I should bring?',
@@ -88,6 +92,7 @@ export default function Visit() {
         title="Plan a Visit"
         description="Sundays at 10am · 28900 B Dr N, Albion, Michigan. Whether it's your first time in a church in years — or ever — you belong here. Free coffee, casual vibe, no pressure."
       />
+      <FAQSchema items={faqs.map((f) => ({ q: f.q, a: f.plainA || f.a }))} />
       {/* Hero */}
       <section className="relative min-h-[80vh] flex items-end bg-fc-black overflow-hidden">
         <img

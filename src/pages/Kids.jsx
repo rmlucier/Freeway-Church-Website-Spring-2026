@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
+import FAQSchema from '../components/FAQSchema.jsx';
 import MailLink from '../components/MailLink.jsx';
 
 const rooms = [
@@ -196,6 +197,7 @@ export default function Kids() {
         title="Kids & Youth"
         description="Kidsway (K–5th), a full-service nursery (0–5), and Freeway Youth (6th–12th) at Freeway Church in Albion, Michigan. Background-checked leaders, two-leader policy, and a secured kids wing. Safe hands. Loud fun."
       />
+      <FAQSchema items={faqs} />
 
       {/* Hero */}
       <section className="relative min-h-[70vh] flex items-end bg-fc-black overflow-hidden">
