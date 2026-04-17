@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import LiteYouTube from '../components/LiteYouTube.jsx';
 
 const expectations = [
   {
@@ -274,14 +275,15 @@ export default function Visit() {
               </p>
             </div>
             <div className="md:col-span-5 order-1 md:order-2">
-              <div className="relative border border-fc-cream/10 overflow-hidden aspect-[3/2]">
-                <img
-                  src="/images/roy-elissa.jpg"
-                  alt="Pastors Roy and Elissa Lucier co-teaching"
-                  className="h-full w-full object-cover object-center"
-                  loading="lazy"
+              <div className="relative border border-fc-cream/10 overflow-hidden aspect-video bg-fc-black">
+                <LiteYouTube
+                  videoId="Xq7t3PRIqOg"
+                  title="A welcome from Pastors Roy and Elissa"
                 />
               </div>
+              <p className="mt-3 text-xs uppercase tracking-widest text-fc-cream/50">
+                A quick hello from Roy &amp; Elissa
+              </p>
             </div>
           </motion.div>
         </div>
