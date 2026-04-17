@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useReducedMotion, animate } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import FAQSchema from '../components/FAQSchema.jsx';
@@ -121,8 +122,20 @@ const INITIAL_TILE_STYLES = [
   'bg-fc-black-soft text-fc-teal border-2 border-fc-teal',
 ];
 
+// Cursor repulsion tuning (desktop + touch-drag on mobile)
+const REPEL_FIELD = 130;    // px — start pushing the bubble when pointer is this close
+const REPEL_STRENGTH = 60;  // px — max offset when pointer is right at the edge
+const FLEE_THRESHOLD = 40;  // px — if the pointer gets THIS close, the bubble gets flung
+
 function LeaderBubble({ name, photo, index }) {
   const prefersReducedMotion = useReducedMotion();
+  const wrapperRef = useRef(null);
+
+  // Outer motion values — these hold the bubble's cursor-repulsion offset
+  // on top of the idle float animation on the inner layer.
+  const pushX = useMotionValue(0);
+  const pushY = useMotionValue(0);
+  const [isFleeing, setIsFleeing] = useState(false);
 
   // Cycle sizes: md, lg, sm, md, lg, sm… → varied without randomness
   const sizeClass = BUBBLE_SIZES[(index + 1) % 3];
@@ -131,33 +144,80 @@ function LeaderBubble({ name, photo, index }) {
   // Colorful initial tiles cycle through teal / gold / outlined
   const initialStyle = INITIAL_TILE_STYLES[name.length % 3];
 
-  // Every bubble animates on THREE axes, each with its own duration and
-  // delay so the wall of bubbles never lines up. Disabled for users who
-  // prefer reduced motion.
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    const handlePointerMove = (e) => {
+      if (!wrapperRef.current || isFleeing) return;
+      const rect = wrapperRef.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = cx - e.clientX;
+      const dy = cy - e.clientY;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist < FLEE_THRESHOLD) {
+        // Too close — fling the bubble off in the direction it's already
+        // being pushed, then gently spring back after a beat.
+        const ang = Math.atan2(dy, dx);
+        setIsFleeing(true);
+        animate(pushX, Math.cos(ang) * 520, {
+          duration: 0.6,
+          ease: [0.2, 0.7, 0.3, 1],
+        });
+        animate(pushY, Math.sin(ang) * 520, {
+          duration: 0.6,
+          ease: [0.2, 0.7, 0.3, 1],
+        });
+        setTimeout(() => {
+          animate(pushX, 0, { type: 'spring', stiffness: 80, damping: 14 });
+          animate(pushY, 0, { type: 'spring', stiffness: 80, damping: 14 });
+          setTimeout(() => setIsFleeing(false), 900);
+        }, 850);
+      } else if (dist < REPEL_FIELD) {
+        // Within the repel field — nudge away proportional to proximity
+        const force = (REPEL_FIELD - dist) / REPEL_FIELD;
+        pushX.set((dx / dist) * force * REPEL_STRENGTH);
+        pushY.set((dy / dist) * force * REPEL_STRENGTH);
+      } else if (pushX.get() !== 0 || pushY.get() !== 0) {
+        // Outside the field — drift back to rest smoothly
+        animate(pushX, 0, { duration: 0.5, ease: 'easeOut' });
+        animate(pushY, 0, { duration: 0.5, ease: 'easeOut' });
+      }
+    };
+
+    // pointermove covers both mouse (desktop) and touch-drag (mobile).
+    // On mobile, bubbles react when a finger drags near them — which ends
+    // up being a fun discovery, not a required interaction.
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, [prefersReducedMotion, isFleeing, pushX, pushY]);
+
+  // Slower, gentler idle motion so the group reads as alive — not restless.
   const floatAnimate = prefersReducedMotion
     ? { rotate: tilt }
     : {
-        rotate: [tilt, tilt + 4, tilt, tilt - 4, tilt],
-        y: [0, -14, 0, 10, 0],
-        x: [0, 4, 0, -4, 0],
+        rotate: [tilt, tilt + 3, tilt, tilt - 3, tilt],
+        y: [0, -5, 0, 4, 0],
+        x: [0, 2, 0, -2, 0],
       };
   const floatTransition = prefersReducedMotion
     ? {}
     : {
         y: {
-          duration: 4 + (index % 4),
+          duration: 9 + (index % 4),
           repeat: Infinity,
           ease: 'easeInOut',
           delay: (index * 0.35) % 2,
         },
         x: {
-          duration: 6 + (index % 3),
+          duration: 11 + (index % 3),
           repeat: Infinity,
           ease: 'easeInOut',
           delay: (index * 0.2) % 1.5,
         },
         rotate: {
-          duration: 5 + (index % 3),
+          duration: 10 + (index % 3),
           repeat: Infinity,
           ease: 'easeInOut',
           delay: (index * 0.45) % 2,
@@ -166,41 +226,46 @@ function LeaderBubble({ name, photo, index }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.5, rotate: tilt }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-40px' }}
-      animate={floatAnimate}
-      whileHover={{ scale: 1.15, rotate: 0, y: -4, x: 0 }}
-      transition={{
-        ...floatTransition,
-        opacity: { duration: 0.5, delay: index * 0.05 },
-        scale: { type: 'spring', stiffness: 220, damping: 14 },
-      }}
-      className="flex flex-col items-center text-center cursor-default"
+      ref={wrapperRef}
+      style={{ x: pushX, y: pushY }}
+      className="flex flex-col items-center text-center"
     >
-      <div
-        className={`${sizeClass} aspect-square rounded-full overflow-hidden shadow-lg shadow-fc-black/40 flex items-center justify-center mb-3 ${
-          photo ? 'ring-2 ring-fc-cream/20 bg-fc-black-soft' : initialStyle
-        }`}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: '-40px' }}
+        animate={floatAnimate}
+        transition={{
+          ...floatTransition,
+          opacity: { duration: 0.5, delay: index * 0.05 },
+          scale: { type: 'spring', stiffness: 220, damping: 14 },
+        }}
+        className="flex flex-col items-center text-center"
       >
-        {photo ? (
-          <img
-            src={`/images/leaders/${photo}`}
-            alt={name}
-            className="h-full w-full object-cover"
-            loading="lazy"
-            width="128"
-            height="128"
-          />
-        ) : (
-          <span className="font-display font-black text-3xl md:text-4xl select-none">
-            {name[0]}
-          </span>
-        )}
-      </div>
-      <p className="font-display uppercase tracking-widest2 text-xs text-fc-cream/80">
-        {name}
-      </p>
+        <div
+          className={`${sizeClass} aspect-square rounded-full overflow-hidden shadow-lg shadow-fc-black/40 flex items-center justify-center mb-3 ${
+            photo ? 'ring-2 ring-fc-cream/20 bg-fc-black-soft' : initialStyle
+          }`}
+        >
+          {photo ? (
+            <img
+              src={`/images/leaders/${photo}`}
+              alt={name}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              width="128"
+              height="128"
+            />
+          ) : (
+            <span className="font-display font-black text-3xl md:text-4xl select-none">
+              {name[0]}
+            </span>
+          )}
+        </div>
+        <p className="font-display uppercase tracking-widest2 text-xs text-fc-cream/80">
+          {name}
+        </p>
+      </motion.div>
     </motion.div>
   );
 }
