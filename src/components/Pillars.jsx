@@ -5,7 +5,7 @@ const pillars = [
     number: '01',
     title: 'Connect',
     habits: ['With God.', 'With others.'],
-    body: 'Jesus is a person — not a belief system. Start there. Then: with each other. God is putting a people together one by one, and it takes real work. Forgive quickly. Put each other first.',
+    body: 'Jesus is a person — not a system. Start with Him, then turn to each other. God is putting a people together one by one, and it takes real work. Forgive quickly. Put each other first.',
     culture: ['Alabaster', 'Lavish'],
   },
   {
