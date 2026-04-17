@@ -13,6 +13,7 @@ const Home = lazy(() => import('./pages/Home.jsx'));
 const Visit = lazy(() => import('./pages/Visit.jsx'));
 const Beliefs = lazy(() => import('./pages/Beliefs.jsx'));
 const Giving = lazy(() => import('./pages/Giving.jsx'));
+const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 // Intentionally minimal — keeps the nav visible and avoids a flashy spinner
 // for what is usually a sub-100ms chunk load on a fast connection.
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/visit" element={<Visit />} />
           <Route path="/beliefs" element={<Beliefs />} />
           <Route path="/giving" element={<Giving />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Footer />
