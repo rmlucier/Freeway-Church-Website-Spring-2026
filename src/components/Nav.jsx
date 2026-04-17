@@ -9,7 +9,7 @@ import { Link, useLocation } from 'react-router-dom';
 // consistent whether you're on the home page or somewhere else.
 const links = [
   { label: 'Visit', to: '/visit', type: 'page' },
-  { label: 'Vision', to: '/#vision', type: 'section' },
+  { label: 'Kids', to: '/kids', type: 'page' },
   { label: 'Beliefs', to: '/beliefs', type: 'page' },
   { label: 'Community', to: '/#community', type: 'section' },
   { label: 'Messages', to: '/#sermons', type: 'section' },

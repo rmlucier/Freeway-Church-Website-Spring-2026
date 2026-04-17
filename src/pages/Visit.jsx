@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import LiteYouTube from '../components/LiteYouTube.jsx';
 
@@ -47,7 +48,17 @@ const faqs = [
   },
   {
     q: 'What about my kids?',
-    a: 'Kids (K–5th) stay with you during the worship set, then Kidsway dismisses about 30 minutes in during the greeting time. You can sign them in when you first arrive and grab a nametag, or wait and sign them in right before they head down. Either works.',
+    a: (
+      <>
+        Nursery (0–5) runs during the whole service, and Kidsway (K–5th) leaves the
+        auditorium for class during the greeting before the message. Sign in at the
+        door — or check in online beforehand. See the{' '}
+        <Link to="/kids" className="text-fc-teal hover:text-fc-gold transition-colors underline underline-offset-4">
+          Kids page
+        </Link>{' '}
+        for safety policies, typical Sunday, and parent FAQs.
+      </>
+    ),
   },
   {
     q: 'Is there anything I should bring?',
