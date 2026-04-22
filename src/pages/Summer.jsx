@@ -53,6 +53,57 @@ const ideas = [
       </svg>
     ),
   },
+  {
+    title: 'Writing & Poetry',
+    body:
+      'Read a poem you wrote. Share an essay or journal entry. Write a letter to the church and read it out loud.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Teaching a Passage',
+    body:
+      'Lead a short devotional from a scripture that has shaped you. Walk us through what you see in it and why.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        <line x1="8" y1="9" x2="16" y2="9" />
+        <line x1="8" y1="13" x2="13" y2="13" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Dance & Movement',
+    body:
+      'Choreograph a worship song. Share an interpretive piece. Lead the church in a movement prayer.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="4" r="2" />
+        <path d="M12 6v5" />
+        <path d="M12 11l-4 9" />
+        <path d="M12 11l4 9" />
+        <path d="M8 9l-4 2" />
+        <path d="M16 9l4 2" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Kids & Family',
+    body:
+      'Kids recite a memorized passage. A family sings or presents together. Three generations on stage at once is exactly the point.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Summer() {
