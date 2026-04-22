@@ -64,37 +64,49 @@ export default function Summer() {
         description="This summer at Freeway Church we're opening up Sunday services for our congregation to share how God is working in their lives — through preaching, music, art, video, craftsmanship, and more. Sign up by May 24, 2026."
       />
 
-      {/* Hero — typography-forward. Photo slot ready for the "A Good Work" slide. */}
+      {/* Hero — typography + A Good Work emblem */}
       <section className="relative min-h-[85vh] flex items-center bg-fc-black overflow-hidden">
-        {/* PLACEHOLDER: drop the "A Good Work" slide image at /images/summer-hero.jpg */}
-        {/* When it lands, uncomment the <img> below.
-        <img
-          src="/images/summer-hero.jpg"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
-          fetchpriority="high"
-        />
-        */}
-        {/* Decorative gradient for the typography-only version */}
-        <div className="absolute inset-0 bg-gradient-to-br from-fc-teal/20 via-fc-black to-fc-gold/10" />
+        {/* Decorative atmospherics */}
+        <div className="absolute inset-0 bg-gradient-to-br from-fc-teal/15 via-fc-black to-fc-gold/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-fc-teal/10 via-transparent to-transparent" />
 
         <div className="container-fc relative z-10 py-20 md:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-            className="max-w-5xl"
-          >
-            <p className="eyebrow mb-6">Summer 2026 · Freeway Church</p>
-            <h1 className="display-xl text-6xl md:text-[10rem] leading-[0.85] text-fc-cream">
-              A Good<br />
-              <span className="text-fc-teal">Work.</span>
-            </h1>
-            <p className="mt-10 text-2xl md:text-4xl text-fc-cream/90 leading-tight max-w-3xl font-display font-medium drop-shadow">
-              Telling God&apos;s story through ours.
-            </p>
-          </motion.div>
+          <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-center">
+            {/* Emblem — appears ABOVE the text on mobile, right side on desktop */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, rotate: -6 }}
+              animate={{ opacity: 1, scale: 1, rotate: -3 }}
+              transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1], delay: 0.15 }}
+              className="md:col-span-4 md:order-2 md:justify-self-end order-1"
+            >
+              <div className="relative w-48 md:w-full max-w-xs mx-auto md:mx-0">
+                <img
+                  src="/images/a-good-work-logo.jpg"
+                  alt="A Good Work — a Freeway Church summer 2026 initiative"
+                  className="w-full h-auto shadow-2xl shadow-fc-black/60"
+                  width="900"
+                  height="900"
+                  fetchpriority="high"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+              className="md:col-span-8 md:order-1 order-2"
+            >
+              <p className="eyebrow mb-6">Summer 2026 · Freeway Church</p>
+              <h1 className="display-xl text-6xl md:text-[9rem] leading-[0.85] text-fc-cream">
+                A Good<br />
+                <span className="text-fc-teal">Work.</span>
+              </h1>
+              <p className="mt-10 text-xl md:text-3xl text-fc-cream/90 leading-tight max-w-2xl font-display font-medium drop-shadow">
+                Telling God&apos;s story through ours.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -239,8 +251,57 @@ export default function Summer() {
         </div>
       </section>
 
-      {/* Ideas */}
+      {/* Already happening — photo gallery as proof */}
       <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mb-14"
+          >
+            <p className="eyebrow mb-6">Already Happening</p>
+            <h2 className="display-xl text-4xl md:text-6xl mb-8">
+              This has always<br />
+              <span className="text-fc-teal">been the story.</span>
+            </h2>
+            <p className="text-fc-cream/70 leading-relaxed text-lg max-w-2xl">
+              Ordinary people stepping up. A song. A testimony. A scripture read out loud.
+              This summer, we&apos;re making space for more of it.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
+            className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4"
+          >
+            {[1, 2, 3, 4, 5].map((n) => (
+              <motion.div
+                key={n}
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                }}
+                className="relative aspect-[4/5] overflow-hidden border border-fc-cream/10"
+              >
+                <img
+                  src={`/images/summer-${n}.jpg`}
+                  alt="A member of Freeway Church sharing on a Sunday"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-[1.04]"
+                  loading="lazy"
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Ideas */}
+      <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
         <div className="container-fc">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -291,7 +352,7 @@ export default function Summer() {
       </section>
 
       {/* Call to Action — Signup */}
-      <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
+      <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
         <div className="container-fc">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
