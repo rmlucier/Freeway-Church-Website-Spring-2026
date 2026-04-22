@@ -14,6 +14,7 @@ const Visit = lazy(() => import('./pages/Visit.jsx'));
 const Beliefs = lazy(() => import('./pages/Beliefs.jsx'));
 const Giving = lazy(() => import('./pages/Giving.jsx'));
 const Kids = lazy(() => import('./pages/Kids.jsx'));
+const Summer = lazy(() => import('./pages/Summer.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 // Intentionally minimal — keeps the nav visible and avoids a flashy spinner
@@ -45,6 +46,7 @@ export default function App() {
           <Route path="/beliefs" element={<Beliefs />} />
           <Route path="/giving" element={<Giving />} />
           <Route path="/kids" element={<Kids />} />
+          <Route path="/summer" element={<Summer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
