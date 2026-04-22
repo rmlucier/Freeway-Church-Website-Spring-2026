@@ -221,7 +221,7 @@ export default function Summer() {
       </section>
 
       {/* The Vision */}
-      <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
+      <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
         <div className="container-fc">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -248,50 +248,7 @@ export default function Summer() {
         </div>
       </section>
 
-      {/* The Shift */}
-      <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
-        <div className="container-fc">
-          <div className="grid md:grid-cols-12 gap-10 md:gap-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6 }}
-              className="md:col-span-5"
-            >
-              <p className="eyebrow mb-6">What&apos;s Different</p>
-              <h2 className="display-xl text-4xl md:text-5xl leading-none">
-                Broader<br />
-                <span className="text-fc-gold">canvas.</span>
-              </h2>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="md:col-span-7"
-            >
-              <p className="text-fc-cream/80 text-lg leading-relaxed mb-6">
-                Past summers we&apos;ve loved hearing from different voices through our{' '}
-                <span className="text-fc-cream">&quot;You Pick Two&quot;</span> preaching
-                series. This year, we&apos;re broadening it.
-              </p>
-              <p className="text-fc-cream/80 text-lg leading-relaxed mb-6">
-                God has equipped this church with a wild diversity of gifts — speaking,
-                writing, building, painting, playing, baking, filming, teaching. This
-                summer we want to see those gifts used to glorify Him.
-              </p>
-              <p className="text-fc-cream/80 text-lg leading-relaxed">
-                Whatever creative, practical, or speaking medium you love most —
-                Sundays this summer are your space to share it.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
+      {/* How It Works — reader-focused steps */}
       <section className="py-24 md:py-32 bg-fc-black border-t border-fc-cream/10">
         <div className="container-fc">
           <motion.div
@@ -303,8 +260,8 @@ export default function Summer() {
           >
             <p className="eyebrow mb-6">How It Works</p>
             <h2 className="display-xl text-4xl md:text-6xl">
-              Every Sunday.<br />
-              <span className="text-fc-teal">At least two voices.</span>
+              Three steps.<br />
+              <span className="text-fc-teal">One Sunday.</span>
             </h2>
           </motion.div>
 
@@ -318,11 +275,12 @@ export default function Summer() {
             >
               <div className="font-display text-fc-gold text-sm tracking-widest2 mb-3">01</div>
               <h3 className="font-display font-black uppercase text-xl text-fc-teal mb-4">
-                Length flexes
+                Look at your life
               </h3>
               <p className="text-fc-cream/75 leading-relaxed">
-                A spoken message might take 15 minutes. Sharing a piece of visual art
-                might take 3. Both are fully welcome.
+                Where has God been at work in you? What has He given you — a story, a
+                craft, a skill, a scripture that won&apos;t leave you alone? If something
+                comes to mind, even hesitantly, pay attention to it.
               </p>
             </motion.div>
             <motion.div
@@ -334,11 +292,12 @@ export default function Summer() {
             >
               <div className="font-display text-fc-gold text-sm tracking-widest2 mb-3">02</div>
               <h3 className="font-display font-black uppercase text-xl text-fc-teal mb-4">
-                Whole service or a segment
+                Sign up
               </h3>
               <p className="text-fc-cream/75 leading-relaxed">
-                Your piece might fill the whole service or sit inside a normal one.
-                The goal is the same either way: offer your gift back to the Lord.
+                Tell us your idea and the Sundays you&apos;re available. Whether your
+                piece is 3 minutes or 30, we&apos;ll find the right fit. The form takes
+                two minutes — or just text Pastor Roy.
               </p>
             </motion.div>
             <motion.div
@@ -350,11 +309,12 @@ export default function Summer() {
             >
               <div className="font-display text-fc-gold text-sm tracking-widest2 mb-3">03</div>
               <h3 className="font-display font-black uppercase text-xl text-fc-teal mb-4">
-                Everyone is invited
+                Bring it forward
               </h3>
               <p className="text-fc-cream/75 leading-relaxed">
-                Adults, teenagers, and kids. If God has given you something and it
-                points back to Him, you have a place on the platform.
+                Pastor Roy walks with you from the first conversation through Sunday
+                morning — coaching, rehearsing, sharpening, whatever you need. You
+                won&apos;t do this alone. Then step up on your week.
               </p>
             </motion.div>
           </div>
