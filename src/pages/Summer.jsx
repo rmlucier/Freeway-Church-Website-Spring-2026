@@ -102,8 +102,14 @@ export default function Summer() {
                 A Good<br />
                 <span className="text-fc-teal">Work.</span>
               </h1>
-              <p className="mt-10 text-xl md:text-3xl text-fc-cream/90 leading-tight max-w-2xl font-display font-medium drop-shadow">
-                Telling God&apos;s story through ours.
+              <p className="mt-8 text-xl md:text-3xl text-fc-cream/90 leading-tight max-w-2xl font-display font-medium drop-shadow">
+                Share God&apos;s story through yours.
+              </p>
+              <p className="mt-6 text-base md:text-lg text-fc-cream/75 leading-relaxed max-w-xl">
+                This summer, we&apos;re opening Sunday services for our church family to share
+                how God is working in their lives. Speak it, sing it, paint it, build it,
+                bake it — whatever you love most.{' '}
+                <span className="text-fc-teal font-medium">Your turn.</span>
               </p>
             </motion.div>
           </div>
