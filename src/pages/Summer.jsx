@@ -104,6 +104,59 @@ const ideas = [
       </svg>
     ),
   },
+  {
+    title: 'Hospitality',
+    body:
+      'Host a meal. Open your home for a night. Tell us about a table you keep and the spiritual lesson it has taught you.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M3 12h18" />
+        <path d="M5 12v8h14v-8" />
+        <path d="M7 12V8a5 5 0 0 1 10 0v4" />
+        <path d="M12 3v2" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Nature & Garden',
+    body:
+      "Share a photography project from God's creation. Walk us through your garden. Reflect on something outdoors that taught you something true.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 22V12" />
+        <path d="M12 12c0-4 3-7 7-7-1 5-4 7-7 7z" />
+        <path d="M12 12c0-4-3-7-7-7 1 5 4 7 7 7z" />
+        <path d="M12 22c0-3 2-5 5-5-1 3-3 5-5 5z" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Sports & Physical',
+    body:
+      'Share an athletic testimony. Demo a skill God has shaped in you. The discipline of training is a sermon in itself — preach it.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 3c2.5 3 2.5 15 0 18" />
+        <path d="M12 3c-2.5 3-2.5 15 0 18" />
+        <path d="M3 12h18" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Digital & Tech',
+    body:
+      'Share a website, app, or digital art piece you made. Walk us through a tool you built that serves a kingdom purpose.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+        <polyline points="8 9 5 12 8 15" />
+        <polyline points="16 9 19 12 16 15" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Summer() {
