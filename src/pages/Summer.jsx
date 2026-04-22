@@ -387,9 +387,9 @@ export default function Summer() {
             whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
-            className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
           >
-            {[1, 2, 3, 4, 5].map((n) => (
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
               <motion.div
                 key={n}
                 variants={{
