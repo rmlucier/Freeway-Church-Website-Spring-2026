@@ -110,12 +110,25 @@ export default function Giving() {
             <p className="mt-10 text-xl md:text-2xl text-fc-cream/80 leading-snug max-w-2xl font-display font-medium">
               We don't give to cover the bills.<br />We give to leave a legacy.
             </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a
+                href="https://freewaychurch.churchcenter.com/giving"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                Give Now
+              </a>
+              <a href="#how-it-works" className="btn-outline">
+                How It Works
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* How it works — Tithing vs Kingdom Builders */}
-      <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
+      <section id="how-it-works" className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
         <div className="container-fc">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
