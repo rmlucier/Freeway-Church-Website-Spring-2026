@@ -3,6 +3,7 @@ import Hero from '../components/Hero.jsx';
 import Vision from '../components/Vision.jsx';
 import Pillars from '../components/Pillars.jsx';
 import Community from '../components/Community.jsx';
+import Coaching from '../components/Coaching.jsx';
 import Services from '../components/Services.jsx';
 import Sermons from '../components/Sermons.jsx';
 import JoinCTA from '../components/JoinCTA.jsx';
@@ -20,6 +21,7 @@ export default function Home() {
       <Vision />
       <Pillars />
       <Community />
+      <Coaching />
       <Services />
       <Sermons />
       <JoinCTA />

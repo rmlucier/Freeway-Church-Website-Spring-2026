@@ -12,6 +12,7 @@ const links = [
   { label: 'Kids', to: '/kids', type: 'page' },
   { label: 'Beliefs', to: '/beliefs', type: 'page' },
   { label: 'Community', to: '/#community', type: 'section' },
+  { label: 'Coaching', to: '/#coaching', type: 'section' },
   { label: 'Messages', to: '/#sermons', type: 'section' },
 ];
 
