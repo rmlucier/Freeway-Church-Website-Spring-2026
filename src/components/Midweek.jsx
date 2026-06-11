@@ -1,21 +1,20 @@
 import { motion } from 'framer-motion';
 import MailLink from './MailLink.jsx';
 
+// Summer schedule — full midweek rhythm (small groups, dinner) resumes
+// after Labor Day; exact date TBD.
 const wednesdayRhythm = [
   {
-    time: '4:00',
-    label: 'Small Groups',
-    body: "Different groups meet depending on the season — studies, men's and women's circles, discipleship. Start times vary.",
-  },
-  {
-    time: '6:00',
-    label: 'Dinner',
-    body: 'A real meal around a real table. Nothing fancy — just food, and everyone who shows up.',
+    time: '6:30',
+    meridiem: '– 7:30 PM',
+    label: 'Prayer',
+    body: 'An hour together in prayer — for our church, our families, and Albion. Come for the whole hour or whatever part of it you can.',
   },
   {
     time: '7:00',
-    label: 'Prayer',
-    body: 'The night lands in prayer together. Come for all of it, or just this.',
+    meridiem: 'PM',
+    label: 'Street Team',
+    body: 'We take it outside — walking the streets of Albion, praying, meeting neighbors, being the church beyond the building.',
   },
 ];
 
@@ -39,8 +38,8 @@ export default function Midweek() {
             <span className="text-fc-teal">together.</span>
           </h2>
           <p className="mt-6 text-lg text-fc-cream/70 leading-relaxed max-w-2xl">
-            Wednesday night is when the week slows down and the church comes back around a
-            table. Small groups, dinner, prayer — come for one part, come for all of it.
+            This summer, Wednesday night is simple: prayer and the Street Team. Come for
+            one, come for both. The full midweek rhythm starts back up in the fall.
           </p>
         </motion.div>
 
@@ -78,7 +77,7 @@ export default function Midweek() {
           whileInView="show"
           viewport={{ once: true, margin: '-80px' }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
-          className="grid md:grid-cols-3 gap-0 border-t border-l border-fc-cream/10"
+          className="grid md:grid-cols-2 gap-0 border-t border-l border-fc-cream/10"
         >
           {wednesdayRhythm.map((r) => (
             <motion.div
@@ -95,7 +94,7 @@ export default function Midweek() {
                   {r.time}
                 </span>
                 <span className="font-display uppercase tracking-widest2 text-xs text-fc-cream/50">
-                  PM
+                  {r.meridiem}
                 </span>
               </div>
               <h3 className="font-display font-black uppercase text-xl md:text-2xl leading-none mb-4 text-fc-teal">
@@ -116,13 +115,13 @@ export default function Midweek() {
         >
           <div className="md:col-span-7">
             <p className="text-fc-cream/70 leading-relaxed mb-4">
-              Community nights run in seasons, and the schedule shifts with the year — which
-              groups are meeting, when they start, what they're studying. The best way to
-              find where you belong is to reach out. We'll walk you through what's happening
-              right now and the group that fits where you are.
+              Community nights run in seasons. Small groups, dinner, and the rest of the
+              midweek rhythm are on summer break — they start back up after Labor Day this
+              fall, and we'll announce the date soon. Prayer and the Street Team keep going
+              all summer long.
             </p>
             <p className="text-fc-cream/50 leading-relaxed text-sm italic">
-              Want the community events calendar? Message us and we'll send it over.
+              Want to know what's coming this fall? Message us and we'll keep you posted.
             </p>
           </div>
           <div className="md:col-span-5 md:justify-self-end">

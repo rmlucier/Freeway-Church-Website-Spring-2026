@@ -21,10 +21,10 @@ export default function Home() {
       <Vision />
       <Pillars />
       <Community />
-      <Coaching />
       <Services />
       <Sermons />
       <JoinCTA />
+      <Coaching />
       <Midweek />
     </>
   );
