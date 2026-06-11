@@ -5,18 +5,18 @@ import { useState } from 'react';
 // which defeats the overwhelming majority of email harvesters that scrape
 // static HTML and bundled JS for literal "@" patterns.
 const PARTS = ['info', 'freeway', 'church'];
-const buildAddress = () => `${PARTS[0]}@${PARTS[1]}.${PARTS[2]}`;
-const buildHref = (subject) => {
+const buildAddress = (parts) => `${parts[0]}@${parts[1]}.${parts[2]}`;
+const buildHref = (subject, parts) => {
   const params = subject ? `?subject=${encodeURIComponent(subject)}` : '';
-  return `mailto:${buildAddress()}${params}`;
+  return `mailto:${buildAddress(parts)}${params}`;
 };
 
-export default function MailLink({ subject, children, className, ariaLabel }) {
+export default function MailLink({ subject, children, className, ariaLabel, parts = PARTS }) {
   const [href, setHref] = useState(null);
 
   const prepare = () => {
     if (href) return;
-    setHref(buildHref(subject));
+    setHref(buildHref(subject, parts));
   };
 
   return (
@@ -33,7 +33,7 @@ export default function MailLink({ subject, children, className, ariaLabel }) {
         // some mobile browsers). Construct and navigate on the fly.
         if (!href) {
           e.preventDefault();
-          window.location.href = buildHref(subject);
+          window.location.href = buildHref(subject, parts);
         }
       }}
     >

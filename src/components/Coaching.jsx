@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
+import MailLink from './MailLink.jsx';
 
-const SCHEDULING_URL = 'https://calendar.app.google/REPLACE_ME'; // UPDATE: Roy's Google appointment schedule link
+// Assembled on interaction via MailLink — see that component for why
+// the addresses are split into parts.
+const ROY_PARTS = ['rmlucier', 'gmail', 'com'];
+const COUNSELING_PARTS = ['harry', 'freeway', 'church'];
 
 const cards = [
   {
@@ -31,7 +35,7 @@ export default function Coaching() {
           transition={{ duration: 0.6 }}
           className="mb-16 md:mb-24 max-w-3xl"
         >
-          <p className="eyebrow text-fc-gold-soft mb-4">Pastoral Coaching</p>
+          <p className="eyebrow text-fc-gold-soft mb-4">Pastoral Coaching and Counseling</p>
           <h2 className="display-xl text-4xl md:text-6xl">
             Someone in<br />
             <span className="text-fc-black">your corner.</span>
@@ -85,17 +89,16 @@ export default function Coaching() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-8 flex flex-wrap items-center gap-4"
         >
-          <a
-            href={SCHEDULING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <MailLink
+            parts={ROY_PARTS}
+            subject="Coaching session"
             className="btn bg-fc-black text-fc-cream hover:bg-fc-gold hover:text-fc-black"
           >
             Book a Session
-          </a>
-          <a href="mailto:hello@freeway.church" className="btn-outline">
+          </MailLink>
+          <MailLink parts={ROY_PARTS} subject="Coaching question" className="btn-outline">
             Questions? Ask Roy
-          </a>
+          </MailLink>
         </motion.div>
 
         <motion.p
@@ -108,6 +111,37 @@ export default function Coaching() {
           Coaching isn't therapy. If you're carrying something heavier — grief, trauma, a
           crisis — reach out and we'll help you find the right care.
         </motion.p>
+
+        {/* Counseling */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7 }}
+          className="mt-16 border border-fc-cream/25 bg-fc-black/20 p-8 md:p-12 grid md:grid-cols-12 items-center gap-8"
+        >
+          <div className="md:col-span-8">
+            <p className="eyebrow text-fc-gold-soft mb-3">Counseling</p>
+            <h3 className="font-display font-black uppercase text-3xl md:text-4xl leading-none mb-4">
+              When it's more<br className="md:hidden" /> than coaching.
+            </h3>
+            <p className="text-fc-cream/80 leading-relaxed max-w-xl">
+              Freeway also has a licensed mental health counselor available to the church.
+              Grief, trauma, anxiety, depression — some things deserve more than a next
+              step, and that's exactly what counseling is for. Reach out and we'll connect
+              you.
+            </p>
+          </div>
+          <div className="md:col-span-4 md:justify-self-end">
+            <MailLink
+              parts={COUNSELING_PARTS}
+              subject="Counseling"
+              className="btn bg-fc-black text-fc-cream hover:bg-fc-gold hover:text-fc-black"
+            >
+              Ask About Counseling
+            </MailLink>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
