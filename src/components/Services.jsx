@@ -4,7 +4,7 @@ const schedule = [
   { time: '9:15 AM', name: 'Preservice Prayer' },
   { time: '10:00 AM', name: 'Worship Service' },
   { time: '11:30 AM', name: 'Fellowship' },
-  { time: '6:00 PM', name: 'Freeway Youth' },
+  { time: '5:30 PM', name: 'Freeway Youth' },
 ];
 
 const programs = [
@@ -22,7 +22,7 @@ const programs = [
   },
   {
     title: 'Freeway Youth',
-    body: '6th–12th grade. Sunday evenings in small-group style, plus quarterly events. Real questions, real conversations.',
+    body: '6th–12th grade. Sunday evenings, 5:30–7pm, small-group style plus quarterly events. Real questions, real conversations.',
   },
 ];
 
@@ -132,7 +132,7 @@ export default function Services() {
             <p className="eyebrow mb-3">Freeway Youth</p>
             <h3 className="font-display font-black uppercase text-3xl md:text-5xl leading-none mb-5 text-fc-cream">
               6th–12th.<br />
-              <span className="text-fc-teal">Sundays at 6.</span>
+              <span className="text-fc-teal">Sundays 5:30–7.</span>
             </h3>
             <p className="text-fc-cream/80 leading-relaxed max-w-md">
               Real questions, real conversations, real worship. Small-group style plus

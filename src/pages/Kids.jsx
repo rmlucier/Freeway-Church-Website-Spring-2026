@@ -26,7 +26,7 @@ const rooms = [
     age: '6th–12th',
     name: 'Freeway Youth',
     body:
-      'Sunday nights at 6 PM. A space built for middle and high schoolers to ask real questions, learn what faith looks like in their own life, and actually enjoy the people they worship with.',
+      'Sunday nights, 5:30 to 7 PM. A space built for middle and high schoolers to ask real questions, learn what faith looks like in their own life, and actually enjoy the people they worship with.',
     image: '/images/services-youth.jpg',
     imageAlt: 'Freeway Youth gathering',
   },

@@ -1,20 +1,14 @@
 import { motion } from 'framer-motion';
 import MailLink from './MailLink.jsx';
 
-// Summer schedule — full midweek rhythm (small groups, dinner) resumes
-// after Labor Day; exact date TBD.
+// Summer + early fall schedule — full midweek rhythm (small groups, dinner)
+// resumes with the fall programming launch on September 30, 2026.
 const wednesdayRhythm = [
   {
     time: '6:30',
     meridiem: '– 7:30 PM',
     label: 'Prayer',
     body: 'An hour together in prayer — for our church, our families, and Albion. Come for the whole hour or whatever part of it you can.',
-  },
-  {
-    time: '7:00',
-    meridiem: 'PM',
-    label: 'Street Team',
-    body: 'We take it outside — walking the streets of Albion, praying, meeting neighbors, being the church beyond the building.',
   },
 ];
 
@@ -38,8 +32,9 @@ export default function Midweek() {
             <span className="text-fc-teal">together.</span>
           </h2>
           <p className="mt-6 text-lg text-fc-cream/70 leading-relaxed max-w-2xl">
-            This summer, Wednesday night is simple: prayer and the Street Team. Come for
-            one, come for both. The full midweek rhythm starts back up in the fall.
+            Right now, Wednesday night is simple: an hour of prayer, together. The full
+            midweek rhythm — small groups, dinner, and the rest — launches back up on
+            September 30.
           </p>
         </motion.div>
 
@@ -77,7 +72,7 @@ export default function Midweek() {
           whileInView="show"
           viewport={{ once: true, margin: '-80px' }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
-          className="grid md:grid-cols-2 gap-0 border-t border-l border-fc-cream/10"
+          className="grid grid-cols-1 gap-0 border-t border-l border-fc-cream/10 max-w-2xl"
         >
           {wednesdayRhythm.map((r) => (
             <motion.div
@@ -116,9 +111,10 @@ export default function Midweek() {
           <div className="md:col-span-7">
             <p className="text-fc-cream/70 leading-relaxed mb-4">
               Community nights run in seasons. Small groups, dinner, and the rest of the
-              midweek rhythm are on summer break — they start back up after Labor Day this
-              fall, and we'll announce the date soon. Prayer and the Street Team keep going
-              all summer long.
+              midweek rhythm are on pause for the summer — they launch back up alongside
+              our full fall programming on{' '}
+              <span className="text-fc-cream">September 30</span>. Wednesday prayer keeps
+              going every week until then.
             </p>
             <p className="text-fc-cream/50 leading-relaxed text-sm italic">
               Want to know what's coming this fall? Message us and we'll keep you posted.
