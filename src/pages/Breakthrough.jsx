@@ -20,7 +20,7 @@ const fronts = [
   {
     n: '02',
     title: 'Kids & Youth Ministry',
-    body: 'Pastor Jennae and every kid and teen in our care. The Freeway Leadership Academy launches Wednesday nights, starting September 30 — a generation learning to follow Jesus and lead the way.',
+    body: 'Pastor Jennae and the next generation she leads. The Freeway Leadership Academy launches Wednesday nights on September 30 — kids and teens learning to walk with Jesus and lead the way.',
   },
   {
     n: '03',
