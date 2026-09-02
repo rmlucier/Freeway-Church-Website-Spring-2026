@@ -210,7 +210,7 @@ export default function Breakthrough() {
             viewport={{ once: true, margin: '-120px' }}
             className="text-2xl md:text-3xl leading-snug font-display font-medium text-fc-cream flex flex-wrap max-w-3xl"
           >
-            {'Dead things raised. Desire for God. The breakthrough of getting more of Jesus.'
+            {'Dead things raised. Desire for God.'
               .split(' ')
               .map((w, i) => (
                 <motion.span key={i} variants={revealWord} className="mr-[0.35rem] inline-block">
