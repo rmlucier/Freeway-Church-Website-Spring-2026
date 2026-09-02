@@ -93,7 +93,7 @@ export default function Breakthrough() {
         className="relative min-h-[90vh] flex items-center overflow-hidden"
       >
         <motion.img
-          src="/breakthrough/poster_p1_prayer_trio.jpg"
+          src="/breakthrough/hero_prayer_trio.jpg"
           alt=""
           aria-hidden="true"
           style={prefersReducedMotion ? undefined : { y: posterY, scale: posterScale }}
