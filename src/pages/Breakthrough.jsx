@@ -237,8 +237,9 @@ export default function Breakthrough() {
                 6:30<span className="text-fc-teal">–</span>7:30 PM
               </h2>
               <p className="text-fc-cream/70 text-base leading-relaxed max-w-md">
-                Corporate prayer over the four fronts. Praying for one another by name.
-                You don&apos;t need to prepare — just be in the room.
+                An hour of prayer, together. We lift up the four fronts and pray for one
+                another by name. Nothing to prepare, no wrong way to do it — just come and
+                bring whatever you&apos;re carrying.
               </p>
             </div>
             <div className="md:col-span-7">
