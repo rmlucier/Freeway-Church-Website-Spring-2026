@@ -15,12 +15,12 @@ const fronts = [
   {
     n: '01',
     title: 'Pastors Roy & Elissa',
-    body: 'Leadership and Vision. Protection over their family. God-encounters that shape every message and every meeting.',
+    body: 'Leadership and vision. Protection over their family. God-encounters that shape every message and every meeting.',
   },
   {
     n: '02',
-    title: 'Kids in Our Region',
-    body: 'Schools. Mental health. Freedom from what is dragging them down. God-encounters that mark a whole generation.',
+    title: 'Kids & Youth Ministry',
+    body: 'Pastor Jennae and every kid and teen in our care. The Freeway Leadership Academy launches Wednesday nights, starting September 30 — a generation learning to follow Jesus and lead the way.',
   },
   {
     n: '03',
@@ -29,8 +29,8 @@ const fronts = [
   },
   {
     n: '04',
-    title: 'Jobs & Finances',
-    body: 'Provision. Integrity in every transaction. Favor with the right people. Purpose that outlasts a paycheck.',
+    title: 'Unity Within the Church',
+    body: 'One church of one heart and mind. Walls down, honesty up — that we would become a true New Testament community, devoted to one another, breaking bread, sharing life.',
   },
 ];
 
