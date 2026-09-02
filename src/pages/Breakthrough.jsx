@@ -7,14 +7,6 @@ import SEO from '../components/SEO.jsx';
 // separate from the main site's fc-* tokens.
 
 const PRAYER_FORM_URL = 'https://forms.gle/3kVhufpow498Tr3K9';
-const PRAYER_GUIDE_URL = '/breakthrough/prayer-guide.pdf';
-
-const posters = [
-  { file: 'poster_p1_prayer_trio.jpg', alt: 'Three women praying together — intercession' },
-  { file: 'poster_p2_hands_out.jpg', alt: 'A man alone with hands out — lament' },
-  { file: 'poster_p4_worship_hands.jpg', alt: 'Raised hands in corporate worship' },
-  { file: 'poster_p7_receiving_prayer.jpg', alt: 'A tattooed arm laid on someone receiving prayer — impartation' },
-];
 
 const wednesdays = ['Sept 2', 'Sept 9', 'Sept 16', 'Sept 23', 'Sept 30'];
 
@@ -22,7 +14,7 @@ const fronts = [
   {
     n: '01',
     title: 'Pastors Roy & Elissa',
-    body: 'Boldness in the pulpit. Protection over their family. God-encounters that shape every message and every meeting.',
+    body: 'Leadership and Vision. Protection over their family. God-encounters that shape every message and every meeting.',
   },
   {
     n: '02',
@@ -32,7 +24,7 @@ const fronts = [
   {
     n: '03',
     title: 'Marriages & Relationships',
-    body: 'Healing where there is wound. Honesty where there is hiding. Forgiveness where there is bitterness. Unity where there is drift.',
+    body: 'Healing where there is wound. Honesty where there is hiding. Forgiveness where there is bitterness. Life where there is death.',
   },
   {
     n: '04',
@@ -120,14 +112,6 @@ export default function Breakthrough() {
                 SUBMIT A PRAYER REQUEST
                 <span aria-hidden>→</span>
               </a>
-              <a
-                href={PRAYER_GUIDE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 border border-brk-teal/60 text-brk-cream font-bebas tracking-[0.2em] text-sm md:text-base px-8 py-4 hover:bg-brk-teal/10 transition-colors"
-              >
-                DOWNLOAD THE PRAYER GUIDE
-              </a>
             </div>
 
             <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 font-bebas tracking-[0.25em] text-xs md:text-sm text-brk-gray">
@@ -156,8 +140,7 @@ export default function Breakthrough() {
               <span className="text-brk-teal">WITH JESUS.</span>
             </h2>
             <p className="text-lg md:text-2xl text-brk-cream/90 leading-snug mb-6 font-bebas tracking-wide">
-              Dead things raised. On fire for God. Not the breakthrough of getting what
-              we want.
+              Dead things raised. Desire for God.
             </p>
             <p className="text-lg md:text-2xl text-brk-teal leading-snug font-bebas tracking-wide">
               The breakthrough of getting more of Jesus.
@@ -285,8 +268,8 @@ export default function Breakthrough() {
             </h2>
             <p className="text-brk-gray leading-relaxed max-w-2xl">
               The point of fasting isn&apos;t hunger — it&apos;s attention. Any of the
-              lanes below re-orient your day toward prayer. The full guide walks through
-              scripture, posture, and what to do when it gets hard.
+              lanes below re-orients your day toward prayer. Pick one. Tell someone.
+              Start.
             </p>
           </motion.div>
 
@@ -314,64 +297,6 @@ export default function Breakthrough() {
             ))}
           </motion.div>
 
-          <div className="mt-12">
-            <a
-              href={PRAYER_GUIDE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 border border-brk-teal/60 text-brk-cream font-bebas tracking-[0.2em] text-sm md:text-base px-8 py-4 hover:bg-brk-teal/10 transition-colors"
-            >
-              SEE THE FULL GUIDE
-              <span aria-hidden>→</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Poster gallery */}
-      <section className="py-24 md:py-36 border-t border-brk-teal/20">
-        <div className="container-fc">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mb-14"
-          >
-            <p className="font-bebas text-brk-teal tracking-[0.4em] text-xs md:text-sm mb-6">
-              THE CAMPAIGN
-            </p>
-            <h2 className="font-anton text-3xl md:text-5xl leading-none text-brk-cream">
-              FOUR POSTERS.<br />
-              <span className="text-brk-teal">ONE PRAYER.</span>
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5"
-          >
-            {posters.map((p) => (
-              <motion.div
-                key={p.file}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-                }}
-                className="relative aspect-[2/3] overflow-hidden border border-brk-teal/20"
-              >
-                <img
-                  src={`/breakthrough/${p.file}`}
-                  alt={p.alt}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-                  loading="lazy"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </section>
 
