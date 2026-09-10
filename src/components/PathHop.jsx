@@ -1,22 +1,38 @@
 import { useEffect, useId, useRef } from 'react';
 import { useInView, useReducedMotion } from 'framer-motion';
 
-// A dashed flight-path "hop" that sits between sections on the Academy page:
-// a little paper plane actually flies ALONG the dotted trail — the same
-// SMIL <animateMotion> technique as the hero's AirplaneTrail, so it tracks the
-// path rather than just appearing at the end. Chained down the page
-// (alternating direction + color) it reads as one continuous paper-plane
-// journey — the playful signature that sets the Academy apart.
+// A dashed paper-plane flight path for the Academy page. A little plane flies
+// ALONG the dotted trail (SMIL <animateMotion>, same as the hero AirplaneTrail),
+// triggered when the hop scrolls into view.
 //
-// SMIL normally begins on page load, which would mean a below-the-fold hop
-// finishes flying before it's ever on screen. So we start it with
-// begin="indefinite" and fire it via beginElement() once the hop scrolls into
-// view. prefers-reduced-motion drops the plane at the end of the path instead.
+// Two shapes:
+//   • default ("hop")    — a long, sweeping horizontal trail that sits in a
+//                          section's bottom padding.
+//   • vertical ("bridge")— a tall descending trail meant to be absolutely
+//                          positioned straddling the seam between two sections,
+//                          so the plane flies from one section into the next.
+//
+// SMIL starts on page load, which would waste a below-the-fold flight, so we
+// start it with begin="indefinite" and fire beginElement() on scroll-in.
+// prefers-reduced-motion drops the plane at the end of the trail.
 
-const TRAIL = 'M10 16 C 80 16, 110 64, 230 64';
+const SHAPES = {
+  horizontal: {
+    viewBox: '0 0 460 120',
+    d: 'M12 30 C 150 30, 150 92, 250 90 C 330 88, 330 40, 458 92',
+    end: 'translate(458,92) rotate(30)',
+    dur: '2.4s',
+  },
+  vertical: {
+    viewBox: '0 0 200 360',
+    d: 'M104 8 C 30 74, 176 150, 100 214 C 40 264, 150 300, 96 352',
+    end: 'translate(96,352) rotate(115)',
+    dur: '2.8s',
+  },
+};
 
 function Plane({ color }) {
-  // Nose points toward +x so rotate="auto" orients it along the path.
+  // Nose points toward +x so rotate="auto" orients it along the path tangent.
   return (
     <g transform="translate(-7,0)">
       <path
@@ -31,12 +47,19 @@ function Plane({ color }) {
   );
 }
 
-export default function PathHop({ color = '#009B8D', flip = false, className = '' }) {
+export default function PathHop({
+  color = '#009B8D',
+  flip = false,
+  vertical = false,
+  className = '',
+}) {
   const reduce = useReducedMotion();
   const containerRef = useRef(null);
   const motionRef = useRef(null);
   const inView = useInView(containerRef, { once: true, margin: '-80px' });
   const trailId = `hop-trail-${useId().replace(/[:]/g, '')}`;
+
+  const shape = vertical ? SHAPES.vertical : SHAPES.horizontal;
 
   useEffect(() => {
     if (inView && !reduce && motionRef.current) {
@@ -51,13 +74,15 @@ export default function PathHop({ color = '#009B8D', flip = false, className = '
   return (
     <div ref={containerRef} className={`flex justify-center ${className}`} aria-hidden="true">
       <svg
-        viewBox="0 0 240 80"
+        viewBox={shape.viewBox}
         fill="none"
-        className={`w-44 md:w-60 h-auto overflow-visible ${flip ? '-scale-x-100' : ''}`}
+        className={`overflow-visible ${flip ? '-scale-x-100' : ''} ${
+          vertical ? 'h-44 md:h-64 w-auto' : 'w-full max-w-lg h-auto'
+        }`}
       >
         <path
           id={trailId}
-          d={TRAIL}
+          d={shape.d}
           stroke="currentColor"
           strokeWidth="2.5"
           strokeLinecap="round"
@@ -66,15 +91,14 @@ export default function PathHop({ color = '#009B8D', flip = false, className = '
         />
 
         {reduce ? (
-          <g transform="translate(230,64)">
+          <g transform={shape.end}>
             <Plane color={color} />
           </g>
         ) : (
-          // Hidden until it's on screen, then the plane flies the trail.
           <g style={{ opacity: inView ? 1 : 0, transition: 'opacity 0.25s ease' }}>
             <animateMotion
               ref={motionRef}
-              dur="1.8s"
+              dur={shape.dur}
               begin="indefinite"
               fill="freeze"
               rotate="auto"

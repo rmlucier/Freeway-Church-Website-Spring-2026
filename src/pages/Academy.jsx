@@ -296,7 +296,7 @@ export default function Academy() {
       </section>
 
       {/* About — the working description */}
-      <section id="about" className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
+      <section id="about" className="relative py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
         <div className="container-fc">
           <motion.div
             variants={revealUp}
@@ -323,9 +323,14 @@ export default function Academy() {
               with courage, and lead with humility and integrity.
             </p>
           </motion.div>
-
-          <PathHop color={LOGO_COLORS[0]} className="mt-16 md:mt-24" />
         </div>
+
+        {/* Flight path that crosses from About down into the gallery */}
+        <PathHop
+          vertical
+          color={LOGO_COLORS[0]}
+          className="absolute right-6 md:right-24 bottom-0 translate-y-1/2 z-20 pointer-events-none"
+        />
       </section>
 
       {/* Gallery — real kids, real fun */}
@@ -504,7 +509,7 @@ export default function Academy() {
       </section>
 
       {/* The Goal */}
-      <section className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
+      <section className="relative py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
         <div className="container-fc">
           <motion.div
             variants={revealUp}
@@ -525,9 +530,15 @@ export default function Academy() {
               difference in the world around them.
             </p>
           </motion.div>
-
-          <PathHop color={LOGO_COLORS[4]} className="mt-16 md:mt-24" />
         </div>
+
+        {/* Flight path that crosses from the Goal down into the details */}
+        <PathHop
+          vertical
+          flip
+          color={LOGO_COLORS[4]}
+          className="absolute left-6 md:left-24 bottom-0 translate-y-1/2 z-20 pointer-events-none"
+        />
       </section>
 
       {/* Details — ages + schedule */}
