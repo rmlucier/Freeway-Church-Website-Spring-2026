@@ -75,7 +75,7 @@ export default function Nav() {
               {/* The dotted flight-path, as a ring that slowly circles the plane */}
               <span
                 aria-hidden="true"
-                className="absolute inset-0 rounded-full border border-dashed border-fc-gold/40 transition-colors group-hover:border-fc-gold/80 motion-safe:animate-[spin_9s_linear_infinite]"
+                className="absolute inset-0 rounded-full border border-dashed border-fc-gold/40 transition-colors group-hover:border-fc-gold/80 motion-safe:animate-[spin_20s_linear_infinite]"
               />
               <svg
                 viewBox="0 0 24 24"

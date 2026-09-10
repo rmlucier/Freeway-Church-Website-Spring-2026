@@ -447,7 +447,7 @@ export default function Academy() {
             ))}
           </motion.div>
 
-          <PathHop color={LOGO_COLORS[7]} flip className="mt-16 md:mt-24" />
+          <PathHop color={LOGO_COLORS[7]} className="mt-16 md:mt-24" />
         </div>
       </section>
 
