@@ -62,6 +62,37 @@ export default function Nav() {
           <Link to="/giving" className="btn-primary">
             Give
           </Link>
+
+          {/* FreeWay Leadership Academy — a discreet paper-plane icon with a
+              hover tooltip, echoing the Academy logo. Keeps the page out of the
+              main text nav while still being reachable from anywhere. */}
+          <div className="relative group flex items-center">
+            <Link
+              to="/academy"
+              aria-label="FreeWay Leadership Academy"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-fc-cream/20 text-fc-gold transition-all duration-300 hover:border-fc-gold hover:bg-fc-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-fc-gold"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              >
+                <path d="M22 2 11 13" />
+                <path d="M22 2 15 22 11 13 2 9z" />
+              </svg>
+            </Link>
+            <span
+              role="tooltip"
+              className="pointer-events-none absolute top-full right-0 mt-2 whitespace-nowrap rounded-md border border-fc-cream/15 bg-fc-black/95 px-3 py-1.5 font-display uppercase tracking-widest2 text-xs text-fc-cream opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0"
+            >
+              FreeWay Academy
+            </span>
+          </div>
         </nav>
 
         <button
@@ -90,6 +121,25 @@ export default function Nav() {
                   {l.label}
                 </Link>
               ))}
+              <Link
+                to="/academy"
+                className={`${mobileLinkClass} inline-flex items-center gap-2 text-fc-gold`}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="h-5 w-5"
+                >
+                  <path d="M22 2 11 13" />
+                  <path d="M22 2 15 22 11 13 2 9z" />
+                </svg>
+                Academy
+              </Link>
               <Link to="/giving" className="btn-primary self-start">
                 Give
               </Link>
