@@ -16,18 +16,20 @@ import { useInView, useReducedMotion } from 'framer-motion';
 // start it with begin="indefinite" and fire beginElement() on scroll-in.
 // prefers-reduced-motion drops the plane at the end of the trail.
 
+// Deliberately wandering, uneven curves — like a kid doodled the flight path
+// rather than a tidy machine-drawn arc.
 const SHAPES = {
   horizontal: {
-    viewBox: '0 0 460 120',
-    d: 'M12 30 C 150 30, 150 92, 250 90 C 330 88, 330 40, 458 92',
-    end: 'translate(458,92) rotate(30)',
-    dur: '2.4s',
+    viewBox: '0 0 460 130',
+    d: 'M12 52 C 66 8, 98 104, 152 78 C 200 55, 182 18, 244 36 C 302 53, 322 106, 378 80 C 414 64, 432 98, 452 74',
+    end: 'translate(452,74) rotate(-14)',
+    dur: '2.6s',
   },
   vertical: {
     viewBox: '0 0 200 360',
-    d: 'M104 8 C 30 74, 176 150, 100 214 C 40 264, 150 300, 96 352',
-    end: 'translate(96,352) rotate(115)',
-    dur: '2.8s',
+    d: 'M96 10 C 162 46, 40 72, 92 110 C 152 154, 48 180, 106 220 C 160 256, 64 288, 102 326 C 120 344, 90 350, 106 354',
+    end: 'translate(106,354) rotate(104)',
+    dur: '3s',
   },
 };
 

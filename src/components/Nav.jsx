@@ -70,8 +70,13 @@ export default function Nav() {
             <Link
               to="/academy"
               aria-label="FreeWay Leadership Academy"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-fc-cream/20 text-fc-gold transition-all duration-300 hover:border-fc-gold hover:bg-fc-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-fc-gold"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full text-fc-gold transition-colors duration-300 hover:text-fc-gold-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-fc-gold focus-visible:ring-offset-2 focus-visible:ring-offset-fc-black"
             >
+              {/* The dotted flight-path, as a ring that slowly circles the plane */}
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 rounded-full border border-dashed border-fc-gold/40 transition-colors group-hover:border-fc-gold/80 motion-safe:animate-[spin_9s_linear_infinite]"
+              />
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -80,7 +85,7 @@ export default function Nav() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                className="relative h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               >
                 <path d="M22 2 11 13" />
                 <path d="M22 2 15 22 11 13 2 9z" />
