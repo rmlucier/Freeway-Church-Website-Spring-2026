@@ -3,6 +3,21 @@ import SEO from '../components/SEO.jsx';
 import MailLink from '../components/MailLink.jsx';
 import PhoneLink from '../components/PhoneLink.jsx';
 import AirplaneTrail from '../components/AirplaneTrail.jsx';
+import PathHop from '../components/PathHop.jsx';
+
+// The Academy logo's full crayon-box palette. Used for playful accents (the
+// flight-path hops, the strengths chips) that set this page apart from the
+// site's restrained teal/gold.
+const LOGO_COLORS = [
+  '#E4572E', // coral
+  '#F2A93B', // amber
+  '#EF9A9A', // pink
+  '#2E8B7F', // teal-green
+  '#3FA34D', // green
+  '#7FA8D9', // sky
+  '#2E6FB0', // blue
+  '#F6D64A', // yellow
+];
 
 // Shared scroll reveals. Each block rises and fades in as it scrolls into view,
 // so the page feels like it's being uncovered section by section. Images and the
@@ -182,9 +197,12 @@ export default function Academy() {
 
       {/* Hero — logo on a light card + tagline */}
       <section className="relative min-h-[85vh] flex items-center bg-fc-black overflow-hidden">
-        {/* Decorative atmospherics */}
+        {/* Decorative atmospherics — a little warmer/brighter than the rest of
+            the site, to set the Academy apart from the very top */}
         <div className="absolute inset-0 bg-gradient-to-br from-fc-teal/15 via-fc-black to-fc-gold/10" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-fc-teal/10 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute -top-16 left-1/4 h-80 w-80 rounded-full bg-[#E4572E]/10 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 right-1/3 h-72 w-72 rounded-full bg-[#F6D64A]/10 blur-3xl" />
 
         {/* Paper airplane flight-path motif, echoing the Academy logo */}
         <AirplaneTrail className="pointer-events-none absolute top-24 md:top-16 right-4 md:right-24 w-56 md:w-96 text-fc-teal/70 z-10" />
@@ -305,6 +323,8 @@ export default function Academy() {
               with courage, and lead with humility and integrity.
             </p>
           </motion.div>
+
+          <PathHop color={LOGO_COLORS[0]} className="mt-16 md:mt-24" />
         </div>
       </section>
 
@@ -407,19 +427,22 @@ export default function Academy() {
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
             className="flex flex-wrap gap-3 md:gap-4"
           >
-            {strengths.map((s) => (
+            {strengths.map((s, i) => (
               <motion.span
                 key={s}
                 variants={{
                   hidden: { opacity: 0, y: 12 },
                   show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
                 }}
-                className="font-display uppercase tracking-widest2 text-sm md:text-base border border-fc-cream/20 text-fc-cream/85 px-5 py-3 hover:border-fc-teal hover:text-fc-teal transition-colors"
+                style={{ borderLeftColor: LOGO_COLORS[i % LOGO_COLORS.length] }}
+                className="font-display uppercase tracking-widest2 text-sm md:text-base border border-fc-cream/15 border-l-4 text-fc-cream/85 px-5 py-3 transition-colors hover:text-fc-cream hover:bg-fc-cream/5"
               >
                 {s}
               </motion.span>
             ))}
           </motion.div>
+
+          <PathHop color={LOGO_COLORS[6]} flip className="mt-16 md:mt-24" />
         </div>
       </section>
 
@@ -502,6 +525,8 @@ export default function Academy() {
               difference in the world around them.
             </p>
           </motion.div>
+
+          <PathHop color={LOGO_COLORS[4]} className="mt-16 md:mt-24" />
         </div>
       </section>
 
@@ -562,8 +587,14 @@ export default function Academy() {
       </section>
 
       {/* Apply CTA */}
-      <section id="apply" className="py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10">
-        <div className="container-fc">
+      <section
+        id="apply"
+        className="relative overflow-hidden py-24 md:py-32 bg-fc-black-soft border-t border-fc-cream/10"
+      >
+        {/* Warm, brighter finale glow — a lift out of the dark to close the page */}
+        <div className="pointer-events-none absolute -top-24 -right-16 h-96 w-96 rounded-full bg-fc-gold/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-32 -left-20 h-96 w-96 rounded-full bg-fc-teal/20 blur-3xl" />
+        <div className="container-fc relative">
           <motion.div
             variants={revealUp}
             initial="hidden"
