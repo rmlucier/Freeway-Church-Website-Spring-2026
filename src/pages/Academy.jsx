@@ -1,4 +1,5 @@
 import { motion, MotionConfig } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import MailLink from '../components/MailLink.jsx';
 import PhoneLink from '../components/PhoneLink.jsx';
@@ -134,9 +135,9 @@ const topics = [
     ),
   },
   {
-    title: 'Circle of Control',
+    title: 'What You Can Control',
     body:
-      'Focusing energy on what we can control, and learning to leave the people around us powerful.',
+      'Learning to put our energy where it counts — our own attitude, effort, and response — and letting go of the rest.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="9" />
@@ -495,13 +496,13 @@ export default function Academy() {
                 <p className="text-fc-cream/75 text-sm leading-relaxed">{topic.body}</p>
               </motion.div>
             ))}
-            {/* "And more" tile */}
+            {/* "And more" tile — decorative, intentionally not a link */}
             <motion.div
               variants={revealItem}
-              className="relative p-8 md:p-10 border-r border-b border-fc-cream/10 flex items-center"
+              className="relative p-8 md:p-10 border-r border-b border-fc-cream/10 flex items-center justify-center"
             >
-              <p className="font-display uppercase tracking-widest2 text-fc-gold text-lg">
-                &amp; more →
+              <p className="font-display italic normal-case tracking-wide text-fc-cream/35 text-base">
+                …and more
               </p>
             </motion.div>
           </motion.div>
@@ -520,14 +521,14 @@ export default function Academy() {
           >
             <p className="eyebrow mb-6">Our Goal</p>
             <h2 className="display-xl text-4xl md:text-6xl mb-10">
-              A generation who lead<br />
+              A generation who leads<br />
               <span className="text-fc-teal">with character &amp; faith.</span>
             </h2>
             <p className="text-fc-cream/80 text-lg leading-relaxed">
-              To see a generation of young leaders grow in character, courage,
-              compassion, and faith — helping them discover their God-given identity
-              and use their influence to serve the community and make a positive
-              difference in the world around them.
+              We want to see a generation of young leaders grow in character,
+              courage, compassion, and faith. We want to help each child discover
+              their God-given identity. And we want to send them out to serve their
+              community — and make a real difference in the world around them.
             </p>
           </motion.div>
         </div>
@@ -670,6 +671,37 @@ export default function Academy() {
               </MailLink>
               .
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Church bridge — gives the Academy its Freeway Church home and eases
+          into the site-wide footer instead of jumping straight into it. */}
+      <section className="py-20 md:py-24 bg-fc-black border-t border-fc-cream/10">
+        <div className="container-fc">
+          <motion.div
+            variants={revealUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-100px' }}
+            className="max-w-3xl"
+          >
+            <p className="eyebrow mb-6">Part of the Freeway Family</p>
+            <h2 className="display-xl text-3xl md:text-5xl mb-6 pb-[0.12em]">
+              A ministry of <span className="text-fc-teal">Freeway Church.</span>
+            </h2>
+            <p className="text-fc-cream/75 text-lg leading-relaxed mb-8">
+              The Leadership Academy is one of the ways our church family in Albion
+              pours into the next generation. New to Freeway? We&apos;d love to meet you.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/visit" className="btn-outline">
+                Plan a Visit
+              </Link>
+              <Link to="/kids" className="btn-outline">
+                Kids at Freeway
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
