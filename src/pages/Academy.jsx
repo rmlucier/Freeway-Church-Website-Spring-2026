@@ -279,14 +279,14 @@ export default function Academy() {
               {/* Quick facts */}
               <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
                 <div className="flex items-center gap-2.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-fc-gold" />
-                  <span className="font-display uppercase tracking-widest2 text-xs text-fc-cream/70">
+                  <span className="h-2 w-2 rounded-full bg-fc-gold" />
+                  <span className="font-display uppercase tracking-widest2 text-sm md:text-base text-fc-cream/85">
                     Grades 1–6 &middot; Pre-K &amp; K track
                   </span>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-fc-gold" />
-                  <span className="font-display uppercase tracking-widest2 text-xs text-fc-cream/70">
+                  <span className="h-2 w-2 rounded-full bg-fc-gold" />
+                  <span className="font-display uppercase tracking-widest2 text-sm md:text-base text-fc-cream/85">
                     6:30–8:00pm &middot; Dinner at 5:30
                   </span>
                 </div>
@@ -364,7 +364,6 @@ export default function Academy() {
           >
             {[
               { src: '/images/academy-group.jpg', alt: 'Academy students worshipping with hands raised outdoors' },
-              { src: '/images/academy-slide.jpg', alt: 'A child laughing on a summer slip-and-slide' },
               { src: '/images/academy-play.jpg', alt: 'A student building at a hands-on activity table' },
               { src: '/images/academy-water.jpg', alt: 'A student mid-game in an outdoor activity' },
               { src: '/images/academy-container.jpg', alt: 'Kids playing a balance game outdoors' },
@@ -419,10 +418,10 @@ export default function Academy() {
             viewport={{ once: true, margin: '-100px' }}
             className="max-w-3xl mb-14"
           >
-            <p className="eyebrow mb-6">What They Grow In</p>
+            <p className="eyebrow mb-6">The 10 Traits</p>
             <h2 className="display-xl text-4xl md:text-6xl pb-[0.12em]">
-              Ten strengths.<br />
-              <span className="text-fc-gold">One young leader.</span>
+              Strengths your<br />
+              <span className="text-fc-gold">young leader will grow in.</span>
             </h2>
           </motion.div>
 
