@@ -94,9 +94,9 @@ function Wipe({ children, className = '', delay = 0, color = 'bg-fc-black' }) {
   );
 }
 
-// TODO: replace with the real FreeWay Leadership Academy application form URL
-// once the Google Form is built. Until then this points visitors to text/email.
-const APPLICATION_FORM_URL = '';
+// FreeWay Leadership Academy application — Church Center (Planning Center) form.
+const APPLICATION_FORM_URL =
+  'https://freewaychurch.churchcenter.com/people/forms/1328111';
 
 const topics = [
   {
