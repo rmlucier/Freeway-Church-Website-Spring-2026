@@ -19,11 +19,14 @@ export default function SEO({
   path = '/',
   image = DEFAULT_OG_IMAGE,
   noindex = false,
+  titleSuffix = true,
 }) {
   const canonical = `${SITE_URL}${path}`;
   // The title ends with the site name for brand recognition in search results,
-  // except on the home page which gets a cleaner treatment.
-  const fullTitle = path === '/' ? title : `${title} | Freeway Church`;
+  // except on the home page which gets a cleaner treatment. Pages that need an
+  // exact title (e.g. event landing pages) can opt out with titleSuffix={false}.
+  const fullTitle =
+    path === '/' || !titleSuffix ? title : `${title} | Freeway Church`;
 
   return (
     <Helmet>
