@@ -124,27 +124,8 @@ function RegisterButton({ closed }) {
   );
 }
 
-// Image that quietly removes itself if the file isn't there yet, so the
-// container's solid background shows instead of a broken-image icon.
-function OptionalImage({ src, alt, className, onMissing, ...rest }) {
-  const [missing, setMissing] = useState(false);
-  if (missing) return null;
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className={className}
-      onError={() => {
-        setMissing(true);
-        onMissing?.();
-      }}
-      {...rest}
-    />
-  );
-}
-
-// Lets a couple pass the page along to friends. Uses the phone's share sheet
-// when available, otherwise copies the link.
+// Soft "send this to a friend" link for the double-date callout. Opens the
+// phone's share sheet where available; otherwise copies the page link.
 function ShareLink() {
   const [copied, setCopied] = useState(false);
   const url = `${SITE_URL}/marriage`;
@@ -152,7 +133,11 @@ function ShareLink() {
   async function share() {
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'Marriage Night at Freeway', url });
+        await navigator.share({
+          title: 'Marriage Night at Freeway',
+          text: 'Want to make it a double date? Marriage Night at Freeway, Sat Nov 7. Free, with pizza.',
+          url,
+        });
       } catch {
         // Share sheet dismissed — nothing to do.
       }
@@ -175,9 +160,28 @@ function ShareLink() {
     >
       {copied ? 'Link copied' : 'Send them the link →'}
       <span className="sr-only" aria-live="polite">
-        {copied ? ' Link copied to clipboard' : ''}
+        {copied ? ' Page link copied to clipboard' : ''}
       </span>
     </button>
+  );
+}
+
+// Image that quietly removes itself if the file isn't there yet, so the
+// container's solid background shows instead of a broken-image icon.
+function OptionalImage({ src, alt, className, onMissing, ...rest }) {
+  const [missing, setMissing] = useState(false);
+  if (missing) return null;
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      onError={() => {
+        setMissing(true);
+        onMissing?.();
+      }}
+      {...rest}
+    />
   );
 }
 
@@ -383,10 +387,9 @@ export default function Marriage() {
                   Make it a double date.
                 </p>
                 <p className="mt-3 text-fc-cream/85 leading-relaxed">
-                  Freeway couples and friends are welcome, so bring another couple with you.
-                  {closed
-                    ? null
-                    : ' Seats are limited to 20 couples, so send them the link and they can save their own spot.'}
+                  Freeway couples and friends are welcome. If there&apos;s a couple you&apos;d
+                  enjoy the evening with, pass this page along. Each couple registers
+                  on their own, so they&apos;ll want to grab a spot before the 20 fill up.
                 </p>
                 {!closed && <ShareLink />}
               </aside>
