@@ -235,13 +235,8 @@ export default function Marriage() {
               <p className="eyebrow mb-6">One Evening, Just the Two of You</p>
               <div className="space-y-6 text-fc-cream/80 text-lg leading-relaxed">
                 <p>
-                  Nobody sat you down and taught you how to talk to each other. You picked
-                  it up from your parents, from old relationships, from whatever worked
-                  last time. Most couples are winging it.
-                </p>
-                <p>
-                  Marriage Night is one evening to fix that. Chris Cowling of Pathway
-                  Coaching has worked with couples for over 25 years, and he&apos;ll walk us
+                  Chris Cowling of Pathway Coaching has worked with couples for over 25
+                  years, and he&apos;ll walk us
                   through the Know Honesty model: a simple, shared way to be fully honest
                   and fully open with each other.
                 </p>
