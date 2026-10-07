@@ -143,6 +143,44 @@ function OptionalImage({ src, alt, className, onMissing, ...rest }) {
   );
 }
 
+// Lets a couple pass the page along to friends. Uses the phone's share sheet
+// when available, otherwise copies the link.
+function ShareLink() {
+  const [copied, setCopied] = useState(false);
+  const url = `${SITE_URL}/marriage`;
+
+  async function share() {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Marriage Night at Freeway', url });
+      } catch {
+        // Share sheet dismissed — nothing to do.
+      }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      window.prompt('Copy this link:', url);
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={share}
+      className="mt-5 inline-block font-display uppercase tracking-widest2 text-xs text-fc-gold-soft hover:text-fc-cream transition-colors"
+    >
+      {copied ? 'Link copied' : 'Send them the link →'}
+      <span className="sr-only" aria-live="polite">
+        {copied ? ' Link copied to clipboard' : ''}
+      </span>
+    </button>
+  );
+}
+
 function PresenterPhoto() {
   const [missing, setMissing] = useState(false);
   return (
@@ -346,7 +384,11 @@ export default function Marriage() {
                 </p>
                 <p className="mt-3 text-fc-cream/85 leading-relaxed">
                   Freeway couples and friends are welcome, so bring another couple with you.
+                  {closed
+                    ? null
+                    : ' Seats are limited to 20 couples, so send them the link and they can save their own spot.'}
                 </p>
+                {!closed && <ShareLink />}
               </aside>
             </motion.div>
           </div>
