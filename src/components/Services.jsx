@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 const schedule = [
-  { time: '9:15 AM', name: 'Preservice Prayer' },
+  { time: '9:30 AM', name: 'Preservice Prayer' },
   { time: '10:00 AM', name: 'Worship Service' },
   { time: '11:30 AM', name: 'Fellowship' },
   { time: '5:30 PM', name: 'Freeway Youth' },
