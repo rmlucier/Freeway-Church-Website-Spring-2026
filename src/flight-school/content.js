@@ -31,6 +31,7 @@ export const TRAITS = [
     id: 'faithful',
     name: 'Faithful',
     message: 'https://www.youtube.com/live/kPazo1W0wpA?t=362s',
+    messageDate: 'October 11',
     definition: "Trusting God enough to risk what he's given you.",
     test: "You know you're faithful when you've put something on the line for him.",
     results: {
@@ -52,6 +53,7 @@ export const TRAITS = [
     id: 'available',
     name: 'Available',
     message: 'https://www.youtube.com/live/GUp3u5R162g?t=362s',
+    messageDate: 'October 18',
     definition: 'Being ready for God to lead you.',
     test: "You know you're available when you're out of backup plans.",
     results: {
@@ -73,6 +75,7 @@ export const TRAITS = [
     id: 'teachable',
     name: 'Teachable',
     message: 'https://www.youtube.com/live/UeIbzJLreEU?t=296s',
+    messageDate: 'October 25',
     definition: 'Trusting God enough to let him correct and change you.',
     test: "You know you're teachable when you'd rather be healed than be right.",
     results: {
@@ -94,6 +97,7 @@ export const TRAITS = [
     id: 'missional',
     name: 'Missional',
     message: 'https://www.youtube.com/live/BYdhWP4hQVw?t=277s',
+    messageDate: 'November 1',
     definition: 'Living every day on purpose to help others follow Jesus.',
     test: "You know you're missional when you can name who you're sent to.",
     results: {

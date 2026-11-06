@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import { TRAITS } from '../flight-school/content.js';
@@ -36,6 +36,62 @@ function StartButton({ state }) {
   );
 }
 
+// Sound is off until someone presses play, per the style guide. Pressing play
+// also sends the plane across again, so it flies for the length of the jingle.
+function Hero() {
+  const audioRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+  const [flight, setFlight] = useState(0);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    return () => audio?.pause();
+  }, []);
+
+  const toggle = async () => {
+    const audio = audioRef.current;
+    if (playing) {
+      audio.pause();
+      setPlaying(false);
+      return;
+    }
+    audio.currentTime = 0;
+    setFlight((n) => n + 1);
+    try {
+      await audio.play();
+      setPlaying(true);
+    } catch {
+      setPlaying(false);
+    }
+  };
+
+  return (
+    <div className="fs-hero">
+      <h1>
+        <div className="fs-hero-art">
+          <picture>
+            <source media="(min-width: 640px)" srcSet="/flight-school/hero_cockpit_title@1x.png" />
+            <img
+              className="fs-pixel"
+              src="/flight-school/hero_cockpit_portrait_title@1x.png"
+              alt="Flight School"
+            />
+          </picture>
+          <div className="fs-sky" aria-hidden="true">
+            <img key={flight} className="fs-pixel fs-plane" src="/flight-school/plane@1x.png" alt="" />
+          </div>
+        </div>
+      </h1>
+      <div className="fs-jingle">
+        <audio ref={audioRef} src="/flight-school/jingle.m4a" preload="none" onEnded={() => setPlaying(false)} />
+        <button type="button" className="fs-btn fs-btn-2" onClick={toggle}>
+          {playing ? 'Stop Jingle' : 'Play Jingle'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function FlightSchool() {
   const state = useMemo(loadState, []);
 
@@ -48,18 +104,7 @@ export default function FlightSchool() {
         image="https://freeway.church/flight-school/box_cover_title@6x.png"
       />
 
-      <div className="fs-hero">
-        <h1>
-          <picture>
-            <source media="(min-width: 640px)" srcSet="/flight-school/hero_cockpit_title@1x.png" />
-            <img
-              className="fs-pixel"
-              src="/flight-school/hero_cockpit_portrait_title@1x.png"
-              alt="Flight School"
-            />
-          </picture>
-        </h1>
-      </div>
+      <Hero />
 
       <section className="fs-section">
         <div className="fs-read fs-stack">
@@ -92,7 +137,6 @@ export default function FlightSchool() {
                 <p className="fs-muted">
                   <em>{trait.test}</em>
                 </p>
-                <MessageLink trait={trait} />
               </article>
             ))}
           </div>
@@ -116,6 +160,18 @@ export default function FlightSchool() {
         </div>
       </section>
 
+      <section className="fs-section">
+        <div className="fs-wide">
+          <h2 style={{ color: 'var(--accent)', marginBottom: 8 }}>Watch the series</h2>
+          <p style={{ marginBottom: 24 }}>One message for each trait.</p>
+          <div className="fs-message-grid">
+            {TRAITS.map((trait) => (
+              <MessageLink key={trait.id} trait={trait} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="fs-section fs-section-deep">
         <div className="fs-read fs-stack">
           <h2 style={{ color: 'var(--accent)' }}>Your answers are private</h2>
@@ -129,9 +185,6 @@ export default function FlightSchool() {
           </p>
           <div className="fs-btn-row" style={{ paddingTop: 8 }}>
             <StartButton state={state} />
-            <Link to="/#sermons" className="fs-btn fs-btn-2">
-              Watch Messages
-            </Link>
           </div>
         </div>
       </section>

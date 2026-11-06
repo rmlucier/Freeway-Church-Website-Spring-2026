@@ -85,7 +85,7 @@
 /* Art: scaled by whole numbers only. */
 .fs-pixel { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
 .fs-hero { background: var(--panel-dark); padding-top: 80px; overflow: hidden; }
-.fs-hero picture { display: flex; justify-content: center; }
+.fs-hero h1 { display: flex; justify-content: center; }
 .fs-hero img { width: 360px; height: 640px; max-width: none; flex: none; }
 @media (min-width: 640px) { .fs-hero img { width: 640px; height: 360px; } }
 @media (min-width: 960px) { .fs-hero img { width: 960px; height: 540px; } }
@@ -310,14 +310,45 @@
 .fs-test { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
 .fs-test strong { color: var(--trait); white-space: nowrap; }
 
-/* Sermon link on each trait */
+/* Watch the series */
+.fs-message-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 720px) { .fs-message-grid { grid-template-columns: repeat(4, 1fr); } }
 .fs-message {
-  display: inline-flex;
-  align-items: center;
-  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  min-height: 64px;
+  padding: 12px;
+  background: var(--panel);
+  border: 2px solid var(--panel-line);
+  border-top: 4px solid var(--trait);
   color: var(--trait);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 700;
 }
-.fs-message:hover { color: var(--text); }
+.fs-message:hover { background: var(--panel-dark); }
+
+/* Hero: a plane crosses the sky, in whole art pixels like the rest of the scene. */
+.fs-hero { --s: 2; --art-w: 180; --art-h: 320; --sky-x: 10; --plane-y: 80; }
+@media (min-width: 640px) { .fs-hero { --s: 2; --art-w: 320; --art-h: 180; --plane-y: 71; } }
+@media (min-width: 960px) { .fs-hero { --s: 3; } }
+@media (min-width: 1280px) { .fs-hero { --s: 4; } }
+.fs-hero-art { position: relative; flex: none; width: calc(var(--art-w) * var(--s) * 1px); height: calc(var(--art-h) * var(--s) * 1px); }
+.fs-sky { position: absolute; top: 0; bottom: 0; left: calc(var(--sky-x) * var(--s) * 1px); right: calc(var(--sky-x) * var(--s) * 1px); overflow: hidden; pointer-events: none; }
+.fs-hero .fs-plane {
+  position: absolute;
+  left: 0;
+  top: calc(var(--plane-y) * var(--s) * 1px);
+  width: calc(18 * var(--s) * 1px);
+  height: calc(9 * var(--s) * 1px);
+  transform: translateX(calc(-18 * var(--s) * 1px));
+  animation: fs-plane-fly 16s steps(200) infinite;
+}
+/* 10 seconds across the sky, the length of the jingle, then a short rest. */
+@keyframes fs-plane-fly {
+  0% { transform: translateX(calc(-18 * var(--s) * 1px)); }
+  62.5%, 100% { transform: translateX(calc(var(--art-w) * var(--s) * 1px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fs-hero .fs-plane { animation: none; transform: translateX(calc(40 * var(--s) * 1px)); }
+}
+.fs-jingle { display: flex; justify-content: center; padding-block: 16px; }
