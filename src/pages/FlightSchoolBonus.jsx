@@ -13,6 +13,9 @@ const WRITTEN = LAST_ITEM + 1;
 
 const allAnswered = (answers) => BONUS_ORDER.every((id) => typeof answers[id] === 'number');
 
+// TABLED: not routed in App.jsx. Pastor Roy wants pride up / pride down rebuilt as
+// its own, more nuanced assessment. Kept as a starting point.
+//
 // The optional Teachable bonus. Offered after the main assessment, with its own
 // results, so nobody has to read about pride to get their Flight Log.
 export default function FlightSchoolBonus() {

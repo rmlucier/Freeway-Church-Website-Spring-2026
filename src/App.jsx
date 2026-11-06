@@ -21,7 +21,6 @@ const Marriage = lazy(() => import('./pages/Marriage.jsx'));
 const FlightSchool = lazy(() => import('./pages/FlightSchool.jsx'));
 const FlightSchoolPreflight = lazy(() => import('./pages/FlightSchoolPreflight.jsx'));
 const FlightSchoolLog = lazy(() => import('./pages/FlightSchoolLog.jsx'));
-const FlightSchoolBonus = lazy(() => import('./pages/FlightSchoolBonus.jsx'));
 const FlightSchoolPastor = lazy(() => import('./pages/FlightSchoolPastor.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
@@ -29,11 +28,11 @@ const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 // analytics pick that fragment up.
 const stripHash = (event) => ({ ...event, url: event.url.split('#')[0] });
 
-// The assessment and bonus run full-screen with their own top bar, so the person
-// can focus on one question at a time.
+// The assessment runs full-screen with its own top bar, so the person can focus
+// on one question at a time.
 function SiteChrome({ children }) {
   const { pathname } = useLocation();
-  return ['/flight-school/preflight', '/flight-school/bonus'].includes(pathname) ? null : children;
+  return pathname === '/flight-school/preflight' ? null : children;
 }
 
 // Intentionally minimal — keeps the nav visible and avoids a flashy spinner
@@ -74,7 +73,6 @@ export default function App() {
           <Route path="/flight-school" element={<FlightSchool />} />
           <Route path="/flight-school/preflight" element={<FlightSchoolPreflight />} />
           <Route path="/flight-school/log" element={<FlightSchoolLog />} />
-          <Route path="/flight-school/bonus" element={<FlightSchoolBonus />} />
           <Route path="/flight-school/pastor" element={<FlightSchoolPastor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

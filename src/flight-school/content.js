@@ -74,7 +74,7 @@ export const TRAITS = [
     test: "You know you're teachable when you'd rather be healed than be right.",
     results: {
       Low: {
-        text: "Correction may be bouncing off you. Some people argue it down. Others agree and then change nothing. The optional bonus shows which way you lean. If shame is under it, that's not pride: God lifts up people who feel crushed.",
+        text: "Correction may be bouncing off you. Some people argue it down. Others agree and then change nothing. If shame is under it, that's not pride: God lifts up people who feel crushed.",
         next: 'Ask one person you trust, "What\'s one thing you see in me that I don\'t?" Then just listen.',
       },
       Middle: {

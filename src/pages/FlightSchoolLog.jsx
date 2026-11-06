@@ -3,13 +3,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import {
   OPEN_QUESTIONS,
-  QUADRANTS,
   TRAITS,
   YEARS_CHOICES,
   sliderLabel,
 } from '../flight-school/content.js';
 import { scoreAssessment } from '../flight-school/scoring.js';
-import { BonusResult, DiscipleshipChain, NextStep, Quote, ResultsBars, TraitIcon, useFlash } from '../flight-school/parts.jsx';
+import { DiscipleshipChain, NextStep, Quote, ResultsBars, TraitIcon, useFlash } from '../flight-school/parts.jsx';
 import { buildInsights, retakeDate } from '../flight-school/insights.js';
 import { postFlightSchool } from '../flight-school/api.js';
 import { LIMITS, decodeLog, emptyState, encodeLog, loadState, saveState } from '../flight-school/store.js';
@@ -156,31 +155,6 @@ function Log({ log, isShared }) {
             );
           })}
 
-          {isShared
-            ? results.quadrant && (
-                <div className="fs-stack">
-                  <h2 style={{ color: 'var(--teachable)' }}>Teachable bonus</h2>
-                  <BonusResult results={results} />
-                </div>
-              )
-            : (
-                <article className="fs-card fs-stack" data-trait="teachable">
-                  <h2>Teachable bonus</h2>
-                  {results.quadrant ? (
-                    <p>
-                      You took the bonus. Your result: <strong>{QUADRANTS[results.quadrant].name}</strong>.
-                    </p>
-                  ) : (
-                    <p>
-                      Optional, about 3 minutes. See whether you lean toward "I know better" or "I'm
-                      not good enough." You'll get separate results.
-                    </p>
-                  )}
-                  <Link to="/flight-school/bonus" className="fs-btn fs-btn-2">
-                    {results.quadrant ? 'See Bonus Results' : 'Take the Bonus'}
-                  </Link>
-                </article>
-              )}
         </div>
       </section>
 
@@ -226,13 +200,6 @@ function MentorNotes({ log, results }) {
               <strong>Comfort with risk:</strong> {sliderLabel(risk)}. Read Faithful against this.
               High Faithful from a careful person means real trust. From a risk-lover, it may be
               personality. Ask: "What did it cost you?"
-            </p>
-          )}
-          {results.prideDown >= 5 && (
-            <p>
-              <strong>Pride down is high.</strong> This can be shame, not pride. If the person seems
-              crushed rather than guarded, lead with grace. Jesus doesn't humble the crushed; he
-              lifts them.
             </p>
           )}
           {results.flags.length > 0 && (
