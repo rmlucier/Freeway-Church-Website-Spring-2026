@@ -14,7 +14,7 @@ export const sliderLabel = (value) =>
   SLIDER_LABELS.find((band) => value < band.below).label;
 
 export const OPENING_LINE =
-  'There are no right or wrong answers. Answer how things really are, not how you wish they were. Your mentor will use this to know where to start.';
+  'There are no right or wrong answers. Answer the questions honestly, not how you wish they were.';
 
 export const YEARS_CHOICES = [
   "I'm not sure yet / I'm still exploring",

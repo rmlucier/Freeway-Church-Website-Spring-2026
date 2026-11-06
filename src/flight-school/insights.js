@@ -14,23 +14,23 @@ const SAY_DO_PAIRS = [
 const SAY_DO_MIN_GAP = 3;
 
 const PAIRINGS = {
-  'faithful>available': "You're willing to take risks for God, but life may be too full to hear where He's leading. Bold steps go further when they start with quiet.",
+  'faithful>available': "You're willing to take risks for God, but life may be too full to hear what he's saying. Bold steps go further when they start with quiet.",
   'faithful>teachable': "You'll step out for God, but correction may not land as easily. Courage grows stronger when someone can tell you the truth.",
-  'faithful>missional': "You've trusted God with real risk. Now aim it at a person. Who could that trust help follow Jesus?",
-  'available>faithful': 'You make room for God and listen for Him. Next, act on it. Being ready turns into faith when something is on the line.',
-  'available>teachable': "You listen for God's lead, but it may be harder to hear Him through other people. God often uses them too.",
+  'faithful>missional': "You've trusted God with real risk. How can you use your faithfulness to help someone?",
+  'available>faithful': 'You make room for God and listen for Him. Act on it. Being ready turns into faith when something is on the line.',
+  'available>teachable': "You listen for God's lead, but it may be harder to hear Him through other people. God puts people into our lives for a reason!",
   'available>missional': "You're ready for God to lead. The next question is who He's leading you toward.",
   'teachable>faithful': 'You let God change you. Now put what you\'ve learned at risk. Learning grows when you act on it.',
-  'teachable>available': "You're open to being taught, but a busy life leaves little room to hear. Quiet may be your next step.",
-  'teachable>missional': "You're taking a lot in, but not yet passing it on. Someone near you could use what God has taught you.",
+  'teachable>available': "You're open to being taught, but a busy life leaves little room to hear. Finding quiet time with God is your next step.",
+  'teachable>missional': "You're taking a lot in, but not yet passing it on. Someone near you can use what God has taught you.",
   'missional>faithful': 'You care about people following Jesus. Let that care cost you something. What could you risk for them?',
-  'missional>available': "You're focused on people, and that's good. Make sure you're also stopping to hear God, so you're not running on your own.",
+  'missional>available': "You're focused on people, and that's good. Make sure you're also stopping to hear God, so you're partnering with him.",
   'missional>teachable': "You're pouring into others. Make sure someone can still correct you, so you keep growing as you lead.",
 };
 const PAIRING_MIN_GAP = 1.5;
 
 const STAGE_NOTES = [
-  "You're still exploring, and you're welcome here. These scores aren't a grade. Pick one next step that seems doable.",
+  "You're still exploring, and you're welcome to explore at Freeway. These scores aren't a grade. Pick one next step that seems doable.",
   "You're early in this walk. A low score here is a next step, not a failure.",
   "You've been walking with Jesus for a while. This is a good time to find what's next, and someone to walk it with you.",
   "You've followed Jesus a long time. Ask what has changed lately, and who could learn from what you've lived.",

@@ -9,7 +9,7 @@ import '../flight-school/flight-school.css';
 const STEPS = [
   {
     label: 'Preflight',
-    body: 'Answer honest statements about your life right now. It takes about 15 minutes, on your phone or computer.',
+    body: 'Answer honest statements about your life right now. It takes about 10 minutes, on your phone or computer.',
   },
   {
     label: 'Your Flight Log',
