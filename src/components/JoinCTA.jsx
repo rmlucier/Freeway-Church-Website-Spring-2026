@@ -52,6 +52,26 @@ export default function JoinCTA() {
           </h2>
         </motion.div>
 
+        {/* Flight School campaign card. Remove this when the campaign ends. */}
+        <Link
+          to="/flight-school"
+          className="group mb-8 flex flex-col gap-6 border border-[#FFD23F]/60 p-8 transition-colors hover:bg-fc-black md:mb-10 md:flex-row md:items-center md:justify-between md:p-10"
+        >
+          <div>
+            <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none text-[#FFD23F]">
+              Flight School
+            </h3>
+            <p className="mt-4 max-w-2xl text-fc-cream/70 text-sm leading-relaxed">
+              What does it take to be a disciple? Take the assessment on your phone and find your
+              next step in being faithful, available, teachable and missional.
+            </p>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-2 font-display uppercase tracking-widest2 text-xs text-[#FFD23F]">
+            Start here
+            <span className="transition-transform group-hover:translate-x-1">→</span>
+          </span>
+        </Link>
+
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-0 border-t border-l border-fc-cream/10">
           {steps.map((s, i) => {
             const isExternal = s.href.startsWith('http');

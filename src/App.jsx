@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -18,7 +18,21 @@ const Summer = lazy(() => import('./pages/Summer.jsx'));
 const Breakthrough = lazy(() => import('./pages/Breakthrough.jsx'));
 const Academy = lazy(() => import('./pages/Academy.jsx'));
 const Marriage = lazy(() => import('./pages/Marriage.jsx'));
+const FlightSchool = lazy(() => import('./pages/FlightSchool.jsx'));
+const FlightSchoolPreflight = lazy(() => import('./pages/FlightSchoolPreflight.jsx'));
+const FlightSchoolLog = lazy(() => import('./pages/FlightSchoolLog.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
+
+// Flight Log links keep private results in the URL fragment. Never let
+// analytics pick that fragment up.
+const stripHash = (event) => ({ ...event, url: event.url.split('#')[0] });
+
+// The assessment runs full-screen with its own top bar, so the person can focus
+// on one question at a time.
+function SiteChrome({ children }) {
+  const { pathname } = useLocation();
+  return pathname === '/flight-school/preflight' ? null : children;
+}
 
 // Intentionally minimal — keeps the nav visible and avoids a flashy spinner
 // for what is usually a sub-100ms chunk load on a fast connection.
@@ -37,11 +51,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToHash />
-      <motion.div
-        style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-0.5 bg-fc-teal origin-left z-[60]"
-      />
-      <Nav />
+      <SiteChrome>
+        <motion.div
+          style={{ scaleX }}
+          className="fixed top-0 left-0 right-0 h-0.5 bg-fc-teal origin-left z-[60]"
+        />
+        <Nav />
+      </SiteChrome>
       <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -53,12 +69,17 @@ export default function App() {
           <Route path="/prayer" element={<Breakthrough />} />
           <Route path="/academy" element={<Academy />} />
           <Route path="/marriage" element={<Marriage />} />
+          <Route path="/flight-school" element={<FlightSchool />} />
+          <Route path="/flight-school/preflight" element={<FlightSchoolPreflight />} />
+          <Route path="/flight-school/log" element={<FlightSchoolLog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
-      <Footer />
-      <Analytics />
-      <SpeedInsights />
+      <SiteChrome>
+        <Footer />
+      </SiteChrome>
+      <Analytics beforeSend={stripHash} />
+      <SpeedInsights beforeSend={stripHash} />
     </BrowserRouter>
   );
 }

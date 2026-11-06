@@ -37,6 +37,10 @@ export default function Nav() {
   const linkClass =
     'font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors';
   const mobileLinkClass = 'font-display uppercase tracking-widest2 text-lg';
+  // Flight School campaign tab. Yellow is the Flight School accent, so the tab
+  // stands out while the campaign runs. Remove this tab when the campaign ends.
+  const flightSchoolClass =
+    'font-display uppercase tracking-widest2 text-[#FFD23F] hover:text-[#FF9A2E] transition-colors whitespace-nowrap';
 
   return (
     <header
@@ -45,20 +49,23 @@ export default function Nav() {
       }`}
     >
       <div className="container-fc flex items-center justify-between h-20">
-        <Link to="/" aria-label="Freeway Church — home" className="block">
+        <Link to="/" aria-label="Freeway Church — home" className="block xl:shrink-0">
           <img
             src="/images/logo-horizontal-white.png"
             alt="Freeway Church"
-            className="h-8 md:h-9 w-auto"
+            className="h-8 2xl:h-9 w-auto"
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden xl:flex items-center gap-5 2xl:gap-10">
           {links.map((l) => (
             <Link key={l.label} to={l.to} className={linkClass}>
               {l.label}
             </Link>
           ))}
+          <Link to="/flight-school" className={`${flightSchoolClass} text-sm`}>
+            Flight School
+          </Link>
           <Link to="/giving" className="btn-primary">
             Give
           </Link>
@@ -103,7 +110,7 @@ export default function Nav() {
         <button
           onClick={() => setOpen((v) => !v)}
           aria-label="Menu"
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="xl:hidden flex flex-col gap-1.5 p-2"
         >
           <span className={`h-0.5 w-6 bg-fc-cream transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`} />
           <span className={`h-0.5 w-6 bg-fc-cream transition-opacity ${open ? 'opacity-0' : ''}`} />
@@ -118,7 +125,7 @@ export default function Nav() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden overflow-hidden bg-fc-black border-t border-fc-cream/10"
+            className="xl:hidden overflow-hidden bg-fc-black border-t border-fc-cream/10"
           >
             <div className="container-fc py-6 flex flex-col gap-5">
               {links.map((l) => (
@@ -144,6 +151,9 @@ export default function Nav() {
                   <path d="M22 2 15 22 11 13 2 9z" />
                 </svg>
                 Academy
+              </Link>
+              <Link to="/flight-school" className={`${flightSchoolClass} text-lg`}>
+                Flight School
               </Link>
               <Link to="/giving" className="btn-primary self-start">
                 Give
