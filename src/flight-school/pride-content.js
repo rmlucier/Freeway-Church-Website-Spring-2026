@@ -15,7 +15,7 @@ export const INTRO = [
   "If you're carrying shame, hear this first: this isn't about beating you up. Jesus lifts up people who feel crushed.",
 ];
 
-// `side` is up, back or teachable. Pride-up and holding-back items feed their
+// `side` is up, back or teachable (back is pride down). Pride-up and pride-down items feed their
 // dimension; teachable items feed the teachable bar.
 export const STATEMENTS = {
   PU1a: { dim: 'self', side: 'up', text: 'When someone else gets praised, I think about why I deserved it more.' },
@@ -47,7 +47,7 @@ export const STATEMENT_ORDER = [
   'PD4b', 'PU2b', 'T4', 'PD3b', 'PU4b', 'PD1b', 'PU3a', 'PD2a', 'T2', 'PU1a',
 ];
 
-// Each answer is [text, pride-up value, holding-back value]. Links store the
+// Each answer is [text, pride-up value, pride-down value]. Links store the
 // answer's place in this list, so don't reorder answers once people have links.
 export const SITUATIONS = [
   {
@@ -174,7 +174,7 @@ export const LEANS = {
     prayer: "God, I'd rather be healed than be right.",
   },
   back: {
-    title: 'You lean toward holding back',
+    title: 'You lean toward pride down',
     text: "You may stay quiet, say \"okay\" without changing, or skip things because someone else could do them better. That can feel safe, and it may come from being nervous more than anything else. But God made you to be brave. Your voice and your yes matter more than you think.",
     picture: "Moses said, \"Please send someone else.\" God sent him anyway, and gave him his brother Aaron to go with him. God doesn't wait for you to feel ready. He goes with you.",
     prayer: "God, I'm not enough, and you are. Help me be brave.",
@@ -259,4 +259,4 @@ export const TWO_KINDS = [
   ['In the Bible', 'Naaman: "Aren\'t the rivers back home better?"', 'The servant who buried the money: "I was afraid." Moses: "Send someone else."'],
 ];
 export const TWO_KINDS_BOTTOM_LINE =
-  'Pride up refuses to be taught. Holding back refuses to be sent. Teachable people are humble enough to listen and brave enough to go.';
+  'Pride up refuses to be taught. Pride down refuses to be sent. Teachable people are humble enough to listen and brave enough to go.';

@@ -119,11 +119,11 @@ function Results({ record, isShared }) {
 
           <div className="fs-stack" style={{ paddingTop: 16 }}>
             <Bar label="Pride up" score={results.up} color="missional" />
-            <Bar label="Holding back" score={results.back} color="available" />
+            <Bar label="Pride down" score={results.back} color="available" />
             <Bar label="Teachable" score={results.teachable} color="teachable" />
           </div>
           <p className="fs-small">
-            Higher on pride up or holding back means more of it. Higher on teachable is the good
+            Higher on pride up or pride down means more of it. Higher on teachable is the good
             direction.
           </p>
 
@@ -147,7 +147,7 @@ function Results({ record, isShared }) {
                   <span className="fs-readout fs-row-score">{row.up.toFixed(1)}</span>
                 </span>
                 <span data-trait="available">
-                  <span className="fs-small">Holding back</span>
+                  <span className="fs-small">Pride down</span>
                   <span className="fs-readout fs-row-score">{row.back.toFixed(1)}</span>
                 </span>
               </div>
@@ -212,7 +212,7 @@ function Results({ record, isShared }) {
             <div className="fs-kinds-head" role="row">
               <span className="fs-kinds-corner" role="cell" />
               <span className="fs-label" role="columnheader" data-trait="missional">Pride up</span>
-              <span className="fs-label" role="columnheader" data-trait="available">Holding back</span>
+              <span className="fs-label" role="columnheader" data-trait="available">Pride down</span>
             </div>
             {TWO_KINDS.map(([label, up, back]) => (
               <div className="fs-kinds-row" role="row" key={label}>

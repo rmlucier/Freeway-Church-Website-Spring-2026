@@ -62,7 +62,7 @@ function gapOf(a, b) {
 }
 
 function rowWord({ up, back }) {
-  if (gapOf(up, back) >= LEAN_GAP) return up > back ? 'Leans up' : 'Leans back';
+  if (gapOf(up, back) >= LEAN_GAP) return up > back ? 'Leans up' : 'Leans down';
   return up >= HIGH && back >= HIGH ? 'Both high' : 'Balanced';
 }
 
@@ -75,7 +75,7 @@ function leanFor(up, back) {
 
 function stepsFor(rows, teachable) {
   // One step per area, so two steps always mean two different places to work.
-  // On a tie, holding back wins: courage is the safer thing to lead with.
+  // On a tie, pride down wins: courage is the safer thing to lead with.
   const steps = rows
     .map((row) => {
       const side = row.up > row.back ? 'up' : 'back';
