@@ -42,7 +42,7 @@ export default function FlightSchoolLog() {
         description="Your Flight School results."
         noindex
       />
-      {log ? <Log log={log} isShared={Boolean(shared)} /> : <NoLog badLink={Boolean(fragment)} />}
+      {log ? <Log key={fragment} log={log} isShared={Boolean(shared)} /> : <NoLog badLink={Boolean(fragment)} />}
     </div>
   );
 }
@@ -69,6 +69,16 @@ function Log({ log, isShared }) {
   const results = useMemo(() => scoreAssessment(log.answers, log.names), [log]);
   const insights = useMemo(() => buildInsights(log, results), [log, results]);
   const lastTime = isShared ? null : log.history?.[log.history.length - 1];
+  const [doneSteps, setDoneSteps] = useState(log.doneSteps || {});
+  // Checked boxes are remembered on the person's own device only.
+  const toggleStep = (key) =>
+    isShared
+      ? undefined
+      : (checked) => {
+          const next = { ...doneSteps, [key]: checked };
+          setDoneSteps(next);
+          saveState({ ...loadState(), doneSteps: next });
+        };
   const written = OPEN_QUESTIONS.filter((q) => log.written[q.id]?.trim());
   const date = formatDate(log.finishedAt);
 
@@ -111,14 +121,6 @@ function Log({ log, isShared }) {
           )}
 
           <article className="fs-card fs-stack">
-            <h3>In your own words</h3>
-            <p className="fs-small">Your strongest statement</p>
-            <Quote text={insights.own.strength.text} label={insights.own.strength.label} />
-            <p className="fs-small">Most room to grow</p>
-            <Quote text={insights.own.room.text} label={insights.own.room.label} />
-          </article>
-
-          <article className="fs-card fs-stack">
             <h3>Your chain</h3>
             <p>Someone was sent to you. Now you're being sent.</p>
             <DiscipleshipChain helpers={log.names.helpers} sentTo={log.names.sentTo} />
@@ -147,7 +149,9 @@ function Log({ log, isShared }) {
                   </p>
                   <p>{trait.test}</p>
                 </div>
-                <NextStep>{copy.next}</NextStep>
+                <NextStep checked={Boolean(doneSteps[trait.id])} onToggle={toggleStep(trait.id)}>
+                  {copy.next}
+                </NextStep>
               </article>
             );
           })}
@@ -279,7 +283,7 @@ function Takeoff({ log }) {
         return;
       }
       setDelivery({ status: 'done', emailed: Boolean(reply.emailed) });
-      saveState({ ...log, profile: who, recorded: true, emailed: Boolean(reply.emailed) });
+      saveState({ ...loadState(), profile: who, recorded: true, emailed: Boolean(reply.emailed) });
     },
     [log]
   );

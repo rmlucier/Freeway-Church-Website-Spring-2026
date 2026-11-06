@@ -207,7 +207,7 @@ export function Counter({ n, total, label = 'Question' }) {
 }
 
 /** The pride-up / pride-down result. Only used where the bonus was taken. */
-export function BonusResult({ results }) {
+export function BonusResult({ results, checked, onToggle }) {
   const quadrant = QUADRANTS[results.quadrant];
   return (
     <article className="fs-card fs-stack" data-trait="teachable">
@@ -226,7 +226,9 @@ export function BonusResult({ results }) {
         Pride up is "I know better." Pride down is "I'm not good enough." Higher means more pride.
       </p>
       <p>{quadrant.text}</p>
-      <NextStep>{quadrant.next}</NextStep>
+      <NextStep checked={checked} onToggle={onToggle}>
+        {quadrant.next}
+      </NextStep>
     </article>
   );
 }
@@ -252,22 +254,34 @@ export function DiscipleshipChain({ helpers, sentTo }) {
   return (
     <div className="fs-chain">
       {link('Ahead of you', helpers?.trim())}
-      <span aria-hidden="true" className="fs-chain-arrow">&darr;</span>
+      <span aria-hidden="true" className="fs-chain-arrow"><i /></span>
       <div className="fs-chain-link you">
         <strong>You</strong>
       </div>
-      <span aria-hidden="true" className="fs-chain-arrow">&darr;</span>
+      <span aria-hidden="true" className="fs-chain-arrow"><i /></span>
       {link("You're helping", sentTo?.trim())}
     </div>
   );
 }
 
-export function NextStep({ children }) {
+/**
+ * A next step with a box to check off. Shared logs pass no `onToggle`, so a
+ * mentor sees an unchecked box they can't change.
+ */
+export function NextStep({ children, checked = false, onToggle }) {
   return (
-    <p className="fs-next">
-      <span>Next step</span>
-      {children}
-    </p>
+    <label className={`fs-next ${checked ? 'done' : ''}`}>
+      <input
+        type="checkbox"
+        checked={checked}
+        disabled={!onToggle}
+        onChange={(e) => onToggle?.(e.target.checked)}
+      />
+      <span className="fs-next-text">
+        <span className="fs-next-label">Next step</span>
+        {children}
+      </span>
+    </label>
   );
 }
 

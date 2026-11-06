@@ -18,6 +18,7 @@ export const emptyState = () => ({
   written: {},
   profile: {},
   history: [],
+  doneSteps: {},
   bonusStep: 0,
   bonusDoneAt: null,
   recorded: false,

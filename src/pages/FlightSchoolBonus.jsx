@@ -51,7 +51,11 @@ export default function FlightSchoolBonus() {
       return (
         <div className="fs-stack">
           <h1 style={{ color: 'var(--teachable)' }}>Your bonus results</h1>
-          <BonusResult results={results} />
+          <BonusResult
+            results={results}
+            checked={Boolean(state.doneSteps.bonus)}
+            onToggle={(checked) => update({ doneSteps: { ...state.doneSteps, bonus: checked } })}
+          />
           <Link to="/flight-school/log" className="fs-btn">
             Back to My Flight Log
           </Link>

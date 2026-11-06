@@ -46,27 +46,11 @@ function coreTest(traitId, answers, names) {
   return value >= 4 ? 'Getting there' : 'Not yet';
 }
 
-// Quotes reverse statements only when someone agreed with them, so a quote
-// always reads as what the person actually said about themselves.
-function ownWords(answers, alreadyQuoted = []) {
-  const items = Object.entries(CORE_ITEMS).filter(([id]) => !alreadyQuoted.includes(id));
-  const toQuote = ([id, item]) => ({ id, text: item.text, label: sliderLabel(answers[id]), value: answers[id] });
-  const regular = items.filter(([, item]) => !item.reverse).map(toQuote);
-  const reversed = items.filter(([, item]) => item.reverse).map(toQuote);
-
-  const strength = regular.reduce((best, q) => (q.value > best.value ? q : best));
-  const lowRegular = regular.reduce((low, q) => (q.value < low.value ? q : low));
-  const highReverse = reversed.reduce((high, q) => (q.value > high.value ? q : high));
-  const room = highReverse.value > 10 - lowRegular.value ? highReverse : lowRegular;
-  return { strength, room };
-}
-
 function sayDoGap(answers) {
   const gaps = SAY_DO_PAIRS.map((pair) => ({ ...pair, gap: answers[pair.say] - answers[pair.do] }));
   const biggest = gaps.reduce((best, g) => (g.gap > best.gap ? g : best));
   if (biggest.gap < SAY_DO_MIN_GAP) return null;
   return {
-    ids: [biggest.say, biggest.do],
     say: { text: CORE_ITEMS[biggest.say].text, label: sliderLabel(answers[biggest.say]) },
     do: { text: CORE_ITEMS[biggest.do].text, label: sliderLabel(answers[biggest.do]) },
   };
@@ -77,15 +61,13 @@ export function buildInsights(log, results) {
   const high = ranked[0];
   const low = ranked[ranked.length - 1];
   const spread = results.traits[high.id].score - results.traits[low.id].score;
-  const gap = sayDoGap(log.answers);
 
   return {
     stage: STAGE_NOTES[log.context.years] || null,
     pairing: spread >= PAIRING_MIN_GAP
       ? { high: traitById[high.id].name, low: traitById[low.id].name, text: PAIRINGS[`${high.id}>${low.id}`] }
       : null,
-    gap,
-    own: ownWords(log.answers, gap?.ids), // Don't quote the same statements twice.
+    gap: sayDoGap(log.answers),
     tests: Object.fromEntries(TRAITS.map((t) => [t.id, coreTest(t.id, log.answers, log.names)])),
   };
 }

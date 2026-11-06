@@ -273,8 +273,11 @@
 .fs-meter-bar i { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: var(--text); }
 .fs-score-row { display: flex; align-items: baseline; gap: 12px; }
 .fs-band { color: var(--trait); }
-.fs-next { border-left: 4px solid var(--trait); padding-left: 12px; font-weight: 700; }
-.fs-next span { font-weight: 400; color: var(--text-muted); display: block; font-size: 15px; }
+.fs-next { display: flex; align-items: flex-start; gap: 12px; min-height: 48px; border-left: 4px solid var(--trait); padding: 4px 0 4px 12px; font-weight: 700; cursor: pointer; }
+.fs-next input { flex: none; width: 28px; height: 28px; margin: 2px 0 0; accent-color: var(--trait); cursor: pointer; }
+.fs-next input:disabled { cursor: default; }
+.fs-next-label { display: block; font-size: 15px; font-weight: 400; color: var(--text-muted); }
+.fs-next.done .fs-next-text { color: var(--text-muted); }
 .fs-check { display: flex; align-items: flex-start; gap: 12px; min-height: 48px; cursor: pointer; }
 .fs-check input { width: 24px; height: 24px; flex: none; margin-top: 3px; accent-color: var(--accent); }
 .fs-alert { color: var(--alert); }
@@ -291,6 +294,18 @@
 .fs-chain-link.you { border-color: var(--accent); color: var(--accent); }
 .fs-chain-link.empty { border-style: dashed; }
 .fs-chain-link.empty strong { color: var(--alert); font-weight: 400; }
-.fs-chain-arrow { color: var(--text-muted); line-height: 1.2; }
+/* A small light moving down the chain, handed from one person to the next. */
+.fs-chain-arrow { position: relative; display: block; align-self: center; width: 4px; height: 32px; background: var(--panel-line); }
+.fs-chain-arrow i { position: absolute; left: -2px; top: 0; width: 8px; height: 8px; background: var(--accent); animation: fs-chain-move 1.6s steps(6) infinite; }
+.fs-chain-arrow:last-of-type i { animation-delay: 0.8s; }
+@keyframes fs-chain-move {
+  from { transform: translateY(-4px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  to { transform: translateY(28px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fs-chain-arrow i { animation: none; top: 12px; }
+}
 .fs-test { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
 .fs-test strong { color: var(--trait); white-space: nowrap; }
