@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import {
@@ -9,8 +9,9 @@ import {
   sliderLabel,
 } from '../flight-school/content.js';
 import { scoreAssessment } from '../flight-school/scoring.js';
-import { NextStep, ResultsWheel, TraitIcon, useFlash } from '../flight-school/parts.jsx';
-import { clearState, decodeLog, encodeLog, loadState } from '../flight-school/store.js';
+import { BonusResult, NextStep, ResultsBars, TraitIcon, useFlash } from '../flight-school/parts.jsx';
+import { postFlightSchool } from '../flight-school/api.js';
+import { LIMITS, clearState, decodeLog, encodeLog, loadState, saveState } from '../flight-school/store.js';
 import '../flight-school/flight-school.css';
 
 const churchEmail = () => ['info', 'freeway.church'].join('@');
@@ -65,7 +66,6 @@ function NoLog({ badLink }) {
 
 function Log({ log, isShared }) {
   const results = useMemo(() => scoreAssessment(log.answers, log.names), [log]);
-  const quadrant = QUADRANTS[results.quadrant];
   const written = OPEN_QUESTIONS.filter((q) => log.written[q.id]?.trim());
   const date = formatDate(log.finishedAt);
 
@@ -77,7 +77,7 @@ function Log({ log, isShared }) {
           {date && <p className="fs-muted">Finished {date}</p>}
           {isShared && <p>Someone trusted you with their results. Please keep them private.</p>}
           <div style={{ paddingTop: 16 }}>
-            <ResultsWheel traits={results.traits} />
+            <ResultsBars traits={results.traits} />
           </div>
         </div>
       </section>
@@ -119,26 +119,31 @@ function Log({ log, isShared }) {
             );
           })}
 
-          <article className="fs-card fs-stack" data-trait="teachable">
-            <h2>Teachable bonus</h2>
-            <h3 style={{ fontSize: 'var(--fs-h2)', color: 'var(--text)' }}>{quadrant.name}</h3>
-            <div className="fs-well" style={{ display: 'flex', justifyContent: 'space-around', gap: 16 }}>
-              <div>
-                <div className="fs-small">Pride up</div>
-                <div className="fs-readout">{results.prideUp.toFixed(1)}</div>
-              </div>
-              <div>
-                <div className="fs-small">Pride down</div>
-                <div className="fs-readout">{results.prideDown.toFixed(1)}</div>
-              </div>
-            </div>
-            <p className="fs-small">
-              Pride up is "I know better." Pride down is "I'm not good enough." Higher means more
-              pride.
-            </p>
-            <p>{quadrant.text}</p>
-            <NextStep>{quadrant.next}</NextStep>
-          </article>
+          {isShared
+            ? results.quadrant && (
+                <div className="fs-stack">
+                  <h2 style={{ color: 'var(--teachable)' }}>Teachable bonus</h2>
+                  <BonusResult results={results} />
+                </div>
+              )
+            : (
+                <article className="fs-card fs-stack" data-trait="teachable">
+                  <h2>Teachable bonus</h2>
+                  {results.quadrant ? (
+                    <p>
+                      You took the bonus. Your result: <strong>{QUADRANTS[results.quadrant].name}</strong>.
+                    </p>
+                  ) : (
+                    <p>
+                      Optional, about 3 minutes. See whether you lean toward "I know better" or "I'm
+                      not good enough." You'll get separate results.
+                    </p>
+                  )}
+                  <Link to="/flight-school/bonus" className="fs-btn fs-btn-2">
+                    {results.quadrant ? 'See Bonus Results' : 'Take the Bonus'}
+                  </Link>
+                </article>
+              )}
         </div>
       </section>
 
@@ -218,6 +223,41 @@ function Takeoff({ log }) {
   const navigate = useNavigate();
   const [includeWritten, setIncludeWritten] = useState(false);
   const [flash, showFlash] = useFlash();
+  const [profile, setProfile] = useState(log.profile || {});
+  const [delivery, setDelivery] = useState({
+    status: log.recorded ? 'done' : 'idle',
+    emailed: Boolean(log.emailed),
+  });
+
+  // Tell the church this person finished, and email their link. Runs once on
+  // arrival; if it fails, the form below lets them try again.
+  const record = useCallback(
+    async (who) => {
+      setDelivery({ status: 'sending', emailed: false });
+      const reply = await postFlightSchool({
+        action: 'finish',
+        name: who.name,
+        email: who.email || '',
+        helpers: log.names.helpers || '',
+        link: logLink(log),
+      });
+      if (!reply?.saved) {
+        setDelivery({ status: 'failed', emailed: false });
+        return;
+      }
+      setDelivery({ status: 'done', emailed: Boolean(reply.emailed) });
+      saveState({ ...log, profile: who, recorded: true, emailed: Boolean(reply.emailed) });
+    },
+    [log]
+  );
+
+  const autoRecorded = useRef(false);
+  useEffect(() => {
+    if (autoRecorded.current) return;
+    autoRecorded.current = true;
+    if (!log.recorded && log.profile?.name?.trim()) record(log.profile);
+  }, [log, record]);
+
   const hasWritten = OPEN_QUESTIONS.some((q) => log.written[q.id]?.trim());
   const canShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
 
@@ -249,10 +289,9 @@ function Takeoff({ log }) {
     window.location.href = `mailto:?subject=${encodeURIComponent('My Flight Log')}&body=${encodeURIComponent(body)}`;
   };
 
-  const tellPastor = () => {
-    const helpers = log.names.helpers?.trim() || '(no one named yet)';
-    const body = `Pastor Roy,\n\nI finished the Flight School assessment.\n\nMy name: \nWho's helping me grow: ${helpers}\n\nCan you help connect me with a mentor?`;
-    window.location.href = `mailto:${churchEmail()}?subject=${encodeURIComponent('I finished Flight School')}&body=${encodeURIComponent(body)}`;
+  const askAboutMentor = () => {
+    const body = `Pastor Roy,\n\nI finished Flight School. Can you help connect me with a mentor?\n\n${profile.name || ''}`;
+    window.location.href = `mailto:${churchEmail()}?subject=${encodeURIComponent('Flight School: finding a mentor')}&body=${encodeURIComponent(body)}`;
   };
 
   const retake = () => {
@@ -267,20 +306,80 @@ function Takeoff({ log }) {
       <div className="fs-read fs-stack">
         <h2 style={{ color: 'var(--accent)' }}>Cleared for Takeoff</h2>
         <p>
-          A next step is easier with someone beside you. Tell Pastor Roy you finished, and he can
-          help connect you with a mentor: someone ahead of you, helping you grow. This opens an email
-          for you to send. It only says that you finished and who you named as helping you grow, not
-          your answers or scores.
+          A next step is easier with someone beside you. A mentor is someone ahead of you, helping
+          you grow.
         </p>
-        <button type="button" className="fs-btn" onClick={tellPastor}>
-          Tell Pastor Roy
+
+        {delivery.status === 'done' && (
+          <p aria-live="polite">
+            Pastor Roy can see that you finished and who you named as helping you grow. He can't see
+            your answers or scores unless you share them.
+            {delivery.emailed && ' We also emailed you your private results link.'}
+          </p>
+        )}
+        {delivery.status === 'sending' && (
+          <p className="fs-muted" aria-live="polite">
+            Letting Pastor Roy know you finished...
+          </p>
+        )}
+        {(delivery.status === 'idle' || delivery.status === 'failed') && (
+          <form
+            className="fs-well fs-stack"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (profile.name?.trim()) record(profile);
+            }}
+          >
+            <p className={delivery.status === 'failed' ? 'fs-alert' : undefined} aria-live="polite">
+              {delivery.status === 'failed'
+                ? "That didn't go through. Please try again."
+                : 'Add your name so Pastor Roy knows you finished and who you named as helping you grow. He will not see your answers.'}
+            </p>
+            <div>
+              <label htmlFor="log-name" style={{ fontWeight: 700 }}>
+                Your name
+              </label>
+              <input
+                id="log-name"
+                className="fs-input"
+                type="text"
+                autoComplete="name"
+                maxLength={LIMITS.name}
+                required
+                value={profile.name || ''}
+                onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+              />
+            </div>
+            <div>
+              <label htmlFor="log-email" style={{ fontWeight: 700 }}>
+                Your email, to get your results link
+              </label>
+              <input
+                id="log-email"
+                className="fs-input"
+                type="email"
+                autoComplete="email"
+                maxLength={LIMITS.email}
+                value={profile.email || ''}
+                onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+              />
+            </div>
+            <button type="submit" className="fs-btn">
+              Send
+            </button>
+          </form>
+        )}
+
+        <button type="button" className="fs-btn fs-btn-2" onClick={askAboutMentor}>
+          Ask About a Mentor
         </button>
 
         <div className="fs-card fs-stack" style={{ marginTop: 32 }}>
           <h3>Keep or share your log</h3>
           <p>
-            Your results are saved on this device only. Email yourself the private link so you don't
-            lose them. Anyone with the link can see your results, so choose who gets it.
+            Your answers are saved on this device and inside your private link, not on our servers.
+            Keep the link so you don't lose them. Anyone with the link can see your results, so
+            choose who gets it.
           </p>
           {hasWritten && (
             <label className="fs-check">

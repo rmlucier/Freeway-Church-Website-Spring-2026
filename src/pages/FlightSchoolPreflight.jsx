@@ -2,8 +2,6 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import {
-  BONUS_ITEMS,
-  BONUS_ORDER,
   CORE_ITEMS,
   CORE_ORDER,
   NAME_PROMPTS,
@@ -14,9 +12,11 @@ import {
   YEARS_QUESTION,
   traitById,
 } from '../flight-school/content.js';
-import { Progress, RatingSlider } from '../flight-school/parts.jsx';
+import { Counter, RatingSlider } from '../flight-school/parts.jsx';
 import { LIMITS, loadState, saveState } from '../flight-school/store.js';
 import '../flight-school/flight-school.css';
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // The whole assessment as one flat list of screens.
 function buildSteps() {
@@ -29,21 +29,25 @@ function buildSteps() {
     steps.push({ type: 'item', id, text: CORE_ITEMS[id].text, section: 'core', n: i + 1, total: CORE_ORDER.length });
     if (NAME_PROMPTS[id]) steps.push({ type: 'names', ...NAME_PROMPTS[id], n: i + 1, total: CORE_ORDER.length });
   });
-  steps.push({ type: 'bonusIntro' });
-  BONUS_ORDER.forEach((id, i) => {
-    steps.push({ type: 'item', id, text: BONUS_ITEMS[id].text, section: 'bonus', n: i + 1, total: BONUS_ORDER.length });
-  });
   steps.push({ type: 'writtenIntro' });
-  OPEN_QUESTIONS.forEach((q, i) => {
-    steps.push({ type: 'written', ...q, n: i + 1, total: OPEN_QUESTIONS.length });
+  const written = OPEN_QUESTIONS.filter((q) => q.id !== 'b1'); // b1 goes with the bonus.
+  written.forEach((q, i) => {
+    steps.push({ type: 'written', ...q, n: i + 1, total: written.length });
   });
+  steps.push({ type: 'finish' });
   return steps;
 }
 
 export default function FlightSchoolPreflight() {
   const navigate = useNavigate();
   const steps = useMemo(buildSteps, []);
-  const [state, setState] = useState(loadState);
+  // The screen list changed once already, so resume at the first unanswered
+  // statement rather than trusting a saved position past it.
+  const [state, setState] = useState(() => {
+    const saved = loadState();
+    const missing = steps.findIndex((s) => s.type === 'item' && typeof saved.answers[s.id] !== 'number');
+    return missing >= 0 && missing < saved.step ? { ...saved, step: missing } : saved;
+  });
   const stepRef = useRef(null);
 
   const index = Math.min(state.step, steps.length - 1);
@@ -72,14 +76,15 @@ export default function FlightSchoolPreflight() {
     if (step.type === 'years') return typeof state.context.years === 'number';
     if (step.type === 'risk') return typeof state.context.risk === 'number';
     if (step.type === 'item') return typeof state.answers[step.id] === 'number';
+    if (step.type === 'finish') {
+      const email = state.profile.email?.trim() || '';
+      return Boolean(state.profile.name?.trim()) && (!email || EMAIL_PATTERN.test(email));
+    }
     return true;
   };
 
-  let inBonus = false;
-  if (step.type === 'bonusIntro' || step.section === 'bonus') inBonus = true;
-
   return (
-    <div className="fs" data-trait={inBonus ? 'teachable' : undefined}>
+    <div className="fs">
       <SEO
         path="/flight-school/preflight"
         title="Preflight | Flight School"
@@ -97,7 +102,7 @@ export default function FlightSchoolPreflight() {
       </div>
 
       <main className="fs-read fs-step" ref={stepRef} tabIndex={-1}>
-        <StepBody step={step} state={state} update={update} onFinish={finish} />
+        <StepBody step={step} state={state} update={update} onSkipWritten={() => goTo(steps.length - 1)} />
 
         {step.type !== 'intro' && (
           <div className="fs-nav">
@@ -128,18 +133,7 @@ function nextLabel(step, state, isLast) {
   return 'Next';
 }
 
-function Counter({ n, total, label = 'Question' }) {
-  return (
-    <div style={{ marginBottom: 24 }}>
-      <p className="fs-readout" style={{ fontSize: 28, marginBottom: 8 }}>
-        {label} {n} of {total}
-      </p>
-      <Progress total={total} done={n} />
-    </div>
-  );
-}
-
-function StepBody({ step, state, update, onFinish }) {
+function StepBody({ step, state, update, onSkipWritten }) {
   switch (step.type) {
     case 'intro':
       return (
@@ -192,7 +186,7 @@ function StepBody({ step, state, update, onFinish }) {
     case 'item':
       return (
         <div>
-          <Counter n={step.n} total={step.total} label={step.section === 'bonus' ? 'Bonus' : 'Question'} />
+          <Counter n={step.n} total={step.total} />
           <p className="fs-question" style={{ marginBottom: 16 }}>
             {step.text}
           </p>
@@ -227,31 +221,20 @@ function StepBody({ step, state, update, onFinish }) {
         </div>
       );
 
-    case 'bonusIntro':
-      return (
-        <div className="fs-stack">
-          <h1 style={{ color: 'var(--teachable)' }}>Teachable bonus</h1>
-          <p>
-            Great work. Here are 12 more statements. They look closer at how you respond when
-            someone tries to help you.
-          </p>
-        </div>
-      );
-
     case 'writtenIntro':
       return (
         <div className="fs-stack">
           <h1>For your mentor</h1>
           <p>
-            Last part. These 9 questions help a mentor know where to start. Write as much or as
+            Last part. These 8 questions help a mentor know where to start. Write as much or as
             little as you want, and skip any you like.
           </p>
           <p className="fs-muted">
             Your written answers stay on this device. They are only shared if you choose to include
             them.
           </p>
-          <button type="button" className="fs-btn fs-btn-2" onClick={onFinish}>
-            Skip to My Log
+          <button type="button" className="fs-btn fs-btn-2" onClick={onSkipWritten}>
+            Skip These
           </button>
         </div>
       );
@@ -273,6 +256,49 @@ function StepBody({ step, state, update, onFinish }) {
           <p className="fs-small" style={{ marginTop: 8 }}>
             {traitById[step.trait].name}
           </p>
+        </div>
+      );
+
+    case 'finish':
+      return (
+        <div className="fs-stack">
+          <h1>Almost done</h1>
+          <p>
+            Your answers are private. You choose who sees your results. Pastor Roy will see that you
+            finished and who you named as helping you grow, so he can help connect you with a mentor.
+          </p>
+          <div>
+            <label htmlFor="fs-name" style={{ fontWeight: 700 }}>
+              Your name
+            </label>
+            <input
+              id="fs-name"
+              className="fs-input"
+              type="text"
+              autoComplete="name"
+              maxLength={LIMITS.name}
+              value={state.profile.name || ''}
+              onChange={(e) => update({ profile: { ...state.profile, name: e.target.value } })}
+            />
+          </div>
+          <div>
+            <label htmlFor="fs-email" style={{ fontWeight: 700 }}>
+              Your email
+            </label>
+            <input
+              id="fs-email"
+              className="fs-input"
+              type="email"
+              autoComplete="email"
+              inputMode="email"
+              maxLength={LIMITS.email}
+              value={state.profile.email || ''}
+              onChange={(e) => update({ profile: { ...state.profile, email: e.target.value } })}
+            />
+            <p className="fs-small" style={{ marginTop: 8 }}>
+              We only use this to send your private results link.
+            </p>
+          </div>
         </div>
       );
 

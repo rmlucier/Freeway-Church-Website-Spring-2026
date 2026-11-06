@@ -42,8 +42,10 @@ export function scoreAssessment(answers, names = {}) {
           .map(([id, item]) => scored(item, answers[id]))
       )
     );
-  const prideUp = side('up');
-  const prideDown = side('down');
+  // The bonus is optional, so there may be nothing to score.
+  const tookBonus = Object.keys(BONUS_ITEMS).every((id) => typeof answers[id] === 'number');
+  const prideUp = tookBonus ? side('up') : null;
+  const prideDown = tookBonus ? side('down') : null;
 
   if (answers.M1 >= 7 && !names.sentTo?.trim()) {
     flags.push('Rated high on naming someone they are helping follow Jesus, but wrote no name.');
@@ -52,5 +54,11 @@ export function scoreAssessment(answers, names = {}) {
     flags.push('Rated high on someone helping them grow, but wrote no name.');
   }
 
-  return { traits, prideUp, prideDown, quadrant: quadrantFor(prideUp, prideDown), flags };
+  return {
+    traits,
+    prideUp,
+    prideDown,
+    quadrant: tookBonus ? quadrantFor(prideUp, prideDown) : null,
+    flags,
+  };
 }

@@ -1,8 +1,9 @@
 import { BONUS_ORDER, CORE_ORDER, OPEN_QUESTIONS, YEARS_CHOICES } from './content.js';
 
-// Everything a person answers stays in their own browser. Nothing is sent to a
-// server. Sharing works through a link whose data lives in the URL fragment
-// (#...), which browsers never send to the web server.
+// Answers stay in the person's own browser and are never stored on a server.
+// Sharing works through a link whose data lives in the URL fragment (#...),
+// which browsers don't send when a page loads. The only things saved centrally
+// are a name, the finish time and who they named as helping them grow.
 
 const KEY = 'flight-school.v1';
 const ITEM_IDS = [...CORE_ORDER, ...BONUS_ORDER];
@@ -15,6 +16,11 @@ export const emptyState = () => ({
   context: {},
   names: {},
   written: {},
+  profile: {},
+  bonusStep: 0,
+  bonusDoneAt: null,
+  recorded: false,
+  emailed: false,
   finishedAt: null,
 });
 
@@ -57,7 +63,8 @@ const fromBase64Url = (text) =>
 
 export function encodeLog(state, { includeWritten = false } = {}) {
   const payload = {
-    a: ITEM_IDS.map((id) => Math.round(state.answers[id] * 10)),
+    // The bonus is optional, so its slots hold -1 until it's taken.
+    a: ITEM_IDS.map((id) => (typeof state.answers[id] === 'number' ? Math.round(state.answers[id] * 10) : -1)),
     y: state.context.years ?? -1,
     r: Math.round((state.context.risk ?? 0) * 10),
     n: [state.names.sentTo || '', state.names.helpers || ''],
@@ -76,11 +83,13 @@ const clip = (value, max) => (typeof value === 'string' ? value.slice(0, max) : 
 export function decodeLog(fragment) {
   try {
     const p = JSON.parse(fromBase64Url(fragment));
-    if (!Array.isArray(p.a) || p.a.length !== ITEM_IDS.length || !p.a.every(isTenths)) return null;
+    if (!Array.isArray(p.a) || p.a.length !== ITEM_IDS.length) return null;
     const log = emptyState();
-    ITEM_IDS.forEach((id, i) => {
-      log.answers[id] = p.a[i] / 10;
-    });
+    for (const [i, id] of ITEM_IDS.entries()) {
+      const skippedBonus = p.a[i] === -1 && i >= CORE_ORDER.length;
+      if (!skippedBonus && !isTenths(p.a[i])) return null;
+      if (!skippedBonus) log.answers[id] = p.a[i] / 10;
+    }
     if (Number.isInteger(p.y) && p.y >= 0 && p.y < YEARS_CHOICES.length) log.context.years = p.y;
     if (isTenths(p.r)) log.context.risk = p.r / 10;
     if (Array.isArray(p.n)) {
@@ -99,4 +108,4 @@ export function decodeLog(fragment) {
   }
 }
 
-export const LIMITS = { names: MAX_NAMES, written: MAX_WRITTEN };
+export const LIMITS = { names: MAX_NAMES, written: MAX_WRITTEN, name: 120, email: 254 };

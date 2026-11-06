@@ -74,7 +74,7 @@ export const TRAITS = [
     test: "You know you're teachable when you'd rather be healed than be right.",
     results: {
       Low: {
-        text: "Correction may be bouncing off you. Some people argue it down. Others agree and then change nothing. Your bonus results show which way you lean. If shame is under it, that's not pride: God lifts up people who feel crushed.",
+        text: "Correction may be bouncing off you. Some people argue it down. Others agree and then change nothing. The optional bonus shows which way you lean. If shame is under it, that's not pride: God lifts up people who feel crushed.",
         next: 'Ask one person you trust, "What\'s one thing you see in me that I don\'t?" Then just listen.',
       },
       Middle: {
@@ -119,7 +119,7 @@ export const CORE_ITEMS = {
   F4: { trait: 'faithful', reverse: true, text: 'In the past year, fear of failing kept me from doing something I felt God wanted me to do.' },
   F5: { trait: 'faithful', text: 'I believe God would rather I try and fail than never try at all.' },
   F6: { trait: 'faithful', text: 'When I sense God asking me to do something, I usually act on it right away.' },
-  F7: { trait: 'faithful', reverse: true, text: "I am loyal to Jesus, but if I'm honest, I haven't done much with what He's given me." },
+  F7: { trait: 'faithful', reverse: true, text: "If I'm honest, I haven't done much with what God has given me." },
   F8: { trait: 'faithful', text: "When a step of faith doesn't go well, I try again instead of quitting." },
 
   A1: { trait: 'available', reverse: true, text: "There is an area of my life where I say yes to God but keep a backup plan in case He doesn't come through." },

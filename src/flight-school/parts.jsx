@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TRAITS, sliderLabel } from './content.js';
+import { QUADRANTS, TRAITS, sliderLabel } from './content.js';
 
 // Line-art aviation icons from the style guide: 2px strokes, one color, no
 // fills, square caps. Decorative, so the trait name always sits beside them.
@@ -116,56 +116,107 @@ export function RatingSlider({ label, value, onChange }) {
   );
 }
 
-const WHEEL_ORDER = ['faithful', 'available', 'teachable', 'missional'];
-const C = 160;
-const MAX_R = 150;
+const BAR_SEGMENTS = 20;
 
-function wedge(trait, radius) {
-  const points = {
-    faithful: [[C - radius, C], [C, C - radius]],
-    available: [[C, C - radius], [C + radius, C]],
-    teachable: [[C + radius, C], [C, C + radius]],
-    missional: [[C, C + radius], [C - radius, C]],
-  }[trait];
-  return `M${C} ${C}L${points[0].join(' ')}A${radius} ${radius} 0 0 1 ${points[1].join(' ')}Z`;
-}
-
-/** Four equal segments filled from the center by score, named outside the wheel. */
-export function ResultsWheel({ traits }) {
-  const summary = TRAITS.map((t) => `${t.name} ${traits[t.id].score.toFixed(1)}`).join(', ');
-  const label = (id) => {
-    const trait = TRAITS.find((t) => t.id === id);
-    return (
-      <div data-trait={id}>
-        <div className="fs-label fs-wheel-label">{trait.name}</div>
-        <div className="fs-readout">{traits[id].score.toFixed(1)}</div>
-      </div>
-    );
-  };
+/**
+ * Level meters sorted strongest to weakest, so the eye lands on what matters:
+ * where you're strong and where to start. Ticks mark the Middle and High bands.
+ */
+export function ResultsBars({ traits }) {
+  const ranked = [...TRAITS].sort((a, b) => traits[b.id].score - traits[a.id].score);
+  const strongest = ranked[0];
+  const startHere = ranked[ranked.length - 1];
+  const allEven = traits[strongest.id].score === traits[startHere.id].score;
 
   return (
-    <div>
-      <div className="fs-wheel-labels" style={{ marginBottom: 8 }}>
-        {label('faithful')}
-        {label('available')}
-      </div>
-      <svg className="fs-wheel" viewBox="0 0 320 320" role="img" aria-label={`Your scores: ${summary}`}>
-        {WHEEL_ORDER.map((id) => (
-          <path key={id} d={wedge(id, MAX_R)} fill="var(--panel-dark)" stroke="var(--panel-line)" strokeWidth="2" />
-        ))}
-        {WHEEL_ORDER.map((id) => (
-          <path
-            key={id}
-            d={wedge(id, Math.max(traits[id].score, 0) * (MAX_R / 10))}
-            style={{ fill: `var(--${id})` }}
-          />
-        ))}
-      </svg>
-      <div className="fs-wheel-labels" style={{ marginTop: 8 }}>
-        {label('missional')}
-        {label('teachable')}
-      </div>
+    <div className="fs-stack">
+      {!allEven && (
+        <div className="fs-read-out">
+          <p>
+            <span className="fs-small">Strongest</span>
+            <br />
+            <span className="fs-label" data-trait={strongest.id} style={{ color: 'var(--trait)' }}>
+              {strongest.name}
+            </span>
+          </p>
+          <p>
+            <span className="fs-small">Start here</span>
+            <br />
+            <span className="fs-label" data-trait={startHere.id} style={{ color: 'var(--trait)' }}>
+              {startHere.name}
+            </span>
+          </p>
+        </div>
+      )}
+      {ranked.map((trait) => {
+        const { score, band } = traits[trait.id];
+        return (
+          <div key={trait.id} data-trait={trait.id}>
+            <div className="fs-bar-head">
+              <span className="fs-label" style={{ color: 'var(--trait)' }}>
+                {trait.name}
+              </span>
+              <span>
+                <span className="fs-small">{band} </span>
+                <span className="fs-readout">{score.toFixed(1)}</span>
+              </span>
+            </div>
+            <div
+              className="fs-meter-bar"
+              role="img"
+              aria-label={`${trait.name}: ${score.toFixed(1)} out of 10, ${band}`}
+            >
+              {Array.from({ length: BAR_SEGMENTS }, (_, i) => (
+                <span key={i} className={score >= (i + 1) / 2 ? 'on' : ''} />
+              ))}
+              <i style={{ left: '50%' }} />
+              <i style={{ left: '75%' }} />
+            </div>
+          </div>
+        );
+      })}
+      <p className="fs-small fs-ends">
+        <span>0</span>
+        <span>Low under 5.0 &middot; High from 7.5</span>
+        <span>10</span>
+      </p>
     </div>
+  );
+}
+
+export function Counter({ n, total, label = 'Question' }) {
+  return (
+    <div style={{ marginBottom: 24 }}>
+      <p className="fs-readout" style={{ fontSize: 28, marginBottom: 8 }}>
+        {label} {n} of {total}
+      </p>
+      <Progress total={total} done={n} />
+    </div>
+  );
+}
+
+/** The pride-up / pride-down result. Only used where the bonus was taken. */
+export function BonusResult({ results }) {
+  const quadrant = QUADRANTS[results.quadrant];
+  return (
+    <article className="fs-card fs-stack" data-trait="teachable">
+      <h2>{quadrant.name}</h2>
+      <div className="fs-well" style={{ display: 'flex', justifyContent: 'space-around', gap: 16 }}>
+        <div>
+          <div className="fs-small">Pride up</div>
+          <div className="fs-readout">{results.prideUp.toFixed(1)}</div>
+        </div>
+        <div>
+          <div className="fs-small">Pride down</div>
+          <div className="fs-readout">{results.prideDown.toFixed(1)}</div>
+        </div>
+      </div>
+      <p className="fs-small">
+        Pride up is "I know better." Pride down is "I'm not good enough." Higher means more pride.
+      </p>
+      <p>{quadrant.text}</p>
+      <NextStep>{quadrant.next}</NextStep>
+    </article>
   );
 }
 

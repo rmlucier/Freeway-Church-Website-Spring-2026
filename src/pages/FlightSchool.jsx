@@ -17,7 +17,7 @@ const STEPS = [
   },
   {
     label: 'Cleared for Takeoff',
-    body: 'Share your results with someone you trust, and let us help connect you with a mentor.',
+    body: 'Get your private results link, share it with someone you trust, and let us help connect you with a mentor.',
   },
 ];
 
@@ -119,8 +119,8 @@ export default function FlightSchool() {
         <div className="fs-read fs-stack">
           <h2 style={{ color: 'var(--accent)' }}>Your answers are private</h2>
           <p>
-            Your answers stay on your phone or computer. We don't collect them. You choose who sees
-            your results.
+            Your answers are private. You choose who sees your results. Pastor Roy will see that you
+            finished and who you named as helping you grow, so he can help connect you with a mentor.
           </p>
           <p>
             Written for high school students through long-time members. If you're still exploring
