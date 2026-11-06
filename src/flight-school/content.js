@@ -127,9 +127,9 @@ export const CORE_ITEMS = {
   A3: { trait: 'available', reverse: true, text: 'My schedule is so full that I would have a hard time saying yes if God asked me to do something new.' },
   A4: { trait: 'available', text: 'In the past month, I sensed the Holy Spirit leading me to do something specific, and I did it.' },
   A5: { trait: 'available', text: 'Most mornings, I give my day to God and ask Him to lead it.' },
-  A6: { trait: 'available', text: 'I can describe where God has placed me right now (school, work, home, or my street) and what He wants me to do there.' },
+  A6: { trait: 'available', text: 'I know what God wants me to do in the place He has put me right now (school, work, home, or my street).' },
   A7: { trait: 'available', reverse: true, text: 'When I have a few free minutes, I usually reach for my phone instead of turning my attention to God.' },
-  A8: { trait: 'available', text: 'In the past month, I changed my plans to help someone or to follow what God was asking.' },
+  A8: { trait: 'available', text: 'In the past month, I changed my plans because I sensed God asking me to.' },
 
   T1: { trait: 'teachable', text: 'In the past few months, someone corrected me and I changed something because of it.' },
   T2: { trait: 'teachable', reverse: true, text: "When someone points out a problem in my life, my first move is to explain why they're wrong." },
@@ -138,7 +138,7 @@ export const CORE_ITEMS = {
   T5: { trait: 'teachable', text: 'When I read or hear a Bible passage I already know, I still expect God to show me something new.' },
   T6: { trait: 'teachable', text: 'If I sense God asking me to do something simple, I do it even before it makes sense to me.' },
   T7: { trait: 'teachable', reverse: true, text: "I tell myself I'm not good enough for God to use me, so I don't try what He asks." },
-  T8: { trait: 'teachable', text: 'I have at least one person in my life who can tell me hard truths, and they have done it in the past few months.' },
+  T8: { trait: 'teachable', text: 'In the past few months, someone I trust told me a hard truth about myself.' },
 
   M1: { trait: 'missional', text: "I can name at least one person God has put in my life who I'm trying to help know or follow Jesus." },
   M2: { trait: 'missional', reverse: true, text: 'Helping people follow Jesus is mostly the job of pastors and church leaders.' },
