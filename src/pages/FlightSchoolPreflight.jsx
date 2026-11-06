@@ -141,7 +141,7 @@ function StepBody({ step, state, update, onSkipWritten }) {
           <h1>Preflight</h1>
           <p>{OPENING_LINE}</p>
           <p className="fs-muted">
-            About 10 minutes. Your place is saved on this device, so you can stop and come back.
+            About 15 minutes. Your place is saved on this device, so you can stop and come back.
           </p>
         </div>
       );
