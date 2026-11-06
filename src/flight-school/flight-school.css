@@ -309,3 +309,15 @@
 }
 .fs-test { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
 .fs-test strong { color: var(--trait); white-space: nowrap; }
+
+/* Sermon link on each trait */
+.fs-message {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  color: var(--trait);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 700;
+}
+.fs-message:hover { color: var(--text); }

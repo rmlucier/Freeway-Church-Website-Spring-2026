@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import { TRAITS } from '../flight-school/content.js';
-import { TraitIcon } from '../flight-school/parts.jsx';
+import { MessageLink, TraitIcon } from '../flight-school/parts.jsx';
 import { loadState } from '../flight-school/store.js';
 import '../flight-school/flight-school.css';
 
@@ -92,6 +92,7 @@ export default function FlightSchool() {
                 <p className="fs-muted">
                   <em>{trait.test}</em>
                 </p>
+                <MessageLink trait={trait} />
               </article>
             ))}
           </div>

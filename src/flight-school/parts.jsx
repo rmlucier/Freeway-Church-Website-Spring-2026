@@ -57,6 +57,16 @@ export function TraitIcon({ trait }) {
   );
 }
 
+/** Opens the sermon on this trait from the series, at the start of the message. */
+export function MessageLink({ trait }) {
+  return (
+    <a className="fs-message" href={trait.message} target="_blank" rel="noopener noreferrer">
+      Watch the {trait.name} message
+      <span className="sr-only"> (opens YouTube)</span>
+    </a>
+  );
+}
+
 /** Segmented bar, like a radio level meter. */
 export function Progress({ total, done }) {
   return (

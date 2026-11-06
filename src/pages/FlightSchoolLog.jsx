@@ -8,7 +8,7 @@ import {
   sliderLabel,
 } from '../flight-school/content.js';
 import { scoreAssessment } from '../flight-school/scoring.js';
-import { DiscipleshipChain, NextStep, Quote, ResultsBars, TraitIcon, useFlash } from '../flight-school/parts.jsx';
+import { DiscipleshipChain, MessageLink, NextStep, Quote, ResultsBars, TraitIcon, useFlash } from '../flight-school/parts.jsx';
 import { buildInsights, retakeDate } from '../flight-school/insights.js';
 import { postFlightSchool } from '../flight-school/api.js';
 import { LIMITS, decodeLog, emptyState, encodeLog, loadState, saveState } from '../flight-school/store.js';
@@ -151,6 +151,7 @@ function Log({ log, isShared }) {
                 <NextStep checked={Boolean(doneSteps[trait.id])} onToggle={toggleStep(trait.id)}>
                   {copy.next}
                 </NextStep>
+                <MessageLink trait={trait} />
               </article>
             );
           })}
