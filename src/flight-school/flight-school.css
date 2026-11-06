@@ -281,3 +281,16 @@
 
 .fs-section { padding-block: 48px; }
 .fs-section-deep { background: var(--bg-deep); }
+
+/* Insights */
+.fs-quote { margin: 0; border-left: 4px solid var(--trait); padding-left: 12px; }
+.fs-quote p:first-child { font-weight: 700; }
+.fs-chain { display: flex; flex-direction: column; align-items: stretch; gap: 4px; text-align: center; }
+.fs-chain-link { background: var(--panel-dark); border: 2px solid var(--panel-line); padding: 12px; overflow-wrap: anywhere; }
+.fs-chain-link span { display: block; }
+.fs-chain-link.you { border-color: var(--accent); color: var(--accent); }
+.fs-chain-link.empty { border-style: dashed; }
+.fs-chain-link.empty strong { color: var(--alert); font-weight: 400; }
+.fs-chain-arrow { color: var(--text-muted); line-height: 1.2; }
+.fs-test { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.fs-test strong { color: var(--trait); white-space: nowrap; }

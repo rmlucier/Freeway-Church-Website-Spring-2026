@@ -9,9 +9,10 @@ import {
   sliderLabel,
 } from '../flight-school/content.js';
 import { scoreAssessment } from '../flight-school/scoring.js';
-import { BonusResult, NextStep, ResultsBars, TraitIcon, useFlash } from '../flight-school/parts.jsx';
+import { BonusResult, DiscipleshipChain, NextStep, Quote, ResultsBars, TraitIcon, useFlash } from '../flight-school/parts.jsx';
+import { buildInsights, retakeDate } from '../flight-school/insights.js';
 import { postFlightSchool } from '../flight-school/api.js';
-import { LIMITS, clearState, decodeLog, encodeLog, loadState, saveState } from '../flight-school/store.js';
+import { LIMITS, decodeLog, emptyState, encodeLog, loadState, saveState } from '../flight-school/store.js';
 import '../flight-school/flight-school.css';
 
 const churchEmail = () => ['info', 'freeway.church'].join('@');
@@ -66,6 +67,8 @@ function NoLog({ badLink }) {
 
 function Log({ log, isShared }) {
   const results = useMemo(() => scoreAssessment(log.answers, log.names), [log]);
+  const insights = useMemo(() => buildInsights(log, results), [log, results]);
+  const lastTime = isShared ? null : log.history?.[log.history.length - 1];
   const written = OPEN_QUESTIONS.filter((q) => log.written[q.id]?.trim());
   const date = formatDate(log.finishedAt);
 
@@ -77,8 +80,49 @@ function Log({ log, isShared }) {
           {date && <p className="fs-muted">Finished {date}</p>}
           {isShared && <p>Someone trusted you with their results. Please keep them private.</p>}
           <div style={{ paddingTop: 16 }}>
-            <ResultsBars traits={results.traits} />
+            <ResultsBars traits={results.traits} previous={lastTime?.scores} />
           </div>
+          {lastTime && <p className="fs-small">Compared with {formatDate(lastTime.at)}.</p>}
+          {insights.stage && !isShared && <p>{insights.stage}</p>}
+        </div>
+      </section>
+
+      <section className="fs-section">
+        <div className="fs-read fs-stack">
+          <h2 style={{ color: 'var(--accent)' }}>What stands out</h2>
+
+          {insights.pairing && (
+            <article className="fs-card fs-stack">
+              <h3>
+                {insights.pairing.high} over {insights.pairing.low}
+              </h3>
+              <p>{insights.pairing.text}</p>
+            </article>
+          )}
+
+          {insights.gap && (
+            <article className="fs-card fs-stack">
+              <h3>Believing and doing</h3>
+              <p>Here's the biggest gap between what you believe and what you've been doing.</p>
+              <Quote text={insights.gap.say.text} label={insights.gap.say.label} />
+              <Quote text={insights.gap.do.text} label={insights.gap.do.label} />
+              <p>That gap isn't a failure. It's a good place to start.</p>
+            </article>
+          )}
+
+          <article className="fs-card fs-stack">
+            <h3>In your own words</h3>
+            <p className="fs-small">Your strongest statement</p>
+            <Quote text={insights.own.strength.text} label={insights.own.strength.label} />
+            <p className="fs-small">Most room to grow</p>
+            <Quote text={insights.own.room.text} label={insights.own.room.label} />
+          </article>
+
+          <article className="fs-card fs-stack">
+            <h3>Your chain</h3>
+            <p>Someone was sent to you. Now you're being sent.</p>
+            <DiscipleshipChain helpers={log.names.helpers} sentTo={log.names.sentTo} />
+          </article>
         </div>
       </section>
 
@@ -96,25 +140,14 @@ function Log({ log, isShared }) {
                   <span className="fs-label fs-band">{band}</span>
                 </div>
                 <p>{copy.text}</p>
+                <div className="fs-well">
+                  <p className="fs-test">
+                    <span className="fs-small">The test</span>
+                    <strong>{insights.tests[trait.id]}</strong>
+                  </p>
+                  <p>{trait.test}</p>
+                </div>
                 <NextStep>{copy.next}</NextStep>
-                {trait.id === 'missional' && (log.names.sentTo?.trim() || log.names.helpers?.trim()) && (
-                  <div className="fs-well fs-stack">
-                    {log.names.sentTo?.trim() && (
-                      <p>
-                        <span className="fs-small">Who you're helping</span>
-                        <br />
-                        {log.names.sentTo}
-                      </p>
-                    )}
-                    {log.names.helpers?.trim() && (
-                      <p>
-                        <span className="fs-small">Who's helping you grow</span>
-                        <br />
-                        {log.names.helpers}
-                      </p>
-                    )}
-                  </div>
-                )}
               </article>
             );
           })}
@@ -259,6 +292,7 @@ function Takeoff({ log }) {
   }, [log, record]);
 
   const hasWritten = OPEN_QUESTIONS.some((q) => log.written[q.id]?.trim());
+  const results = useMemo(() => scoreAssessment(log.answers, log.names), [log]);
   const canShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
 
   const copy = async () => {
@@ -294,11 +328,16 @@ function Takeoff({ log }) {
     window.location.href = `mailto:${churchEmail()}?subject=${encodeURIComponent('Flight School: finding a mentor')}&body=${encodeURIComponent(body)}`;
   };
 
+  // Keeps this round's scores on the device so the next log can show what moved.
   const retake = () => {
-    if (window.confirm('Start over? This clears your answers from this device.')) {
-      clearState();
-      navigate('/flight-school/preflight');
-    }
+    if (!window.confirm('Start a new assessment? Your scores stay here to compare. Your written answers will be cleared, so save your link first.')) return;
+    const scores = Object.fromEntries(TRAITS.map((t) => [t.id, results.traits[t.id].score]));
+    saveState({
+      ...emptyState(),
+      profile: { name: profile.name || '' },
+      history: [...(log.history || []), { at: log.finishedAt, scores }],
+    });
+    navigate('/flight-school/preflight');
   };
 
   return (
@@ -409,9 +448,16 @@ function Takeoff({ log }) {
           </p>
         </div>
 
-        <button type="button" className="fs-link" style={{ background: 'none', border: 0, padding: '12px 0', font: 'inherit', cursor: 'pointer' }} onClick={retake}>
-          Start over
-        </button>
+        <div className="fs-card fs-stack" style={{ marginTop: 32 }}>
+          <h3>Come back and compare</h3>
+          <p>
+            Growth takes time. Retake this around {retakeDate(log.finishedAt)} on this device, and
+            your next log will show what moved.
+          </p>
+          <button type="button" className="fs-btn fs-btn-2" onClick={retake}>
+            Retake
+          </button>
+        </div>
       </div>
     </section>
   );

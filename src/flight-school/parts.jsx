@@ -118,11 +118,17 @@ export function RatingSlider({ label, value, onChange }) {
 
 const BAR_SEGMENTS = 20;
 
+const formatChange = (change) => {
+  const rounded = Math.round(change * 10) / 10;
+  if (rounded === 0) return 'Same';
+  return `${rounded > 0 ? 'Up' : 'Down'} ${Math.abs(rounded).toFixed(1)}`;
+};
+
 /**
  * Level meters sorted strongest to weakest, so the eye lands on what matters:
  * where you're strong and where to start. Ticks mark the Middle and High bands.
  */
-export function ResultsBars({ traits }) {
+export function ResultsBars({ traits, previous }) {
   const ranked = [...TRAITS].sort((a, b) => traits[b.id].score - traits[a.id].score);
   const strongest = ranked[0];
   const startHere = ranked[ranked.length - 1];
@@ -157,6 +163,11 @@ export function ResultsBars({ traits }) {
                 {trait.name}
               </span>
               <span>
+                {previous && (
+                  <span className="fs-small">
+                    {formatChange(score - previous[trait.id])}{' '}
+                  </span>
+                )}
                 <span className="fs-small">{band} </span>
                 <span className="fs-readout">{score.toFixed(1)}</span>
               </span>
@@ -217,6 +228,37 @@ export function BonusResult({ results }) {
       <p>{quadrant.text}</p>
       <NextStep>{quadrant.next}</NextStep>
     </article>
+  );
+}
+
+/** Shows a statement back to the person with the answer they gave. */
+export function Quote({ label, text }) {
+  return (
+    <blockquote className="fs-quote">
+      <p>"{text}"</p>
+      <p className="fs-small">You said: {label}</p>
+    </blockquote>
+  );
+}
+
+/** Who's ahead of you, you, and who you're helping. A blank spot is the point. */
+export function DiscipleshipChain({ helpers, sentTo }) {
+  const link = (role, name) => (
+    <div className={`fs-chain-link ${name ? '' : 'empty'}`}>
+      <span className="fs-small">{role}</span>
+      <strong>{name || 'No one named yet'}</strong>
+    </div>
+  );
+  return (
+    <div className="fs-chain">
+      {link('Ahead of you', helpers?.trim())}
+      <span aria-hidden="true" className="fs-chain-arrow">&darr;</span>
+      <div className="fs-chain-link you">
+        <strong>You</strong>
+      </div>
+      <span aria-hidden="true" className="fs-chain-arrow">&darr;</span>
+      {link("You're helping", sentTo?.trim())}
+    </div>
   );
 }
 

@@ -1,4 +1,4 @@
-import { BONUS_ORDER, CORE_ORDER, OPEN_QUESTIONS, YEARS_CHOICES } from './content.js';
+import { BONUS_ORDER, LINK_CORE_ORDER, OPEN_QUESTIONS, YEARS_CHOICES } from './content.js';
 
 // Answers stay in the person's own browser and are never stored on a server.
 // Sharing works through a link whose data lives in the URL fragment (#...),
@@ -6,7 +6,7 @@ import { BONUS_ORDER, CORE_ORDER, OPEN_QUESTIONS, YEARS_CHOICES } from './conten
 // are a name, the finish time and who they named as helping them grow.
 
 const KEY = 'flight-school.v1';
-const ITEM_IDS = [...CORE_ORDER, ...BONUS_ORDER];
+const ITEM_IDS = [...LINK_CORE_ORDER, ...BONUS_ORDER];
 const MAX_NAMES = 200;
 const MAX_WRITTEN = 2000;
 
@@ -17,6 +17,7 @@ export const emptyState = () => ({
   names: {},
   written: {},
   profile: {},
+  history: [],
   bonusStep: 0,
   bonusDoneAt: null,
   recorded: false,
@@ -86,7 +87,7 @@ export function decodeLog(fragment) {
     if (!Array.isArray(p.a) || p.a.length !== ITEM_IDS.length) return null;
     const log = emptyState();
     for (const [i, id] of ITEM_IDS.entries()) {
-      const skippedBonus = p.a[i] === -1 && i >= CORE_ORDER.length;
+      const skippedBonus = p.a[i] === -1 && i >= LINK_CORE_ORDER.length;
       if (!skippedBonus && !isTenths(p.a[i])) return null;
       if (!skippedBonus) log.answers[id] = p.a[i] / 10;
     }

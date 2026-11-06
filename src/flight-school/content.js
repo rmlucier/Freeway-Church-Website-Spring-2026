@@ -150,18 +150,28 @@ export const CORE_ITEMS = {
   M8: { trait: 'missional', text: "Most weeks, I pray by name for people in my life who don't follow Jesus yet." },
 };
 
-// Core items are mixed across traits so people can't spot the "right" answer.
-// The order is fixed so everyone answers in the same sequence, and no two
-// statements from the same trait sit next to each other.
+// The subject keeps changing so people can't spot the "right" answer, and no two
+// neighbors share a trait. Each stretch keeps one kind of statement, so the
+// thinking stays steady: what you did, then habits, then where you are now, then
+// what you believe. Beliefs come last so actions are answered before ideals.
 export const CORE_ORDER = [
-  'F3', 'M3', 'A5', 'T1',
-  'F2', 'A3', 'M4', 'T5',
-  'A1', 'T2', 'F5', 'M1',
-  'T6', 'M2', 'A4', 'F1',
-  'M5', 'F4', 'T8', 'A2',
-  'T3', 'A6', 'F6', 'M6',
-  'A7', 'M7', 'T4', 'F8',
-  'M8', 'F7', 'A8', 'T7',
+  // What you did
+  'M3', 'F1', 'T1', 'A4', 'F4', 'T8', 'A8', 'T4',
+  // Your habits
+  'A2', 'F6', 'T2', 'M8', 'A5', 'F2', 'T3', 'A7', 'F8', 'T6',
+  // Where you are right now
+  'F3', 'M1', 'A6', 'M5', 'A1', 'T7', 'A3', 'M7', 'F7',
+  // What you believe
+  'M4', 'T5', 'M6', 'F5', 'M2',
+];
+
+// The order answers are packed into private links. Links already sent depend on
+// this, so never change it, even when CORE_ORDER changes.
+export const LINK_CORE_ORDER = [
+  'F3', 'M3', 'A5', 'T1', 'F2', 'A3', 'M4', 'T5',
+  'A1', 'T2', 'F5', 'M1', 'T6', 'M2', 'A4', 'F1',
+  'M5', 'F4', 'T8', 'A2', 'T3', 'A6', 'F6', 'M6',
+  'A7', 'M7', 'T4', 'F8', 'M8', 'F7', 'A8', 'T7',
 ];
 
 export const BONUS_ITEMS = {
