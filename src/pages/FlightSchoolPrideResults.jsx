@@ -208,25 +208,23 @@ function Results({ record, isShared }) {
       <section className="fs-section">
         <div className="fs-read fs-stack">
           <h2 style={{ color: 'var(--trait)' }}>Two kinds of pride</h2>
-          <table className="fs-kinds">
-            <thead>
-              <tr>
-                <td />
-                <th scope="col" data-trait="missional">Pride up</th>
-                <th scope="col" data-trait="available">Holding back (pride down)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {TWO_KINDS.map(([label, up, back]) => (
-                <tr key={label}>
-                  <th scope="row">{label}</th>
-                  <td data-side="Pride up">{up}</td>
-                  <td data-side="Holding back">{back}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p style={{ fontWeight: 700 }}>{TWO_KINDS_BOTTOM_LINE}</p>
+          <div className="fs-kinds" role="table" aria-label="Two kinds of pride, side by side">
+            <div className="fs-kinds-head" role="row">
+              <span className="fs-kinds-corner" role="cell" />
+              <span className="fs-label" role="columnheader" data-trait="missional">Pride up</span>
+              <span className="fs-label" role="columnheader" data-trait="available">Holding back</span>
+            </div>
+            {TWO_KINDS.map(([label, up, back]) => (
+              <div className="fs-kinds-row" role="row" key={label}>
+                <strong role="rowheader">{label}</strong>
+                <span role="cell" data-trait="missional">{up}</span>
+                <span role="cell" data-trait="available">{back}</span>
+              </div>
+            ))}
+          </div>
+          <div className="fs-well">
+            <p style={{ fontWeight: 700 }}>{TWO_KINDS_BOTTOM_LINE}</p>
+          </div>
         </div>
       </section>
 
