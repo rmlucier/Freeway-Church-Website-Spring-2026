@@ -352,3 +352,24 @@
   .fs-hero .fs-plane { animation: none; transform: translateX(calc(40 * var(--s) * 1px)); }
 }
 .fs-jingle { display: flex; justify-content: center; padding-block: 16px; }
+
+/* Pride Check */
+.fs-row-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.fs-row-scores { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+.fs-row-scores > span > span { display: block; }
+.fs-row-score { font-size: 40px; color: var(--trait); }
+.fs-strengths { margin: 0; padding-left: 24px; list-style: square; }
+.fs-strengths li + li { margin-top: 8px; }
+.fs-kinds { width: 100%; border-collapse: collapse; }
+.fs-kinds th { text-align: left; vertical-align: top; }
+.fs-kinds thead th { font-family: var(--font-display); font-size: var(--fs-label); font-weight: 400; line-height: 1.5; color: var(--trait); padding: 8px; }
+.fs-kinds tbody th { font-size: 15px; font-weight: 700; color: var(--text-muted); padding: 12px 8px; }
+.fs-kinds tbody td { padding: 12px 8px; vertical-align: top; }
+.fs-kinds tbody tr { border-top: 2px solid var(--panel-line); }
+@media (max-width: 639px) {
+  .fs-kinds thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .fs-kinds tbody tr { display: block; padding-block: 12px; }
+  .fs-kinds tbody th, .fs-kinds tbody td { display: block; padding: 0; }
+  .fs-kinds tbody td { margin-top: 8px; }
+  .fs-kinds tbody td::before { content: attr(data-side); display: block; font-size: 15px; color: var(--text-muted); }
+}

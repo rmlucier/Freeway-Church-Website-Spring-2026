@@ -39,9 +39,9 @@ async function sendResultsEmail({ to, name, link }) {
     body: JSON.stringify({
       from: process.env.FS_EMAIL_FROM || 'Freeway Church <info@freeway.church>',
       to: [to],
-      subject: 'Your Flight Log',
+      subject: 'Your Preflight Results',
       text: `Hi ${name},\n\nThanks for taking Flight School. Here is your private results link:\n\n${link}\n\nAnyone with this link can see your results, so choose who gets it.\n\nFreeway Church`,
-      html: `<p>Hi ${escapeHtml(name)},</p><p>Thanks for taking Flight School. Here is your private results link:</p><p><a href="${escapeHtml(link)}">Open Your Flight Log</a></p><p>Anyone with this link can see your results, so choose who gets it.</p><p>Freeway Church</p>`,
+      html: `<p>Hi ${escapeHtml(name)},</p><p>Thanks for taking Flight School. Here is your private results link:</p><p><a href="${escapeHtml(link)}">Open Your Preflight Results</a></p><p>Anyone with this link can see your results, so choose who gets it.</p><p>Freeway Church</p>`,
     }),
   });
   return response.ok;
@@ -49,16 +49,15 @@ async function sendResultsEmail({ to, name, link }) {
 
 async function finish(body, res) {
   const name = typeof body.name === 'string' ? body.name.trim() : '';
-  const helpers = typeof body.helpers === 'string' ? body.helpers : '';
   const email = typeof body.email === 'string' ? body.email.trim() : '';
-  if (!name || name.length > 120 || helpers.length > 200 || email.length > 254) {
+  if (!name || name.length > 120 || email.length > 254) {
     return res.status(400).json({ error: 'invalid' });
   }
   const validEmail = EMAIL_PATTERN.test(email);
 
   const saved = await rpc('flight_school_record_finish', {
     p_name: name,
-    p_helpers: helpers,
+    p_helpers: '', // No longer collected. The column stays for rows saved before.
     p_email: validEmail ? email : '',
   });
   if (!saved.ok) return res.status(502).json({ error: 'not saved' });

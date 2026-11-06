@@ -3,21 +3,22 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import { TRAITS } from '../flight-school/content.js';
 import { MessageLink, TraitIcon } from '../flight-school/parts.jsx';
+import { loadPride } from '../flight-school/pride.js';
 import { loadState } from '../flight-school/store.js';
 import '../flight-school/flight-school.css';
 
 const STEPS = [
   {
     label: 'Preflight',
-    body: 'Answer honest statements about your life right now. It takes about 15 minutes, on your phone or computer.',
+    body: 'Answer honest statements about your life right now. It takes about 10 minutes, on your phone or computer.',
   },
   {
-    label: 'Your Flight Log',
+    label: 'Preflight Results',
     body: 'See where you are on all four traits right away, with one next step for each.',
   },
   {
     label: 'Cleared for Takeoff',
-    body: 'Get your private results link, share it with someone you trust, and let us help connect you with a mentor.',
+    body: 'Get your private results link. Keep it, or share it with someone if you want to talk it over.',
   },
 ];
 
@@ -25,13 +26,29 @@ function StartButton({ state }) {
   if (state.finishedAt) {
     return (
       <Link to="/flight-school/log" className="fs-btn">
-        Your Flight Log
+        Preflight Results
       </Link>
     );
   }
   return (
     <Link to="/flight-school/preflight" className="fs-btn">
       {state.step > 0 ? 'Continue Preflight' : 'Start Preflight'}
+    </Link>
+  );
+}
+
+function PrideCheckButton() {
+  const pride = useMemo(loadPride, []);
+  if (pride.finishedAt) {
+    return (
+      <Link to="/flight-school/pride-check/results" className="fs-btn fs-btn-2">
+        Pride Check Results
+      </Link>
+    );
+  }
+  return (
+    <Link to="/flight-school/pride-check" className="fs-btn fs-btn-2">
+      {pride.step > 0 ? 'Continue Pride Check' : 'Start Pride Check'}
     </Link>
   );
 }
@@ -160,6 +177,20 @@ export default function FlightSchool() {
         </div>
       </section>
 
+      <section className="fs-section fs-section-deep">
+        <div className="fs-read fs-stack">
+          <h2 style={{ color: 'var(--teachable)' }}>Pride Check</h2>
+          <p>
+            A separate, optional assessment. Pride can sound like "I know better." It can also sound
+            like "I'm not good enough." Pride Check shows which way you lean right now and where it
+            shows up. It takes about 10 minutes, and you don't need to do Preflight first.
+          </p>
+          <div style={{ paddingTop: 8 }}>
+            <PrideCheckButton />
+          </div>
+        </div>
+      </section>
+
       <section className="fs-section">
         <div className="fs-wide">
           <h2 style={{ color: 'var(--accent)', marginBottom: 8 }}>Watch the series</h2>
@@ -176,8 +207,9 @@ export default function FlightSchool() {
         <div className="fs-read fs-stack">
           <h2 style={{ color: 'var(--accent)' }}>Your answers are private</h2>
           <p>
-            Your answers are private. You choose who sees your results. Pastor Roy will see that you
-            finished and who you named as helping you grow, so he can help connect you with a mentor.
+            Your answers are private. You choose who sees your results. Pastor Roy will see your
+            name and that you finished Preflight, not your answers or scores. Nothing from Pride
+            Check is sent to anyone.
           </p>
           <p>
             Written for high school students through long-time members. If you're still exploring

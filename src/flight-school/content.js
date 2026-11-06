@@ -24,7 +24,6 @@ export const YEARS_CHOICES = [
 ];
 
 export const YEARS_QUESTION = 'How long have you been following Jesus?';
-export const RISK_QUESTION = "In general, I'm comfortable taking risks.";
 
 export const TRAITS = [
   {
@@ -41,7 +40,7 @@ export const TRAITS = [
       },
       Middle: {
         text: "You've taken real steps of faith, but comfort still wins in some areas. Look for the one place you've been playing it safe. Faith that's real doesn't wait until it's sure something will work.",
-        next: "Tell your mentor about one step you've been putting off, and set a date.",
+        next: "Tell someone you trust about one step you've been putting off, and set a date.",
       },
       High: {
         text: "You've put things on the line for God. The question now is what he's asking you to risk next. Keep checking why you risk: trust in God, not just love of a challenge.",
@@ -63,7 +62,7 @@ export const TRAITS = [
       },
       Middle: {
         text: 'You want God to lead, but busyness or a "just in case" still competes. Busyness needs quiet. A backup plan needs trust.',
-        next: 'Name your "just in case" to your mentor.',
+        next: 'Name your "just in case" to someone you trust.',
       },
       High: {
         text: "You're listening and ready to move. Next, make sure you know where God has placed you and what he wants you to do there. Being available isn't being reckless; you can say yes to God and still leave well.",
@@ -182,48 +181,9 @@ export const LINK_CORE_ORDER = [
   'A7', 'M7', 'T4', 'F8', 'M8', 'F7', 'A8', 'T7',
 ];
 
-export const BONUS_ITEMS = {
-  PU1: { side: 'up', text: "When someone gives me advice, I'm already thinking about why it doesn't fit me." },
-  PU2: { side: 'up', text: 'In the past month, I argued with someone who was trying to help me.' },
-  PU3: { side: 'up', text: 'I find it hard to learn from people who know less than I do.' },
-  PU4: { side: 'up', text: 'When I hear a sermon, I mostly think about who else needs to hear it.' },
-  PU5: { side: 'up', text: "Because I've served God faithfully, I feel he owes me good things." },
-  PU6: { side: 'up', reverse: true, text: 'When I\'m wrong, I can say "I was wrong" without explaining myself.' },
-  PD1: { side: 'down', text: 'When someone corrects me, I agree quickly so the talk will end.' },
-  PD2: { side: 'down', text: 'I say yes to advice, but I rarely follow through on it.' },
-  PD3: { side: 'down', text: 'God uses other people, but probably not me.' },
-  PD4: { side: 'down', text: 'Before I step out, I need God to give me a clear sign.' },
-  PD5: { side: 'down', text: 'I would rather stay in control than try something new God might be asking.' },
-  PD6: { side: 'down', reverse: true, text: 'When I feel unqualified, I still say yes to what God asks.' },
-};
-
-export const BONUS_ORDER = [
-  'PU1', 'PD3', 'PU2', 'PD1', 'PU6', 'PD4',
-  'PU3', 'PD6', 'PU5', 'PD2', 'PU4', 'PD5',
-];
-
-export const QUADRANTS = {
-  open: {
-    name: 'Open',
-    text: 'You let people speak into your life and you act on it. Keep inviting it, especially from people you wouldn\'t expect.',
-    next: 'Thank someone who corrected you and tell them what changed.',
-  },
-  hider: {
-    name: 'Hider',
-    text: "You agree easily, but change slips away, and you may not think God would use you. That's still pride: it protects your control. God doesn't call the qualified; he trains the willing.",
-    next: 'Say yes to one thing you feel unqualified for.',
-  },
-  defender: {
-    name: 'Defender',
-    text: "When correction comes, your first move is to push back or explain. You may be right sometimes, but you're missing what God wants to teach you.",
-    next: 'The next time someone corrects you, say "Thanks, I\'ll think about that" and nothing else.',
-  },
-  tug: {
-    name: 'Tug-of-war',
-    text: 'You swing between "I know better" and "I\'m not good enough." Both keep you from being taught and sent.',
-    next: 'Talk with your mentor about which one shows up more, and when.',
-  },
-};
+// Private links once had 12 more slots for a retired bonus. Links already sent
+// have them, so new links keep them empty and they are never read.
+export const RETIRED_LINK_SLOTS = 12;
 
 // Shown right after M1 and M5. Blank is allowed.
 export const NAME_PROMPTS = {
@@ -231,6 +191,9 @@ export const NAME_PROMPTS = {
   M5: { key: 'helpers', prompt: 'Who is ahead of you, helping you grow in following Jesus? Write 1 to 3 first names.' },
 };
 
+// The written questions were retired when the mentor idea came out of Flight School.
+// They stay here, in this order, only so results links people already saved can
+// still show what they wrote.
 export const OPEN_QUESTIONS = [
   { id: 'f1', trait: 'faithful', text: "What has God given you (time, money, skills, people) that you've been keeping safe?" },
   { id: 'f2', trait: 'faithful', text: "Tell about a time you took a risk because of your faith. What happened? If you can't think of one, what has held you back?" },

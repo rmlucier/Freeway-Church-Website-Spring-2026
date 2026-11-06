@@ -6,11 +6,8 @@ import {
   CORE_ORDER,
   NAME_PROMPTS,
   OPENING_LINE,
-  OPEN_QUESTIONS,
-  RISK_QUESTION,
   YEARS_CHOICES,
   YEARS_QUESTION,
-  traitById,
 } from '../flight-school/content.js';
 import { Counter, RatingSlider } from '../flight-school/parts.jsx';
 import { LIMITS, loadState, saveState } from '../flight-school/store.js';
@@ -23,16 +20,10 @@ function buildSteps() {
   const steps = [
     { type: 'intro' },
     { type: 'years' },
-    { type: 'risk' },
   ];
   CORE_ORDER.forEach((id, i) => {
     steps.push({ type: 'item', id, text: CORE_ITEMS[id].text, section: 'core', n: i + 1, total: CORE_ORDER.length });
     if (NAME_PROMPTS[id]) steps.push({ type: 'names', ...NAME_PROMPTS[id], n: i + 1, total: CORE_ORDER.length });
-  });
-  steps.push({ type: 'writtenIntro' });
-  const written = OPEN_QUESTIONS.filter((q) => q.id !== 'b1'); // b1 goes with the bonus.
-  written.forEach((q, i) => {
-    steps.push({ type: 'written', ...q, n: i + 1, total: written.length });
   });
   steps.push({ type: 'finish' });
   return steps;
@@ -74,7 +65,6 @@ export default function FlightSchoolPreflight() {
 
   const canAdvance = () => {
     if (step.type === 'years') return typeof state.context.years === 'number';
-    if (step.type === 'risk') return typeof state.context.risk === 'number';
     if (step.type === 'item') return typeof state.answers[step.id] === 'number';
     if (step.type === 'finish') {
       const email = state.profile.email?.trim() || '';
@@ -102,7 +92,7 @@ export default function FlightSchoolPreflight() {
       </div>
 
       <main className="fs-read fs-step" ref={stepRef} tabIndex={-1}>
-        <StepBody step={step} state={state} update={update} onSkipWritten={() => goTo(steps.length - 1)} />
+        <StepBody step={step} state={state} update={update} />
 
         {step.type !== 'intro' && (
           <div className="fs-nav">
@@ -127,13 +117,12 @@ export default function FlightSchoolPreflight() {
 }
 
 function nextLabel(step, state, isLast) {
-  if (isLast) return 'See My Log';
+  if (isLast) return 'See My Results';
   if (step.type === 'names' && !state.names[step.key]?.trim()) return 'Skip';
-  if (step.type === 'written' && !state.written[step.id]?.trim()) return 'Skip';
   return 'Next';
 }
 
-function StepBody({ step, state, update, onSkipWritten }) {
+function StepBody({ step, state, update }) {
   switch (step.type) {
     case 'intro':
       return (
@@ -141,7 +130,7 @@ function StepBody({ step, state, update, onSkipWritten }) {
           <h1>Preflight</h1>
           <p>{OPENING_LINE}</p>
           <p className="fs-muted">
-            About 15 minutes. Your place is saved on this device, so you can stop and come back.
+            About 10 minutes. Your place is saved on this device, so you can stop and come back.
           </p>
         </div>
       );
@@ -167,19 +156,6 @@ function StepBody({ step, state, update, onSkipWritten }) {
               </button>
             ))}
           </div>
-        </div>
-      );
-
-    case 'risk':
-      return (
-        <div className="fs-stack">
-          <h1>Preflight</h1>
-          <p className="fs-question">{RISK_QUESTION}</p>
-          <RatingSlider
-            label={RISK_QUESTION}
-            value={state.context.risk}
-            onChange={(risk) => update({ context: { ...state.context, risk } })}
-          />
         </div>
       );
 
@@ -221,51 +197,13 @@ function StepBody({ step, state, update, onSkipWritten }) {
         </div>
       );
 
-    case 'writtenIntro':
-      return (
-        <div className="fs-stack">
-          <h1>For your mentor</h1>
-          <p>
-            Last part. These 8 questions help a mentor know where to start. Write as much or as
-            little as you want, and skip any you like.
-          </p>
-          <p className="fs-muted">
-            Your written answers stay on this device. They are only shared if you choose to include
-            them.
-          </p>
-          <button type="button" className="fs-btn fs-btn-2" onClick={onSkipWritten}>
-            Skip These
-          </button>
-        </div>
-      );
-
-    case 'written':
-      return (
-        <div data-trait={step.trait}>
-          <Counter n={step.n} total={step.total} />
-          <label htmlFor={step.id} className="fs-question" style={{ display: 'block', minHeight: 0, marginBottom: 16 }}>
-            {step.text}
-          </label>
-          <textarea
-            id={step.id}
-            className="fs-input"
-            maxLength={LIMITS.written}
-            value={state.written[step.id] || ''}
-            onChange={(e) => update({ written: { ...state.written, [step.id]: e.target.value } })}
-          />
-          <p className="fs-small" style={{ marginTop: 8 }}>
-            {traitById[step.trait].name}
-          </p>
-        </div>
-      );
-
     case 'finish':
       return (
         <div className="fs-stack">
           <h1>Almost done</h1>
           <p>
-            Your answers are private. You choose who sees your results. Pastor Roy will see that you
-            finished and who you named as helping you grow, so he can help connect you with a mentor.
+            Your answers are private. You choose who sees your results. Pastor Roy will see your
+            name and that you finished, not your answers or scores.
           </p>
           <div>
             <label htmlFor="fs-name" style={{ fontWeight: 700 }}>

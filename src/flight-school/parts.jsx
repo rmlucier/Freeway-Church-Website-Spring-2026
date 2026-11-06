@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { QUADRANTS, TRAITS, sliderLabel } from './content.js';
+import { TRAITS, sliderLabel } from './content.js';
 
 // Line-art aviation icons from the style guide: 2px strokes, one color, no
 // fills, square caps. Decorative, so the trait name always sits beside them.
@@ -223,33 +223,6 @@ export function Counter({ n, total, label = 'Question' }) {
   );
 }
 
-/** The pride-up / pride-down result. Only used where the bonus was taken. */
-export function BonusResult({ results, checked, onToggle }) {
-  const quadrant = QUADRANTS[results.quadrant];
-  return (
-    <article className="fs-card fs-stack" data-trait="teachable">
-      <h2>{quadrant.name}</h2>
-      <div className="fs-well" style={{ display: 'flex', justifyContent: 'space-around', gap: 16 }}>
-        <div>
-          <div className="fs-small">Pride up</div>
-          <div className="fs-readout">{results.prideUp.toFixed(1)}</div>
-        </div>
-        <div>
-          <div className="fs-small">Pride down</div>
-          <div className="fs-readout">{results.prideDown.toFixed(1)}</div>
-        </div>
-      </div>
-      <p className="fs-small">
-        Pride up is "I know better." Pride down is "I'm not good enough." Higher means more pride.
-      </p>
-      <p>{quadrant.text}</p>
-      <NextStep checked={checked} onToggle={onToggle}>
-        {quadrant.next}
-      </NextStep>
-    </article>
-  );
-}
-
 /** Shows a statement back to the person with the answer they gave. */
 export function Quote({ label, text }) {
   return (
@@ -282,8 +255,8 @@ export function DiscipleshipChain({ helpers, sentTo }) {
 }
 
 /**
- * A next step with a box to check off. Shared logs pass no `onToggle`, so a
- * mentor sees an unchecked box they can't change.
+ * A next step with a box to check off. Shared results pass no `onToggle`, so
+ * whoever opens the link sees an unchecked box they can't change.
  */
 export function NextStep({ children, checked = false, onToggle }) {
   return (

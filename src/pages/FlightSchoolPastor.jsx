@@ -8,8 +8,8 @@ const formatDate = (iso) =>
   new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
 // Unlinked page. The secret key sits in the URL fragment, which browsers never
-// send to a server on page load. It shows who finished and who they named, and
-// by design has no access to answers or scores.
+// send to a server on page load. It shows who finished, and by design has no
+// access to answers or scores.
 export default function FlightSchoolPastor() {
   const { hash } = useLocation();
   const key = hash.replace(/^#/, '');
@@ -51,10 +51,6 @@ export default function FlightSchoolPastor() {
                       {f.name}
                     </h2>
                     <p className="fs-small">Finished {formatDate(f.finished_at)}</p>
-                    <p style={{ marginTop: 8 }}>
-                      <span className="fs-small">Who's helping them grow: </span>
-                      {f.helpers || 'No one named yet'}
-                    </p>
                   </article>
                 ))}
               </div>

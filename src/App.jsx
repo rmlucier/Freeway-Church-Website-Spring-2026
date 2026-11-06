@@ -21,18 +21,21 @@ const Marriage = lazy(() => import('./pages/Marriage.jsx'));
 const FlightSchool = lazy(() => import('./pages/FlightSchool.jsx'));
 const FlightSchoolPreflight = lazy(() => import('./pages/FlightSchoolPreflight.jsx'));
 const FlightSchoolLog = lazy(() => import('./pages/FlightSchoolLog.jsx'));
+const FlightSchoolPrideCheck = lazy(() => import('./pages/FlightSchoolPrideCheck.jsx'));
+const FlightSchoolPrideResults = lazy(() => import('./pages/FlightSchoolPrideResults.jsx'));
 const FlightSchoolPastor = lazy(() => import('./pages/FlightSchoolPastor.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
-// Flight Log links keep private results in the URL fragment. Never let
+// Flight School results links keep private results in the URL fragment. Never let
 // analytics pick that fragment up.
 const stripHash = (event) => ({ ...event, url: event.url.split('#')[0] });
 
-// The assessment runs full-screen with its own top bar, so the person can focus
+// The assessments run full-screen with its own top bar, so the person can focus
 // on one question at a time.
 function SiteChrome({ children }) {
   const { pathname } = useLocation();
-  return pathname === '/flight-school/preflight' ? null : children;
+  const fullScreen = ['/flight-school/preflight', '/flight-school/pride-check'].includes(pathname);
+  return fullScreen ? null : children;
 }
 
 // Intentionally minimal — keeps the nav visible and avoids a flashy spinner
@@ -73,6 +76,8 @@ export default function App() {
           <Route path="/flight-school" element={<FlightSchool />} />
           <Route path="/flight-school/preflight" element={<FlightSchoolPreflight />} />
           <Route path="/flight-school/log" element={<FlightSchoolLog />} />
+          <Route path="/flight-school/pride-check" element={<FlightSchoolPrideCheck />} />
+          <Route path="/flight-school/pride-check/results" element={<FlightSchoolPrideResults />} />
           <Route path="/flight-school/pastor" element={<FlightSchoolPastor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
