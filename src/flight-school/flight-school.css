@@ -273,11 +273,8 @@
 .fs-meter-bar i { position: absolute; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: var(--text); }
 .fs-score-row { display: flex; align-items: baseline; gap: 12px; }
 .fs-band { color: var(--trait); }
-.fs-next { display: flex; align-items: flex-start; gap: 12px; min-height: 48px; border-left: 4px solid var(--trait); padding: 4px 0 4px 12px; font-weight: 700; cursor: pointer; }
-.fs-next input { flex: none; width: 28px; height: 28px; margin: 2px 0 0; accent-color: var(--trait); cursor: pointer; }
-.fs-next input:disabled { cursor: default; }
+.fs-next { border-left: 4px solid var(--trait); padding: 4px 0 4px 12px; font-weight: 700; }
 .fs-next-label { display: block; font-size: 15px; font-weight: 400; color: var(--text-muted); }
-.fs-next.done .fs-next-text { color: var(--text-muted); }
 .fs-check { display: flex; align-items: flex-start; gap: 12px; min-height: 48px; cursor: pointer; }
 .fs-check input { width: 24px; height: 24px; flex: none; margin-top: 3px; accent-color: var(--accent); }
 .fs-alert { color: var(--alert); }

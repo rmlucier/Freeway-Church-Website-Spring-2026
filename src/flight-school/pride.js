@@ -117,7 +117,6 @@ export const emptyPride = () => ({
   statements: {},
   situations: {},
   shame: {},
-  doneSteps: {},
   seed: Math.floor(Math.random() * 2 ** 31),
   finishedAt: null,
 });

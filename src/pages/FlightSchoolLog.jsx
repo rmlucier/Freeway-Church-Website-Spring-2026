@@ -61,16 +61,6 @@ function Log({ log, isShared }) {
   const results = useMemo(() => scoreAssessment(log.answers), [log]);
   const insights = useMemo(() => buildInsights(log, results), [log, results]);
   const lastTime = isShared ? null : log.history?.[log.history.length - 1];
-  const [doneSteps, setDoneSteps] = useState(log.doneSteps || {});
-  // Checked boxes are remembered on the person's own device only.
-  const toggleStep = (key) =>
-    isShared
-      ? undefined
-      : (checked) => {
-          const next = { ...doneSteps, [key]: checked };
-          setDoneSteps(next);
-          saveState({ ...loadState(), doneSteps: next });
-        };
   const written = OPEN_QUESTIONS.filter((q) => log.written[q.id]?.trim());
   const date = formatDate(log.finishedAt);
 
@@ -141,9 +131,7 @@ function Log({ log, isShared }) {
                   </p>
                   <p>{trait.test}</p>
                 </div>
-                <NextStep checked={Boolean(doneSteps[trait.id])} onToggle={toggleStep(trait.id)}>
-                  {copy.next}
-                </NextStep>
+                <NextStep>{copy.next}</NextStep>
               </article>
             );
           })}

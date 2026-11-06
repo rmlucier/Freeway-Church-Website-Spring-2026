@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import { retakeDate } from '../flight-school/insights.js';
@@ -9,7 +9,6 @@ import {
   encodePride,
   leanCopy,
   loadPride,
-  savePride,
   scorePride,
 } from '../flight-school/pride.js';
 import {
@@ -87,17 +86,6 @@ function Bar({ label, score, color }) {
 function Results({ record, isShared }) {
   const results = useMemo(() => scorePride(record), [record]);
   const lean = leanCopy(results.lean, results.teachable);
-  const [doneSteps, setDoneSteps] = useState(record.doneSteps || {});
-
-  // Checked boxes are remembered on the person's own device only.
-  const toggle = (key) =>
-    isShared
-      ? undefined
-      : (checked) => {
-          const next = { ...doneSteps, [key]: checked };
-          setDoneSteps(next);
-          savePride({ ...loadPride(), doneSteps: next });
-        };
 
   const hasStrengths = results.strengthRows.length > 0 || results.teachableStrong;
 
@@ -116,6 +104,13 @@ function Results({ record, isShared }) {
               <a className="fs-btn fs-btn-2" href={`mailto:${churchEmail()}`}>
                 Email the Church
               </a>
+              <p>
+                If you're ever thinking about hurting yourself, call or text{' '}
+                <a className="fs-link" href="tel:988">
+                  988
+                </a>{' '}
+                any time.
+              </p>
             </div>
           )}
           {results.grace && <p><em>{GRACE.gently}</em></p>}
@@ -169,25 +164,19 @@ function Results({ record, isShared }) {
               <h3>{step.name}</h3>
               <p className="fs-small">{step.label}</p>
               <p>{step.insight}</p>
-              <NextStep checked={Boolean(doneSteps[step.key])} onToggle={toggle(step.key)}>
-                {step.action}
-              </NextStep>
+              <NextStep>{step.action}</NextStep>
             </article>
           ))}
           {results.addTeachableStep && (
             <article className="fs-card fs-stack">
               <h3>Teachable</h3>
               <p>{TEACHABLE_STEP.insight}</p>
-              <NextStep checked={Boolean(doneSteps.teachable)} onToggle={toggle('teachable')}>
-                {TEACHABLE_STEP.action}
-              </NextStep>
+              <NextStep>{TEACHABLE_STEP.action}</NextStep>
             </article>
           )}
           {results.noRowStep && (
             <article className="fs-card">
-              <NextStep checked={Boolean(doneSteps.hardTruths)} onToggle={toggle('hardTruths')}>
-                {NO_ROW_STEP}
-              </NextStep>
+              <NextStep>{NO_ROW_STEP}</NextStep>
             </article>
           )}
 

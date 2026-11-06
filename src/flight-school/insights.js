@@ -15,7 +15,7 @@ const SAY_DO_MIN_GAP = 3;
 
 const PAIRINGS = {
   'faithful>available': "You're willing to take risks for God, but life may be too full to hear what he's saying. Bold steps go further when they start with quiet.",
-  'faithful>teachable': "You'll step out for God, but correction may not land as easily. Courage grows stronger when someone can tell you the truth.",
+  'faithful>teachable': "You'll step out for God, but correction may not land as easily.",
   'faithful>missional': "You've trusted God with real risk. How can you use your faithfulness to help someone?",
   'available>faithful': 'You make room for God and listen for him. Act on it. Being ready turns into faith when something is on the line.',
   'available>teachable': "You listen for God's lead, but it may be harder to hear him through other people. God puts people into our lives for a reason!",

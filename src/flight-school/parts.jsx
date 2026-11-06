@@ -143,13 +143,13 @@ const formatChange = (change) => {
 
 /**
  * Level meters sorted strongest to weakest, so the eye lands on what matters:
- * where you're strong and where to start. Ticks mark the Middle and High bands.
+ * where you're strong and where to grow. Ticks mark the Middle and High bands.
  */
 export function ResultsBars({ traits, previous }) {
   const ranked = [...TRAITS].sort((a, b) => traits[b.id].score - traits[a.id].score);
   const strongest = ranked[0];
-  const startHere = ranked[ranked.length - 1];
-  const allEven = traits[strongest.id].score === traits[startHere.id].score;
+  const growthArea = ranked[ranked.length - 1];
+  const allEven = traits[strongest.id].score === traits[growthArea.id].score;
 
   return (
     <div className="fs-stack">
@@ -163,10 +163,10 @@ export function ResultsBars({ traits, previous }) {
             </span>
           </p>
           <p>
-            <span className="fs-small">Start here</span>
+            <span className="fs-small">Growth area</span>
             <br />
-            <span className="fs-label" data-trait={startHere.id} style={{ color: 'var(--trait)' }}>
-              {startHere.name}
+            <span className="fs-label" data-trait={growthArea.id} style={{ color: 'var(--trait)' }}>
+              {growthArea.name}
             </span>
           </p>
         </div>
@@ -254,24 +254,12 @@ export function DiscipleshipChain({ helpers, sentTo }) {
   );
 }
 
-/**
- * A next step with a box to check off. Shared results pass no `onToggle`, so
- * whoever opens the link sees an unchecked box they can't change.
- */
-export function NextStep({ children, checked = false, onToggle }) {
+export function NextStep({ children }) {
   return (
-    <label className={`fs-next ${checked ? 'done' : ''}`}>
-      <input
-        type="checkbox"
-        checked={checked}
-        disabled={!onToggle}
-        onChange={(e) => onToggle?.(e.target.checked)}
-      />
-      <span className="fs-next-text">
-        <span className="fs-next-label">Next step</span>
-        {children}
-      </span>
-    </label>
+    <p className="fs-next">
+      <span className="fs-next-label">Next step</span>
+      {children}
+    </p>
   );
 }
 

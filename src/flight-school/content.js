@@ -79,7 +79,7 @@ export const TRAITS = [
     test: "You know you're teachable when you'd rather be healed than be right.",
     results: {
       Low: {
-        text: "Correction may be bouncing off you. Some people argue it down. Others agree and then change nothing. If shame is under it, that's not pride: God lifts up people who feel crushed.",
+        text: "When God is trying to correct you, it probably doesn't work. God is trying to get you somewhere. He sends people, his voice and his word to lift you up and help you out.",
         next: 'Ask one person you trust, "What\'s one thing you see in me that I don\'t?" Then just listen.',
       },
       Middle: {
@@ -105,7 +105,7 @@ export const TRAITS = [
         next: 'Write one name and pray for them every day this week.',
       },
       Middle: {
-        text: 'You care about others knowing Jesus, but the names are fuzzy or the conversations are rare. Name your person, and find who is helping you grow.',
+        text: 'You care about others knowing Jesus, but not many lives are changing around you. Find out the mission of God on your life.',
         next: 'Have one conversation this month about what God is doing in your life.',
       },
       High: {
