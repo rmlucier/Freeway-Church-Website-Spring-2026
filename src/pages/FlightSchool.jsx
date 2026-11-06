@@ -66,7 +66,7 @@ export default function FlightSchool() {
           <h2 style={{ color: 'var(--accent)' }}>Learning to fly</h2>
           <p>
             We just finished a series on what it takes to be a disciple. A disciple is someone who
-            follows Jesus and learns to live like Him. Flight School takes that series and helps you
+            follows Jesus and learns to live like him. Flight School takes that series and helps you
             put it to work in your own life.
           </p>
           <p>

@@ -30,11 +30,11 @@ export const TRAITS = [
   {
     id: 'faithful',
     name: 'Faithful',
-    definition: "Trusting God enough to risk what He's given you.",
-    test: "You know you're faithful when you've put something on the line for Him.",
+    definition: "Trusting God enough to risk what he's given you.",
+    test: "You know you're faithful when you've put something on the line for him.",
     results: {
       Low: {
-        text: "You may love God and still be keeping what He gave you safe. You may be afraid of God, not fully understanding his role in your life. God is good, and nothing you put in His hands is wasted.",
+        text: "You may love God and still be keeping what he gave you safe. You may be afraid of God, not fully understanding his role in your life. God is good, and nothing you put in his hands is wasted.",
         next: "Name one thing you've been keeping safe, and take one small risk with it this month.",
       },
       Middle: {
@@ -42,7 +42,7 @@ export const TRAITS = [
         next: "Tell your mentor about one step you've been putting off, and set a date.",
       },
       High: {
-        text: "You've put things on the line for God. The question now is what He's asking you to risk next. Keep checking why you risk: trust in God, not just love of a challenge.",
+        text: "You've put things on the line for God. The question now is what he's asking you to risk next. Keep checking why you risk: trust in God, not just love of a challenge.",
         next: 'Help someone else take their first step of faith.',
       },
     },
@@ -62,15 +62,15 @@ export const TRAITS = [
         next: 'Name your "just in case" to your mentor.',
       },
       High: {
-        text: "You're listening and ready to move. Next, make sure you know where God has placed you and what He wants you to do there. Being available isn't being reckless; you can say yes to God and still leave well.",
-        next: 'Write down where God has placed you and one thing He wants you to do there this week.',
+        text: "You're listening and ready to move. Next, make sure you know where God has placed you and what he wants you to do there. Being available isn't being reckless; you can say yes to God and still leave well.",
+        next: 'Write down where God has placed you and one thing he wants you to do there this week.',
       },
     },
   },
   {
     id: 'teachable',
     name: 'Teachable',
-    definition: 'Trusting God enough to let Him correct and change you.',
+    definition: 'Trusting God enough to let him correct and change you.',
     test: "You know you're teachable when you'd rather be healed than be right.",
     results: {
       Low: {
@@ -115,19 +115,19 @@ export const traitById = Object.fromEntries(TRAITS.map((t) => [t.id, t]));
 export const CORE_ITEMS = {
   F1: { trait: 'faithful', text: 'In the past year, I took a real risk because I believed God was asking me to.' },
   F2: { trait: 'faithful', reverse: true, text: "I usually wait until I'm sure something will work before I try it." },
-  F3: { trait: 'faithful', text: 'I can name something God has given me (time, money, a skill, a relationship) that I am using for Him right now.' },
+  F3: { trait: 'faithful', text: 'I can name something God has given me (time, money, a skill, a relationship) that I am using for him right now.' },
   F4: { trait: 'faithful', reverse: true, text: 'In the past year, fear of failing kept me from doing something I felt God wanted me to do.' },
   F5: { trait: 'faithful', text: 'I believe God would rather I try and fail than never try at all.' },
   F6: { trait: 'faithful', text: 'When I sense God asking me to do something, I usually act on it right away.' },
   F7: { trait: 'faithful', reverse: true, text: "If I'm honest, I haven't done much with what God has given me." },
   F8: { trait: 'faithful', text: "When a step of faith doesn't go well, I try again instead of quitting." },
 
-  A1: { trait: 'available', reverse: true, text: "There is an area of my life where I say yes to God but keep a backup plan in case He doesn't come through." },
+  A1: { trait: 'available', reverse: true, text: "There is an area of my life where I say yes to God but keep a backup plan in case he doesn't come through." },
   A2: { trait: 'available', text: 'Most days, I take some quiet time with no phone or noise to pray and listen to God.' },
   A3: { trait: 'available', reverse: true, text: 'My schedule is so full that I would have a hard time saying yes if God asked me to do something new.' },
   A4: { trait: 'available', text: 'In the past month, I sensed the Holy Spirit leading me to do something specific, and I did it.' },
-  A5: { trait: 'available', text: 'Most mornings, I give my day to God and ask Him to lead it.' },
-  A6: { trait: 'available', text: 'I know what God wants me to do in the place He has put me right now (school, work, home, or my street).' },
+  A5: { trait: 'available', text: 'Most mornings, I give my day to God and ask him to lead it.' },
+  A6: { trait: 'available', text: 'I know what God wants me to do in the place he has put me right now (school, work, home, or my street).' },
   A7: { trait: 'available', reverse: true, text: 'When I have a few free minutes, I usually reach for my phone instead of turning my attention to God.' },
   A8: { trait: 'available', text: 'In the past month, I changed my plans because I sensed God asking me to.' },
 
@@ -137,7 +137,7 @@ export const CORE_ITEMS = {
   T4: { trait: 'teachable', text: 'I have learned something important about God from someone younger than me, newer to faith, or very different from me.' },
   T5: { trait: 'teachable', text: 'When I read or hear a Bible passage I already know, I still expect God to show me something new.' },
   T6: { trait: 'teachable', text: 'If I sense God asking me to do something simple, I do it even before it makes sense to me.' },
-  T7: { trait: 'teachable', reverse: true, text: "I tell myself I'm not good enough for God to use me, so I don't try what He asks." },
+  T7: { trait: 'teachable', reverse: true, text: "I tell myself I'm not good enough for God to use me, so I don't try what he asks." },
   T8: { trait: 'teachable', text: 'In the past few months, someone I trust told me a hard truth about myself.' },
 
   M1: { trait: 'missional', text: "I can name at least one person God has put in my life who I'm trying to help know or follow Jesus." },
@@ -179,7 +179,7 @@ export const BONUS_ITEMS = {
   PU2: { side: 'up', text: 'In the past month, I argued with someone who was trying to help me.' },
   PU3: { side: 'up', text: 'I find it hard to learn from people who know less than I do.' },
   PU4: { side: 'up', text: 'When I hear a sermon, I mostly think about who else needs to hear it.' },
-  PU5: { side: 'up', text: "Because I've served God faithfully, I feel He owes me good things." },
+  PU5: { side: 'up', text: "Because I've served God faithfully, I feel he owes me good things." },
   PU6: { side: 'up', reverse: true, text: 'When I\'m wrong, I can say "I was wrong" without explaining myself.' },
   PD1: { side: 'down', text: 'When someone corrects me, I agree quickly so the talk will end.' },
   PD2: { side: 'down', text: 'I say yes to advice, but I rarely follow through on it.' },
@@ -202,7 +202,7 @@ export const QUADRANTS = {
   },
   hider: {
     name: 'Hider',
-    text: "You agree easily, but change slips away, and you may not think God would use you. That's still pride: it protects your control. God doesn't call the qualified; He trains the willing.",
+    text: "You agree easily, but change slips away, and you may not think God would use you. That's still pride: it protects your control. God doesn't call the qualified; he trains the willing.",
     next: 'Say yes to one thing you feel unqualified for.',
   },
   defender: {

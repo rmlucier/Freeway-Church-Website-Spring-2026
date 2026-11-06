@@ -231,7 +231,7 @@ function MentorNotes({ log, results }) {
           {results.prideDown >= 5 && (
             <p>
               <strong>Pride down is high.</strong> This can be shame, not pride. If the person seems
-              crushed rather than guarded, lead with grace. Jesus doesn't humble the crushed; He
+              crushed rather than guarded, lead with grace. Jesus doesn't humble the crushed; he
               lifts them.
             </p>
           )}
