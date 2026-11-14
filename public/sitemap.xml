@@ -1,62 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://freeway.church/</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://www.freeway.church/</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://freeway.church/visit</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://www.freeway.church/visit</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freeway.church/kids</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://www.freeway.church/kids</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freeway.church/beliefs</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://www.freeway.church/beliefs</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://freeway.church/giving</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://www.freeway.church/giving</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://freeway.church/summer</loc>
-    <lastmod>2026-04-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://freeway.church/prayer</loc>
-    <lastmod>2026-09-02</lastmod>
+    <loc>https://www.freeway.church/academy</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freeway.church/academy</loc>
-    <lastmod>2026-09-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://freeway.church/marriage</loc>
-    <lastmod>2026-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://freeway.church/flight-school</loc>
-    <lastmod>2026-11-06</lastmod>
+    <loc>https://www.freeway.church/flight-school</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

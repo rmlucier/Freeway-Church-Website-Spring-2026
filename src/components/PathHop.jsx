@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef } from 'react';
-import { useInView, useReducedMotion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import useReducedMotion from './useReducedMotionSafe.js';
 
 // A dashed paper-plane flight path for the Academy page. A little plane flies
 // ALONG the dotted trail (SMIL <animateMotion>, same as the hero AirplaneTrail),

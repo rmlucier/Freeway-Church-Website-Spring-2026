@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Phone number is never rendered as one contiguous string in source. Harvesters
 // that scrape the page HTML or bundle find three fragments that look like junk.
@@ -20,6 +20,10 @@ const buildSmsHref = (body) => {
  *
  * If `showNumber` is true, the visible number text is also assembled only
  * at interaction time — until then it renders as the children content.
+ *
+ * If `visible` is true, the number is shown as the link text as soon as the
+ * page is running in a browser. It is still assembled from fragments in the
+ * browser, so it never appears in the page's HTML source.
  */
 export default function PhoneLink({
   mode = 'tel',
@@ -27,10 +31,15 @@ export default function PhoneLink({
   className,
   ariaLabel,
   showNumber = false,
+  visible = false,
   children,
 }) {
   const [href, setHref] = useState(null);
   const [display, setDisplay] = useState(showNumber ? '' : null);
+
+  useEffect(() => {
+    if (visible) setDisplay(buildNumber());
+  }, [visible]);
 
   const prepare = () => {
     if (!href) {
@@ -58,7 +67,7 @@ export default function PhoneLink({
         }
       }}
     >
-      {showNumber ? display || children : children}
+      {showNumber || visible ? display || children : children}
     </a>
   );
 }

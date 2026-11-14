@@ -287,7 +287,7 @@ export default function Academy() {
                 <div className="flex items-center gap-2.5">
                   <span className="h-2 w-2 rounded-full bg-fc-gold" />
                   <span className="font-display uppercase tracking-widest2 text-sm md:text-base text-fc-cream/85">
-                    6:30–8:00pm &middot; Dinner at 5:30
+                    Wednesdays &middot; 6:30–8:00pm &middot; Dinner at 5:30
                   </span>
                 </div>
               </motion.div>
@@ -587,6 +587,7 @@ export default function Academy() {
                 When We Meet
               </h3>
               <p className="text-fc-cream/75 leading-relaxed">
+                We meet on <strong className="text-fc-cream">Wednesdays</strong>.{' '}
                 <strong className="text-fc-cream">Dinner &amp; hangout</strong> starts at{' '}
                 <strong className="text-fc-cream">5:30pm</strong>. The Academy runs{' '}
                 <strong className="text-fc-cream">6:30–8:00pm</strong> — come early, eat

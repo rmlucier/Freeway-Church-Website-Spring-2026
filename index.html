@@ -6,18 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1C1C1C" />
 
-    <!-- Default title/description — each page overrides these with
-         react-helmet-async at runtime. These are the fallback values. -->
-    <title>Freeway Church — A church in Albion, Michigan. Sundays at 10am.</title>
-    <meta name="description" content="Freeway Church is a community in Albion, Michigan for anyone figuring out faith — including people who walked away from church and are thinking about coming back. Sundays at 10am. Everyone is welcome." />
-
-    <meta property="og:title" content="Freeway Church — A church in Albion, Michigan" />
-    <meta property="og:description" content="Sundays at 10am in Albion, MI. Everyone is welcome, even you." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://freeway.church" />
-    <meta property="og:image" content="https://freeway.church/og-image.jpg" />
-    <meta property="og:site_name" content="Freeway Church" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Each page's title, description, canonical and social tags are written
+         here at build time by scripts/prerender.mjs (from the SEO component),
+         so every page ships exactly one of each. -->
+    <!--app-head-->
 
     <!-- Schema.org structured data — this is what drives Google's local
          knowledge panel ("right-rail" result) when people search for the
@@ -36,11 +28,16 @@
       ],
       "slogan": "Everyone is welcome at Freeway Church, even you.",
       "description": "An independent, Assemblies of God-affiliated church in Albion, Michigan. Sundays at 10am.",
-      "url": "https://freeway.church",
-      "logo": "https://freeway.church/images/logo-stack-white.png",
-      "image": "https://freeway.church/og-image.jpg",
+      "url": "https://www.freeway.church",
+      "logo": "https://www.freeway.church/images/logo-stack-white.png",
+      "image": "https://www.freeway.church/og-image.jpg",
       "telephone": "+1-517-798-0571",
       "email": "info@freeway.church",
+      "sameAs": [
+        "https://instagram.com/freeway.church",
+        "https://www.facebook.com/www.freeway.church/",
+        "https://www.youtube.com/@freewaymedia"
+      ],
       "foundingDate": "1942-04-14",
       "founder": {
         "@type": "Person",
@@ -69,31 +66,58 @@
           "closes": "11:15"
         }
       ],
-      "event": {
-        "@type": "Event",
-        "name": "Sunday Worship Service",
-        "description": "Weekly Sunday worship service — music, message, prayer, community.",
-        "eventSchedule": {
-          "@type": "Schedule",
-          "byDay": "https://schema.org/Sunday",
-          "startTime": "10:00",
-          "endTime": "11:15",
-          "repeatFrequency": "P1W"
+      "event": [
+        {
+          "@type": "Event",
+          "name": "Sunday Worship Service",
+          "description": "Weekly Sunday worship service — music, message, prayer, community.",
+          "eventSchedule": {
+            "@type": "Schedule",
+            "byDay": "https://schema.org/Sunday",
+            "startTime": "10:00",
+            "endTime": "11:15",
+            "repeatFrequency": "P1W"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "location": {
+            "@type": "Place",
+            "name": "Freeway Church",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "28900 B Dr N",
+              "addressLocality": "Albion",
+              "addressRegion": "MI",
+              "postalCode": "49224",
+              "addressCountry": "US"
+            }
+          }
         },
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "location": {
-          "@type": "Place",
-          "name": "Freeway Church",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "28900 B Dr N",
-            "addressLocality": "Albion",
-            "addressRegion": "MI",
-            "postalCode": "49224",
-            "addressCountry": "US"
+        {
+          "@type": "Event",
+          "name": "Freeway Youth",
+          "description": "Weekly Sunday evening gathering for 6th–12th grade.",
+          "eventSchedule": {
+            "@type": "Schedule",
+            "byDay": "https://schema.org/Sunday",
+            "startTime": "17:30",
+            "endTime": "19:00",
+            "repeatFrequency": "P1W"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "location": {
+            "@type": "Place",
+            "name": "Freeway Church",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "28900 B Dr N",
+              "addressLocality": "Albion",
+              "addressRegion": "MI",
+              "postalCode": "49224",
+              "addressCountry": "US"
+            }
           }
         }
-      }
+      ]
     }
     </script>
 
@@ -108,7 +132,7 @@
     <link rel="preload" as="image" href="/images/hero.jpg" fetchpriority="high" />
   </head>
   <body class="bg-fc-black text-fc-cream font-body antialiased">
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

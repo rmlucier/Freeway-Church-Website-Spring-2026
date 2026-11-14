@@ -1,6 +1,15 @@
 {
+  "redirects": [
+    { "source": "/marriage", "destination": "/", "permanent": true },
+    { "source": "/prayer", "destination": "/", "permanent": true },
+    { "source": "/summer", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/flight-school/preflight", "destination": "/shell.html" },
+    { "source": "/flight-school/log", "destination": "/shell.html" },
+    { "source": "/flight-school/pride-check", "destination": "/shell.html" },
+    { "source": "/flight-school/pride-check/results", "destination": "/shell.html" },
+    { "source": "/flight-school/pastor", "destination": "/shell.html" }
   ],
   "headers": [
     {

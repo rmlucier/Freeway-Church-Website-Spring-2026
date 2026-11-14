@@ -19,7 +19,9 @@ npm run preview
 - `src/components/{Nav,Hero,Vision,Pillars,Community,Services,Sermons,JoinCTA,Footer}.jsx` — section components
 - `public/images/` — real photos (hero, community, building, youtube-stage)
 - `tailwind.config.js` — brand tokens (`fc-black`, `fc-teal`, `fc-gold`, `fc-cream`) and Barlow Condensed
-- `vercel.json` — SPA rewrite
+- `vercel.json` — security headers, redirects for retired pages, and rewrites that send the Flight School tool routes to the app shell
+- `scripts/prerender.mjs` — runs after `vite build` and writes real HTML for each public page (plus `404.html`), so search engines and AI crawlers get the page text without running JavaScript. When you add a public page, add it to the list in this script, to `src/App.jsx` and to `public/sitemap.xml`
+- `public/llms.txt` — plain-text summary of the church for AI tools. Keep the times and contact details in sync with the site
 
 ## Brand tokens
 - Dark: `#1C1C1C` (`fc-black`)

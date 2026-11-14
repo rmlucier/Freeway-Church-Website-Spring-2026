@@ -1,4 +1,4 @@
-import { useReducedMotion } from 'framer-motion';
+import useReducedMotion from './useReducedMotionSafe.js';
 
 // The FreeWay Leadership Academy logo has a little paper-airplane-on-a-dashed-
 // flight-path motif. This recreates it as scalable SVG so we can recolor it for

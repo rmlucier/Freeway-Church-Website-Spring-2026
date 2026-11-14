@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-const SITE_URL = 'https://freeway.church';
+const SITE_URL = 'https://www.freeway.church';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 /**
@@ -10,8 +10,9 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
  * Twitter Card tags that control how links look when pasted into Facebook,
  * iMessage, Slack, etc.
  *
- * Google and modern crawlers execute the JS on this SPA and see these tags
- * per route; older scrapers see whatever is static in index.html.
+ * The public pages are pre-rendered at build time (scripts/prerender.mjs), so
+ * these tags are in the HTML every crawler receives. index.html carries no
+ * default copies, which keeps it to exactly one of each tag per page.
  */
 export default function SEO({
   title,

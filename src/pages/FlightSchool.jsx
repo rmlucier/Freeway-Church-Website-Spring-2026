@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import { TRAITS } from '../flight-school/content.js';
 import { MessageLink, TraitIcon } from '../flight-school/parts.jsx';
-import { loadPride } from '../flight-school/pride.js';
-import { loadState } from '../flight-school/store.js';
+import { emptyPride, loadPride } from '../flight-school/pride.js';
+import { emptyState, loadState } from '../flight-school/store.js';
 import '../flight-school/flight-school.css';
 
 const STEPS = [
@@ -38,7 +38,10 @@ function StartButton({ state }) {
 }
 
 function PrideCheckButton() {
-  const pride = useMemo(loadPride, []);
+  // Saved progress is read after the first paint so the browser's first render
+  // matches the pre-rendered HTML.
+  const [pride, setPride] = useState(emptyPride);
+  useEffect(() => setPride(loadPride()), []);
   if (pride.finishedAt) {
     return (
       <Link to="/flight-school/pride-check/results" className="fs-btn fs-btn-2">
@@ -110,7 +113,8 @@ function Hero() {
 }
 
 export default function FlightSchool() {
-  const state = useMemo(loadState, []);
+  const [state, setState] = useState(emptyState);
+  useEffect(() => setState(loadState()), []);
 
   return (
     <div className="fs">
@@ -118,7 +122,7 @@ export default function FlightSchool() {
         path="/flight-school"
         title="Flight School"
         description="Flight School is learning to fly: a life fully devoted to Jesus. Take the free assessment on your phone and find your next step in being faithful, available, teachable and missional."
-        image="https://freeway.church/flight-school/box_cover_title@6x.png"
+        image="https://www.freeway.church/flight-school/box_cover_title@6x.png"
       />
 
       <Hero />

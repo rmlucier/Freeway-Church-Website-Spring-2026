@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import MailLink from './MailLink.jsx';
+import PhoneLink from './PhoneLink.jsx';
 
 const socials = [
   { label: 'Instagram', href: 'https://instagram.com/freeway.church' },
@@ -130,6 +132,28 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+            </ul>
+
+            <p className="eyebrow mt-10 mb-5">Contact</p>
+            <ul className="space-y-3">
+              <li>
+                <PhoneLink
+                  visible
+                  ariaLabel="Call Freeway Church"
+                  className="font-display uppercase tracking-wide text-fc-cream/80 hover:text-fc-teal transition-colors"
+                >
+                  Call Us
+                </PhoneLink>
+              </li>
+              <li>
+                <MailLink
+                  showAddress
+                  ariaLabel="Email Freeway Church"
+                  className="font-display tracking-wide text-fc-cream/80 hover:text-fc-teal transition-colors"
+                >
+                  Email Us
+                </MailLink>
+              </li>
             </ul>
           </div>
         </motion.div>

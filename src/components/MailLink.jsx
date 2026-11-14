@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // The address is never stored or rendered as a contiguous string.
 // It gets assembled on user interaction — hover, focus, touch, or click —
@@ -11,8 +11,23 @@ const buildHref = (subject, parts) => {
   return `mailto:${buildAddress(parts)}${params}`;
 };
 
-export default function MailLink({ subject, children, className, ariaLabel, parts = PARTS }) {
+// Pass `showAddress` to show the address itself as the link text. It is put
+// together in the browser after the page loads, so it still never appears in
+// the page's HTML source; until then the children are shown.
+export default function MailLink({
+  subject,
+  children,
+  className,
+  ariaLabel,
+  parts = PARTS,
+  showAddress = false,
+}) {
   const [href, setHref] = useState(null);
+  const [address, setAddress] = useState(null);
+
+  useEffect(() => {
+    if (showAddress) setAddress(buildAddress(parts));
+  }, [showAddress, parts]);
 
   const prepare = () => {
     if (href) return;
@@ -37,7 +52,7 @@ export default function MailLink({ subject, children, className, ariaLabel, part
         }
       }}
     >
-      {children}
+      {address || children}
     </a>
   );
 }

@@ -14,10 +14,7 @@ const Visit = lazy(() => import('./pages/Visit.jsx'));
 const Beliefs = lazy(() => import('./pages/Beliefs.jsx'));
 const Giving = lazy(() => import('./pages/Giving.jsx'));
 const Kids = lazy(() => import('./pages/Kids.jsx'));
-const Summer = lazy(() => import('./pages/Summer.jsx'));
-const Breakthrough = lazy(() => import('./pages/Breakthrough.jsx'));
 const Academy = lazy(() => import('./pages/Academy.jsx'));
-const Marriage = lazy(() => import('./pages/Marriage.jsx'));
 const FlightSchool = lazy(() => import('./pages/FlightSchool.jsx'));
 const FlightSchoolPreflight = lazy(() => import('./pages/FlightSchoolPreflight.jsx'));
 const FlightSchoolLog = lazy(() => import('./pages/FlightSchoolLog.jsx'));
@@ -44,7 +41,9 @@ function RouteFallback() {
   return <div className="min-h-screen bg-fc-black" aria-hidden="true" />;
 }
 
-export default function App() {
+// Everything inside the router. The browser wraps this in BrowserRouter (below);
+// the build-time pre-render wraps it in StaticRouter (src/entry-server.jsx).
+export function AppContent() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -53,7 +52,7 @@ export default function App() {
   });
 
   return (
-    <BrowserRouter>
+    <>
       <ScrollToHash />
       <SiteChrome>
         <motion.div
@@ -69,10 +68,7 @@ export default function App() {
           <Route path="/beliefs" element={<Beliefs />} />
           <Route path="/giving" element={<Giving />} />
           <Route path="/kids" element={<Kids />} />
-          <Route path="/summer" element={<Summer />} />
-          <Route path="/prayer" element={<Breakthrough />} />
           <Route path="/academy" element={<Academy />} />
-          <Route path="/marriage" element={<Marriage />} />
           <Route path="/flight-school" element={<FlightSchool />} />
           <Route path="/flight-school/preflight" element={<FlightSchoolPreflight />} />
           <Route path="/flight-school/log" element={<FlightSchoolLog />} />
@@ -87,6 +83,14 @@ export default function App() {
       </SiteChrome>
       <Analytics beforeSend={stripHash} />
       <SpeedInsights beforeSend={stripHash} />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

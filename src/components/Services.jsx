@@ -13,8 +13,8 @@ const programs = [
     body: 'One worship service, 10am, designed for people to experience God no matter where they are in their faith journey.',
   },
   {
-    title: 'Kidsway',
-    body: "Kids K–5th grade learn and worship in a safe, fun environment with our trained children's team.",
+    title: 'Nursery & Kidsway',
+    body: "Nursery (0–5) runs during the whole service. Kids K–5th grade learn and worship in a safe, fun environment with our trained children's team.",
   },
   {
     title: 'Fellowship',

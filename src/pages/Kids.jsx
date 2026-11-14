@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, useReducedMotion, animate } from 'framer-motion';
+import { motion, useMotionValue, animate } from 'framer-motion';
+import useReducedMotion from '../components/useReducedMotionSafe.js';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO.jsx';
 import FAQSchema from '../components/FAQSchema.jsx';

@@ -1,5 +1,7 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import useReducedMotion from './useReducedMotionSafe.js';
 
 export default function Hero() {
   const ref = useRef(null);
@@ -92,7 +94,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-10 flex flex-wrap gap-4"
           >
-            <a href="#services" className="btn-primary">Plan a Visit</a>
+            <Link to="/visit" className="btn-primary">Plan a Visit</Link>
             <a href="#vision" className="btn-outline">Our Story</a>
           </motion.div>
         </div>
