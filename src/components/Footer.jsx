@@ -11,8 +11,11 @@ const socials = [
 
 const quickLinks = [
   { label: 'Plan a Visit', href: '/visit' },
+  { label: 'Kids & Youth', href: '/kids' },
   { label: 'What We Believe', href: '/beliefs' },
   { label: 'Messages', href: '/#sermons' },
+  { label: 'Coaching', href: '/#coaching' },
+  { label: 'Leadership Academy', href: '/academy' },
   { label: 'Give', href: '/giving' },
   { label: 'Newsletter', href: 'https://freewaychurch.churchcenter.com/people/forms/274372' },
 ];

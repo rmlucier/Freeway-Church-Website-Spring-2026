@@ -1,24 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 
-// Unified nav links.
-//   type: 'page'    → dedicated route (e.g. /visit)
-//   type: 'section' → homepage section anchor (e.g. /#community)
-// Both resolve through React Router + ScrollToHash so behavior is
-// consistent whether you're on the home page or somewhere else.
+// Top bar: what visitors and regulars need most. Keep this list short.
 const links = [
-  { label: 'Visit', to: '/visit', type: 'page' },
-  { label: 'Kids', to: '/kids', type: 'page' },
-  { label: 'Beliefs', to: '/beliefs', type: 'page' },
-  { label: 'Community', to: '/#community', type: 'section' },
-  { label: 'Coaching', to: '/#coaching', type: 'section' },
-  { label: 'Messages', to: '/#sermons', type: 'section' },
+  { label: 'Plan a Visit', to: '/visit' },
+  { label: 'Kids', to: '/kids' },
+  { label: 'Messages', to: '/#sermons' },
+];
+
+// Everything else lives under "More" (listed in full on the mobile menu).
+const moreLinks = [
+  { label: 'Beliefs', to: '/beliefs' },
+  { label: 'Coaching', to: '/#coaching' },
+  { label: 'Academy', to: '/academy' },
 ];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef(null);
+  const moreButtonRef = useRef(null);
   const location = useLocation();
   const onHome = location.pathname === '/';
 
@@ -29,13 +32,33 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu whenever the route changes
+  // Close both menus whenever the route changes
   useEffect(() => {
     setOpen(false);
+    setMoreOpen(false);
   }, [location.pathname, location.hash]);
 
+  // Close "More" on an outside click or Escape
+  useEffect(() => {
+    if (!moreOpen) return undefined;
+    const onPointerDown = (e) => {
+      if (!moreRef.current?.contains(e.target)) setMoreOpen(false);
+    };
+    const onKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+      setMoreOpen(false);
+      moreButtonRef.current?.focus();
+    };
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [moreOpen]);
+
   const linkClass =
-    'font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors';
+    'font-display uppercase tracking-widest2 text-sm text-fc-cream/80 hover:text-fc-teal transition-colors whitespace-nowrap';
   const mobileLinkClass = 'font-display uppercase tracking-widest2 text-lg';
   // Flight School campaign tab. Yellow is the Flight School accent, so the tab
   // stands out while the campaign runs. Remove this tab when the campaign ends.
@@ -49,15 +72,15 @@ export default function Nav() {
       }`}
     >
       <div className="container-fc flex items-center justify-between h-20">
-        <Link to="/" aria-label="Freeway Church — home" className="block xl:shrink-0">
+        <Link to="/" aria-label="Freeway Church — home" className="block shrink-0">
           <img
             src="/images/logo-horizontal-white.png"
             alt="Freeway Church"
-            className="h-8 2xl:h-9 w-auto"
+            className="h-8 lg:h-6 xl:h-8 2xl:h-9 w-auto"
           />
         </Link>
 
-        <nav className="hidden xl:flex items-center gap-5 2xl:gap-10">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
           {links.map((l) => (
             <Link key={l.label} to={l.to} className={linkClass}>
               {l.label}
@@ -66,51 +89,62 @@ export default function Nav() {
           <Link to="/flight-school" className={`${flightSchoolClass} text-sm`}>
             Flight School
           </Link>
+          <div
+            ref={moreRef}
+            className="relative"
+            onBlur={(e) => {
+              if (e.relatedTarget && !e.currentTarget.contains(e.relatedTarget)) setMoreOpen(false);
+            }}
+          >
+            <button
+              ref={moreButtonRef}
+              type="button"
+              onClick={() => setMoreOpen((v) => !v)}
+              aria-expanded={moreOpen}
+              aria-controls="nav-more"
+              className={`${linkClass} inline-flex items-center gap-2 py-2`}
+            >
+              More
+              <svg
+                viewBox="0 0 12 8"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+                className={`h-2 w-3 transition-transform ${moreOpen ? 'rotate-180' : ''}`}
+              >
+                <path d="M1 1.5 6 6.5 11 1.5" />
+              </svg>
+            </button>
+            {/* Always in the HTML so search engines see the links */}
+            <div
+              id="nav-more"
+              className={`absolute right-0 top-full mt-3 min-w-[11rem] border border-fc-cream/15 bg-fc-black py-2 transition-all duration-200 ${
+                moreOpen ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 -translate-y-1'
+              }`}
+            >
+              {moreLinks.map((l) => (
+                <Link
+                  key={l.label}
+                  to={l.to}
+                  onClick={() => setMoreOpen(false)}
+                  className={`${linkClass} block px-5 py-3`}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link to="/giving" className="btn-primary">
             Give
           </Link>
-
-          {/* FreeWay Leadership Academy — a discreet paper-plane icon with a
-              hover tooltip, echoing the Academy logo. Keeps the page out of the
-              main text nav while still being reachable from anywhere. */}
-          <div className="relative group flex items-center">
-            <Link
-              to="/academy"
-              aria-label="FreeWay Leadership Academy"
-              className="relative flex h-10 w-10 items-center justify-center rounded-full text-fc-gold transition-colors duration-300 hover:text-fc-gold-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-fc-gold focus-visible:ring-offset-2 focus-visible:ring-offset-fc-black"
-            >
-              {/* The dotted flight-path, as a ring that slowly circles the plane */}
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 rounded-full border border-dashed border-fc-gold/40 transition-colors group-hover:border-fc-gold/80 motion-safe:animate-[spin_20s_linear_infinite]"
-              />
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="relative h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              >
-                <path d="M22 2 11 13" />
-                <path d="M22 2 15 22 11 13 2 9z" />
-              </svg>
-            </Link>
-            <span
-              role="tooltip"
-              className="pointer-events-none absolute top-full right-0 mt-2 whitespace-nowrap rounded-md border border-fc-cream/15 bg-fc-black/95 px-3 py-1.5 font-display uppercase tracking-widest2 text-xs text-fc-cream opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0"
-            >
-              FreeWay Academy
-            </span>
-          </div>
         </nav>
 
         <button
           onClick={() => setOpen((v) => !v)}
           aria-label="Menu"
-          className="xl:hidden flex flex-col gap-1.5 p-2"
+          aria-expanded={open}
+          className="lg:hidden flex flex-col gap-1.5 p-2"
         >
           <span className={`h-0.5 w-6 bg-fc-cream transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`} />
           <span className={`h-0.5 w-6 bg-fc-cream transition-opacity ${open ? 'opacity-0' : ''}`} />
@@ -125,7 +159,7 @@ export default function Nav() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="xl:hidden overflow-hidden bg-fc-black border-t border-fc-cream/10"
+            className="lg:hidden overflow-hidden bg-fc-black border-t border-fc-cream/10"
           >
             <div className="container-fc py-6 flex flex-col gap-5">
               {links.map((l) => (
@@ -133,28 +167,19 @@ export default function Nav() {
                   {l.label}
                 </Link>
               ))}
-              <Link
-                to="/academy"
-                className={`${mobileLinkClass} inline-flex items-center gap-2 text-fc-gold`}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="h-5 w-5"
-                >
-                  <path d="M22 2 11 13" />
-                  <path d="M22 2 15 22 11 13 2 9z" />
-                </svg>
-                Academy
-              </Link>
               <Link to="/flight-school" className={`${flightSchoolClass} text-lg`}>
                 Flight School
               </Link>
+              {moreLinks.map((l) => (
+                <Link
+                  key={l.label}
+                  to={l.to}
+                  onClick={() => setOpen(false)}
+                  className={`${mobileLinkClass} text-fc-cream/70`}
+                >
+                  {l.label}
+                </Link>
+              ))}
               <Link to="/giving" className="btn-primary self-start">
                 Give
               </Link>
