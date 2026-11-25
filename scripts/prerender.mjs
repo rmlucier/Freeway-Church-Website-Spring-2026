@@ -29,6 +29,7 @@ const PAGES = [
   { route: '/giving', file: 'giving/index.html', module: 'src/pages/Giving.jsx' },
   { route: '/academy', file: 'academy/index.html', module: 'src/pages/Academy.jsx' },
   { route: '/flight-school', file: 'flight-school/index.html', module: 'src/pages/FlightSchool.jsx' },
+  { route: '/privacy', file: 'privacy/index.html', module: 'src/pages/Privacy.jsx' },
   { route: '/404', file: '404.html', module: 'src/pages/NotFound.jsx' },
 ];
 

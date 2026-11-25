@@ -21,6 +21,7 @@ const FlightSchoolLog = lazy(() => import('./pages/FlightSchoolLog.jsx'));
 const FlightSchoolPrideCheck = lazy(() => import('./pages/FlightSchoolPrideCheck.jsx'));
 const FlightSchoolPrideResults = lazy(() => import('./pages/FlightSchoolPrideResults.jsx'));
 const FlightSchoolPastor = lazy(() => import('./pages/FlightSchoolPastor.jsx'));
+const Privacy = lazy(() => import('./pages/Privacy.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 // Flight School results links keep private results in the URL fragment. Never let
@@ -75,6 +76,7 @@ export function AppContent() {
           <Route path="/flight-school/pride-check" element={<FlightSchoolPrideCheck />} />
           <Route path="/flight-school/pride-check/results" element={<FlightSchoolPrideResults />} />
           <Route path="/flight-school/pastor" element={<FlightSchoolPastor />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

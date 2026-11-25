@@ -17,6 +17,7 @@ const quickLinks = [
   { label: 'Coaching', href: '/#coaching' },
   { label: 'Leadership Academy', href: '/academy' },
   { label: 'Give', href: '/giving' },
+  { label: 'Privacy', href: '/privacy' },
   { label: 'Newsletter', href: 'https://freewaychurch.churchcenter.com/people/forms/274372' },
 ];
 
