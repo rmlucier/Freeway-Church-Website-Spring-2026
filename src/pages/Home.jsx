@@ -7,8 +7,10 @@ import Coaching from '../components/Coaching.jsx';
 import Services from '../components/Services.jsx';
 import Sermons from '../components/Sermons.jsx';
 import JoinCTA from '../components/JoinCTA.jsx';
+import { useWonder, HeroSlider, SeriesStrip } from '../wonder/index.js'; // WONDER
 
 export default function Home() {
+  const wonder = useWonder(); // WONDER
   return (
     <>
       <SEO
@@ -16,7 +18,8 @@ export default function Home() {
         title="Freeway Church — A church in Albion, Michigan. Sundays at 10am."
         description="Freeway Church is a community in Albion, Michigan for anyone figuring out faith — including people who walked away from church and are thinking about coming back. Sundays at 10am. Everyone is welcome."
       />
-      <Hero />
+      {wonder ? <HeroSlider><Hero /></HeroSlider> : <Hero />}
+      {wonder && <SeriesStrip />}
       <Vision />
       <Pillars />
       <Community />

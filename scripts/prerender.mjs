@@ -102,7 +102,9 @@ async function main() {
       .filter(Boolean)
       .join('\n    ');
     // Only the home page shows the hero image, so only it should preload it.
-    const base = page.route === '/' ? template : template.replace(HERO_PRELOAD, '');
+    // WONDER: while the Christmas slider is up, its own image is preloaded instead.
+    const showsHero = page.route === '/' && !html.includes('wonder-slider');
+    const base = showsHero ? template : template.replace(HERO_PRELOAD, '');
     const out = base.replace(HEAD_MARK, head).replace(HTML_MARK, html);
 
     // Fail the build rather than ship a page that would hurt search results.
