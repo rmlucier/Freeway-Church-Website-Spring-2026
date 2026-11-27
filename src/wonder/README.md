@@ -23,12 +23,12 @@ Christmas anyway so the pre-rendered pages are clean.
 | --- | --- |
 | `config.js` | The switch, end date, Christmas Eve time, series list |
 | `useWonder.js` | Hook every touch point uses: `const wonder = useWonder()` |
-| `WonderHead.jsx` | Loads Pacifico / Lilita One / Nunito (only while Wonder is on) |
+| `WonderHead.jsx` | Loads Pacifico / Lilita One / Nunito and adds the Christmas Eve schema.org event (only while Wonder is on) |
 | `HeroSlider.jsx` | 2-slide homepage hero: Wonder slide + the regular hero, unchanged |
 | `SeriesStrip.jsx` | Series strip under the hero (`#wonder`, `#christmas-eve`) |
 | `Touches.jsx` | Nav pill, peeking sheep, Next Steps star, footer twinkles, chain strip, hills, footer line |
 | `wonder.css` | Every Wonder style |
-| `public/images/wonder/` | Images, SVGs and the (unused) twinkle video |
+| `public/images/wonder/` | Hero images (re-rendered from the series canvas), SVGs from the illustration kit, sky and grain tiles |
 
 ## Touch points in existing files (each marked `WONDER`)
 
@@ -40,6 +40,10 @@ Christmas anyway so the pre-rendered pages are clean.
 - `src/components/Footer.jsx` — `wonder-footer` class + chain, twinkles, line, hills
 - `vite.config.js` — `__WONDER_BUILD_TIME__` define
 - `scripts/prerender.mjs` — skips the old hero.jpg preload while the slider is up
+
+## After Christmas
+
+- `public/llms.txt` has a "Christmas 2026: Wonder" section. It's a static file the flag can't switch off, so delete that section when you turn Wonder off.
 
 ## Removing it for good
 
