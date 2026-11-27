@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 30" width="96" height="30">
+  <!-- Tileable paper chain: flat cream loops with red/gold side links and ink outlines (repeats every 96px) -->
+  <g fill="none" stroke-linecap="round">
+    <ellipse cx="24" cy="15" rx="17" ry="8" stroke="#16112E" stroke-width="8"/>
+    <ellipse cx="24" cy="15" rx="17" ry="8" stroke="#F3E9D6" stroke-width="4"/>
+    <ellipse cx="72" cy="15" rx="17" ry="8" stroke="#16112E" stroke-width="8"/>
+    <ellipse cx="72" cy="15" rx="17" ry="8" stroke="#F3E9D6" stroke-width="4"/>
+    <rect x="44" y="3.5" width="8" height="23" rx="4" stroke="#16112E" stroke-width="7"/>
+    <rect x="44" y="3.5" width="8" height="23" rx="4" stroke="#D4442E" stroke-width="3.5"/>
+    <rect x="-4" y="3.5" width="8" height="23" rx="4" stroke="#16112E" stroke-width="7"/>
+    <rect x="-4" y="3.5" width="8" height="23" rx="4" stroke="#F2B33D" stroke-width="3.5"/>
+    <rect x="92" y="3.5" width="8" height="23" rx="4" stroke="#16112E" stroke-width="7"/>
+    <rect x="92" y="3.5" width="8" height="23" rx="4" stroke="#F2B33D" stroke-width="3.5"/>
+  </g>
+</svg>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useWonder, WonderStar } from '../wonder/index.js'; // WONDER
 
 const steps = [
   {
@@ -35,6 +36,7 @@ const steps = [
 ];
 
 export default function JoinCTA() {
+  const wonder = useWonder(); // WONDER
   return (
     <section className="relative py-28 md:py-40 bg-fc-black-soft border-y border-fc-cream/10">
       <div className="container-fc">
@@ -91,6 +93,7 @@ export default function JoinCTA() {
                   <h3 className="font-display font-black uppercase text-2xl md:text-3xl leading-none">
                     {s.title}
                   </h3>
+                  {wonder && <WonderStar />}
                   <span className="font-display text-fc-cream/30 text-sm">0{i + 1}</span>
                 </div>
                 <p className="text-fc-cream/70 text-sm leading-relaxed mb-6">{s.body}</p>

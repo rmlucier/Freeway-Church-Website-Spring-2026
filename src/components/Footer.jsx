@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import MailLink from './MailLink.jsx';
 import PhoneLink from './PhoneLink.jsx';
+import { useWonder, WonderChainStrip, WonderTwinkles, WonderFooterLine, WonderHills } from '../wonder/index.js'; // WONDER
 
 const socials = [
   { label: 'Instagram', href: 'https://instagram.com/freeway.church' },
@@ -22,8 +23,11 @@ const quickLinks = [
 ];
 
 export default function Footer() {
+  const wonder = useWonder(); // WONDER
   return (
-    <footer className="relative bg-fc-black pt-24 pb-10 border-t border-fc-cream/10">
+    <footer className={`relative bg-fc-black pt-24 pb-10 border-t border-fc-cream/10${wonder ? ' wonder-footer' : ''}`}>
+      {wonder && <WonderChainStrip />}
+      {wonder && <WonderTwinkles />}
       <div className="container-fc">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -162,6 +166,7 @@ export default function Footer() {
           </div>
         </motion.div>
 
+        {wonder && <WonderFooterLine />}
         <div className="pt-10 border-t border-fc-cream/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <img
             src="/images/logo-stack-white.png"
@@ -173,6 +178,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      {wonder && <WonderHills />}
     </footer>
   );
 }

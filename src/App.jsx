@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import ScrollToHash from './components/ScrollToHash.jsx';
+import { useWonder, WonderHead } from './wonder/index.js'; // WONDER
 
 // Route-level code splitting — each page ships as its own chunk so visitors
 // only download the code for the page they're actually on.
@@ -45,6 +46,7 @@ function RouteFallback() {
 // Everything inside the router. The browser wraps this in BrowserRouter (below);
 // the build-time pre-render wraps it in StaticRouter (src/entry-server.jsx).
 export function AppContent() {
+  const wonder = useWonder(); // WONDER
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -55,6 +57,7 @@ export function AppContent() {
   return (
     <>
       <ScrollToHash />
+      {wonder && <WonderHead />}
       <SiteChrome>
         <motion.div
           style={{ scaleX }}

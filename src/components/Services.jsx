@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useWonder, WonderSheep } from '../wonder/index.js'; // WONDER
 
 const schedule = [
   { time: '9:30 AM', name: 'Preservice Prayer' },
@@ -34,8 +35,10 @@ const mapsEmbed = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000!2
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
 export default function Services() {
+  const wonder = useWonder(); // WONDER
   return (
     <section id="services" className="relative py-28 md:py-40 bg-fc-black-soft">
+      {wonder && <WonderSheep />}
       <div className="container-fc">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

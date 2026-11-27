@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import { useWonder, WonderNavPill } from '../wonder/index.js'; // WONDER
 
 // Top bar: what visitors and regulars need most. Keep this list short.
 const links = [
@@ -24,6 +25,7 @@ export default function Nav() {
   const moreButtonRef = useRef(null);
   const location = useLocation();
   const onHome = location.pathname === '/';
+  const wonder = useWonder(); // WONDER
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -76,7 +78,11 @@ export default function Nav() {
           <img
             src="/images/logo-horizontal-white.png"
             alt="Freeway Church"
-            className="h-8 lg:h-6 xl:h-8 2xl:h-9 w-auto"
+            width="2079"
+            height="183"
+            // The wordmark is ~11:1, so on phones it must stay short enough to
+            // leave room for the menu button.
+            className="h-6 sm:h-8 lg:h-6 xl:h-8 2xl:h-9 w-auto max-w-[calc(100vw-7rem)]"
           />
         </Link>
 
@@ -135,6 +141,7 @@ export default function Nav() {
               ))}
             </div>
           </div>
+          {wonder && <WonderNavPill />}
           <Link to="/giving" className="btn-primary">
             Give
           </Link>
@@ -180,6 +187,7 @@ export default function Nav() {
                   {l.label}
                 </Link>
               ))}
+              {wonder && <WonderNavPill className="self-start" />}
               <Link to="/giving" className="btn-primary self-start">
                 Give
               </Link>
