@@ -88,8 +88,8 @@ footer.wonder-footer::after {
 .wonder-slide {
   background: var(--w-night);
 }
-/* Portrait screens (phones, tablets): crop toward the right so the sheep and
-   the star stay in frame. Wide screens see the whole picture. */
+/* Portrait screens (phones, tablets): crop toward the right so the star stays
+   in frame. Wide screens see the whole picture. */
 .wonder-slide-img {
   object-position: 74% center;
 }
@@ -490,4 +490,77 @@ footer.wonder-footer .border-fc-cream\/10 {
   .wonder-btn:hover {
     transform: none;
   }
+}
+
+/* ── Gentle motion (all off with reduced motion) ──────────────────────── */
+/* Christmas Eve card: the candle from the illustration kit */
+.wonder-candle {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  pointer-events: none;
+  transform-origin: 50% 85%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Series cards rise in, one after another, when the strip first shows */
+  .wonder-strip.is-armed .wonder-card {
+    opacity: 0;
+  }
+  .wonder-strip.is-in .wonder-card {
+    animation: wonder-card-in 520ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+  .wonder-strip.is-in .wonder-tag {
+    animation: wonder-tag-pop 420ms cubic-bezier(0.3, 1.6, 0.5, 1) backwards;
+    animation-delay: 650ms;
+  }
+  /* Hover/focus: a small paper lift and tilt (no shadows) */
+  .wonder-card {
+    transition: transform 220ms ease, opacity 200ms;
+  }
+  .wonder-card:hover,
+  .wonder-card:focus-within {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+  .wonder-card:nth-child(even):hover,
+  .wonder-card:nth-child(even):focus-within {
+    transform: translateY(-4px) rotate(1deg);
+  }
+
+  /* Candle sways a little, like the flame is moving */
+  .wonder-candle {
+    animation: wonder-sway 3.2s ease-in-out infinite;
+  }
+
+  /* Peeking sheep: bobs, then ducks down for a moment and pops back up */
+  .wonder-sheep img {
+    animation: wonder-peek 9s ease-in-out infinite;
+    transform-origin: 50% 100%;
+  }
+}
+
+@keyframes wonder-card-in {
+  from { opacity: 0; transform: translateY(16px) rotate(-1.5deg); }
+  to { transform: none; }
+}
+@keyframes wonder-tag-pop {
+  0% { transform: scale(0.4) rotate(-8deg); opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
+@keyframes wonder-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+@keyframes wonder-peek {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  20% { transform: translateY(-2px) rotate(-3deg); }
+  40% { transform: translateY(0) rotate(2deg); }
+  60% { transform: translateY(0) rotate(0); }
+  70% { transform: translateY(34px); }
+  78% { transform: translateY(34px); }
+  86% { transform: translateY(-3px); }
+  92% { transform: translateY(0); }
 }
