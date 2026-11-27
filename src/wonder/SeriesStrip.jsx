@@ -22,6 +22,29 @@ export default function SeriesStrip() {
 
   const nextSunday = today ? SERIES.find((s) => s.sunday && s.date >= today)?.date : null;
 
+  // Cards rise in one after another the first time the strip scrolls into view.
+  // The pre-rendered HTML shows them as-is; we only "arm" (hide, then animate)
+  // when the strip starts below the fold, so nothing visible ever blinks.
+  const sectionRef = useRef(null);
+  const [anim, setAnim] = useState('off'); // off | armed | in
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    if (el.getBoundingClientRect().top < window.innerHeight) return undefined;
+    setAnim('armed');
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setAnim('in');
+        io.disconnect();
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   // Phones show the list as a sideways row: start it at this week's card.
   useEffect(() => {
     const list = listRef.current;
@@ -31,7 +54,12 @@ export default function SeriesStrip() {
   }, [nextSunday]);
 
   return (
-    <section id="wonder" className="wonder-strip relative overflow-hidden pt-14 md:pt-20" aria-labelledby="wonder-strip-title">
+    <section
+      ref={sectionRef}
+      id="wonder"
+      className={`wonder-strip relative overflow-hidden pt-14 md:pt-20 ${anim === 'armed' ? 'is-armed' : ''} ${anim === 'in' ? 'is-in' : ''}`}
+      aria-labelledby="wonder-strip-title"
+    >
       {/* Big star across from the title, like the hero: Wonder left, star right */}
       <img
         src="/images/wonder/star.svg"
@@ -54,7 +82,7 @@ export default function SeriesStrip() {
         </h2>
 
         <ol ref={listRef} className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-7 gap-3 md:gap-4">
-          {SERIES.map((s) => {
+          {SERIES.map((s, i) => {
             const p = parts(s.date);
             const past = today && s.date < today;
             const isNext = s.date === nextSunday;
@@ -62,6 +90,7 @@ export default function SeriesStrip() {
               <li
                 key={s.date}
                 id={s.id}
+                style={{ '--i': i }}
                 className={`wonder-card ${past ? 'is-past' : ''} ${isNext ? 'is-next' : ''}`}
               >
                 {isNext && <span className="wonder-tag">This Sunday</span>}
@@ -71,6 +100,17 @@ export default function SeriesStrip() {
                 <p className="wonder-card-title">{s.label}</p>
                 {s.sunday && <p className="wonder-card-note">10:00 AM</p>}
                 {s.note && <p className="wonder-card-note">{s.note}</p>}
+                {s.id === 'christmas-eve' && (
+                  <img
+                    src="/images/wonder/candle.svg"
+                    alt=""
+                    aria-hidden="true"
+                    width="44"
+                    height="44"
+                    loading="lazy"
+                    className="wonder-candle"
+                  />
+                )}
               </li>
             );
           })}
